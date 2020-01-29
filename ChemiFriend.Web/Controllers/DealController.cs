@@ -68,7 +68,7 @@ namespace ChemiFriend.Web.Controllers
             ViewBag.BindProduct = _productRepository.BindProducts().ToList();
             ViewBag.BindDealType = _commonRepository.GetDealType().ToList();
             ViewBag.BindDealApplicableFor = _commonRepository.GetDealApplicableFor().ToList();
-            // ViewBag.BindProductType = _commonRepository.GetProductType().ToList(); // Not in use
+            // ViewBag.BindProductType = _commonRepository.GetProductType().ToList(); 
             ViewBag.BindFormType = _commonRepository.GetFormType().ToList();
             ViewBag.BindPackType = _commonRepository.GetPackType().ToList();
             ViewBag.BindGSTApplicable = _commonRepository.GetGSTApplicable().ToList();
