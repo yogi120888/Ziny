@@ -1,0 +1,366 @@
+﻿@model ChemiFriend.Web.Models.InputModel.DealModel
+
+@{
+    ViewBag.Title = "CreateDeal";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .table th, .table td {
+        padding: 3px;
+    }
+</style>
+
+<link href="~/Areas/Admin/Content/js/ImgPreview/AjaxImagePreview.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/js/ImgPreview/AjaxImagePreview.jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#ImageFile").change(function () {
+            $("#dvPreview").html("");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            if (regex.test($(this).val().toLowerCase())) {
+                if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                    $("#dvPreview").show();
+                    $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                }
+                else {
+                    if (typeof (FileReader) != "undefined") {
+                        $("#dvPreview").show();
+                        $("#dvPreview").append("<img width='150' height='150' />");
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("#dvPreview img").attr("src", e.target.result);
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                }
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+    });
+</script>
+
+@using (Html.BeginForm("CreateDeal", "Deal", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <div id="content">
+        <div id="content-header">
+            <div class="btnOnTop"><button type="submit" class="btn btn-success">Save</button>&nbsp;<a href="@Url.Action("GetProductList", "Product", new { area = "Admin" })" class="btn btn-info">All Deals</a></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="span6">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                                <h5>Create Deal</h5>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <div class="control-group">
+                                    <label class="control-label">Deal Type</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.DealType, new SelectList(ViewBag.BindDealType, "DealTypeId", "DealTypeName"), "Select DealType", new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.DealType)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Product</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.ProductId, new SelectList(ViewBag.BindProduct, "ProductId", "ProductName"), "Select Product", new { @class = "span11", onchange = "BindProductDetails();" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.ProductId)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Deal Start Date</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.DealStartDate, new { @class = "span11 datepicker" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.DealStartDate)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Deal End Date</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.DealEndDate, new { @class = "span11 datepicker" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.DealEndDate)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Product Expiry Date</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.ProductExpiryDate, new { @class = "span11 datepicker" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.ProductExpiryDate)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Marketing Company</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.MarketingCompany, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.MarketingCompany)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Brand</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.Brand, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.Brand)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Composition</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.Composition, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.Composition)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Max Quantity For Retailer</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.MaxQuantityForRetailer, new { @class = "span11" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Product Type</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.ProductType, new { @class = "span11" })
+                                        @Html.HiddenFor(x => x.ProductTypeId)
+                                        @*@Html.DropDownListFor(x => x.ProductType, new SelectList(ViewBag.BindProductType, "ProductTypeId", "ProductTypeName"), "Select ProductType", new { @class = "span11" })*@
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Pack Size</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.PackSize, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.PackSize)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Stock Available</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.StockAvailable, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.PackSize)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                            </div>
+                            <div class="widget-content nopadding">
+                                <div class="control-group">
+                                    <label class="control-label">Deal Applicable For</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.DealApplicableFor, new SelectList(ViewBag.BindDealApplicableFor, "DealApplicableForId", "Applicable"), "Select Deal Applicable For", new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.DealApplicableFor)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Form Type</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.FormType, new SelectList(ViewBag.BindFormType, "FormTypeId", "FormTypeName"), "Select FormType", new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.FormType)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Pack Type</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.PackType, new SelectList(ViewBag.BindPackType, "PackTypeId", "PackTypeName"), "Select PackType", new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.PackType)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">MRP</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.MRP, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.MRP)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">PTR</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.PTR, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.PTR)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">GST</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.GST, new SelectList(ViewBag.BindGSTApplicable, "GSTApplicableId", "GST"), "Select GST", new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.GST)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" id="vdImage">Upload Product:</label>
+                                    <div class="controls">
+                                        <input type="file" id="ImageFile" name="ImageFile" class="span11" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div id="dvPreview"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Add Scheme*@
+                    <div class="span12" style="margin-left:0px;margin-top:0px;">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                                <h5>Add Bulk Scheme</h5>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <table id="myGrid" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="dt-center">Scheme Type</th>
+                                            <th class="dt-center">Min Order Qty</th>
+                                            <th class="dt-center">Deal Rate</th>
+                                            <th class="dt-center">Saving</th>
+                                            <th class="dt-center">Deal Scheme</th>
+                                            <th class="dt-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyScheme">
+                                        <tr class="rowCount">
+                                            @*<td class="dt-center" width="250px;">@Html.DropDownListFor(x => x.lstSchemes[0].SchemeTypeId, new SelectList(ViewBag.BindSchemeType, "SchemeTypeId", "SchemeTypeName"), "Select Scheme Type", new { @class = "span12 SchemeTypeId", style = "width:100%" })</td>
+                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].MinOrderQuantity, new { @class = "span12 MinOrderQuantity" })</td>
+                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].DealRate, new { @class = "span12 DealRate" })</td>
+                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].Saving, new { @class = "span12 Saving" })</td>
+                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].DealScheme, new { @class = "span12 DealScheme" })</td>
+                                                <td class="dt-center">
+                                                    <button id="btnRemove" type="button" class="btn" style="color:red;font-size:large;font-weight:bold; display:none;"><span>X</span></button>
+                                                </td>*@
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="dt-center"></td>
+                                            <td class="dt-center">
+                                                <button id="AddRows" type="button" class="btn btn-success">Add Row</button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*End Scheme*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            // ----------- Bind SchemeType -----------------
+            var SchemeTypeList = '<option value="">Select Scheme Type</option>';
+            $.ajax({
+                type: "POST",
+                url: "/Deal/BindSchemeType",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        SchemeTypeList += '<option value="' + value.SchemeTypeId + '">' + value.SchemeTypeName + '</option>'
+                    });
+                    $("select.SchemeTypeId").html(SchemeTypeList).select2();
+                }
+            });
+            // ----------- End -------------
+            //add dynamic rows
+            var count = 0;
+            $("#AddRows").click(function () {
+                $("#tbodyScheme tr:last").after('<tr class="rowCount">'
+                    + '<td class= "dt-center" width = "250px;">'
+                    + '<select class="span12 SchemeTypeId" id="lstSchemes_"' + count + '"__SchemeTypeId" name="lstSchemes["' + count + '"].SchemeTypeId" style="width:100%;display:none;">' + SchemeTypeList + '</select></td>'
+                    + '<td class="dt-center"><input class="span12 MinOrderQuantity" id="lstSchemes_"' + count + '"__MinOrderQuantity" name="lstSchemes["' + count + '"].MinOrderQuantity" type="text"></td>'
+                    + '<td class="dt-center"><input class="span12 DealRate" id="lstSchemes_"' + count + '"__DealRate" name="lstSchemes["' + count + '"].DealRate" type="text"></td>'
+                    + '<td class="dt-center"><input class="span12 Saving" id="lstSchemes_"' + count + '"__Saving" name="lstSchemes["' + count + '"].Saving" type="text"></td>'
+                    + '<td class= "dt-center"><input class="span12 DealScheme" id="lstSchemes_"' + count + '"__DealScheme" name="lstSchemes["' + count + '"].DealScheme" type="text"></td>'
+                    + '<td class="dt-center">'
+                    + '<button id="btnRemove" type="button" class="btn" style="color:red;font-size:large;font-weight:bold;" onclick="RemoveRow(this);"><span>X</span></button>'
+                    + '</td></tr>');
+                $('#myGrid tbody:eq(0) tr:last').find('.SchemeTypeId').select2();
+                //count = parseInt($("tr.rowCount").length - 1);
+                count += 1;
+                srno();
+            });
+        });
+
+        function srno() {
+            $('tr.rowCount').each(function (i) {
+                var count = parseInt((i + 1) - 1);
+                $(this).find('.SchemeTypeId').attr('name', 'lstSchemes[' + count + '].SchemeTypeId');
+                $(this).find('input.MinOrderQuantity').attr('name', 'lstSchemes[' + count + '].MinOrderQuantity');
+                $(this).find('input.DealRate').attr('name', 'lstSchemes[' + count + '].DealRate');
+                $(this).find('input.Saving').attr('name', 'lstSchemes[' + count + '].Saving');
+                $(this).find('input.DealScheme').attr('name', 'lstSchemes[' + count + '].DealScheme');
+                //$(this).find('span.itemCount:eq(0)').html(count);
+            });
+        }
+
+        function RemoveRow(e) {
+            $(e).closest("tr").remove();
+            srno();
+        }
+
+        function BindProductDetails() {
+            var Id = $("#ProductId").val();
+            $.ajax({
+                type: "GET",
+                url: "/Deal/GetProductDetails/" + Id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        $("#ProductType").val(data.ProductType);
+                        $("#ProductTypeId").val(data.ProductTypeId);
+                        $("#MarketingCompany").val(data.MarketingCompany);
+                        $("#Brand").val(data.ProductSubCategory);
+                        $("#MRP").val(data.MRP);
+                        $("#PTR").val(data.PTR);
+                        $("#Composition").val(data.Composition);
+                        //$("#StockAvailable").val(data.StockAvailable);
+                    }
+                }
+            });
+
+        }
+    </script>
+
+    @*=== jQeury Gritter, a growl-like notifications ===*@
+
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Success';
+                GritterNoteSuccess(msg);
+            });
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Error';
+                GritterNoteError(msg);
+            });
+        </script>
+    }
+}
+
+
+

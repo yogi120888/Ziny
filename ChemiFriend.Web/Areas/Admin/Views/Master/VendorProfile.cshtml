@@ -1,0 +1,163 @@
+﻿@model ChemiFriend.Entity.Jsonmodel.CorporateRegistrationJson
+@{
+    ViewBag.Title = "VendorList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    //string APIURL = Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["APIURL"]);
+
+    int UserId = ChemiFriend.Models.UserAuthenticate.UserId;
+    int Role = ChemiFriend.Models.UserAuthenticate.Role;
+}
+
+<div id="content">
+    <div id="content-header">
+        
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Vendor Profile</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <div class="span12">
+                            <div class="widget-box" style="padding:10px;">
+                                <div class="control-group">
+                                    <div class="control-group span2">
+                                        <label class="control-label">Company Name:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.CompanyName
+                                        </div>
+                                    </div>
+                                    <div class="control-group span2">
+                                        <label class="control-label">Contact Person:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.ContactPersonFirstName  @Model.ContactPersonLastName
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-group span2">
+                                        <label class="control-label">Mobile No.:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                           @Model.MobileNo
+                                        </div>
+                                    </div>
+                                    <div class="control-group span2">
+                                        <label class="control-label">Phone No.:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.PhoneNo
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div class="control-group">
+                                    <div class="control-group span2">
+                                        <label class="control-label">Email:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                           @Model.Email
+                                        </div>
+                                    </div>
+                                    <div class="control-group span2">
+                                        <label class="control-label">City:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.CityName
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-group span2">
+                                        <label class="control-label">State:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.StateName
+                                        </div>
+                                    </div>
+                                    <div class="control-group span2">
+                                        <label class="control-label">Country:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.CountryName
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-group span2">
+                                        <label class="control-label">Addres 1:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.Address1
+                                        </div>
+                                    </div>
+                                    <div class="control-group span2">
+                                        <label class="control-label">Addres 2:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                           @Model.Address2
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-group span2">
+                                        <label class="control-label">Zip Code:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.PostalZipCode
+                                        </div>
+                                    </div>
+                                    <div class="control-group span2">
+                                        <label class="control-label">TAN No.:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                            @Model.TANNo
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <div class="control-group span2">
+                                        <label class="control-label">GST No.:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                           @Model.GSTNo
+                                        </div>
+                                    </div>
+                                    <div class="control-group span2">
+                                        <label class="control-label">Pan No.:</label>
+                                    </div>
+                                    <div class="control-group span4">
+                                        <div class="controls">
+                                           @Model.PANNo
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">&nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

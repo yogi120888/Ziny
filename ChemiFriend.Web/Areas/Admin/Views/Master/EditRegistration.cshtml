@@ -1,0 +1,201 @@
+﻿@model ChemiFriend.Entity.CorporateRegistration
+
+@{
+    ViewBag.Title = "EditRegistration";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("EditRegistration", "Master", FormMethod.Post, new { @Id = "EditRegistration", @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(x => x.RegistrationType)
+    @Html.HiddenFor(x => x.CorporateId)
+    @Html.HiddenFor(x => x.Status)
+    @Html.HiddenFor(x => x.CreatedOn)
+    @Html.HiddenFor(x => x.AddedBy)
+
+    <div id="content">
+        <div id="content-header">
+            
+            <div class="btnOnTop"><button type="submit" class="btn btn-success">Update</button>&nbsp;<a href="@Url.Action("CorporateMemberList", "Master", new { area="Admin"})" class="btn btn-info">Member List</a></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span11">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Edit Corporate Registration</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <div class="span6">
+                                <div class="widget-box">
+                                    <div class="control-group">
+                                        <label class="control-label">Company Name:</label>
+                                        @Html.HiddenFor(x => x.OrganizationId)
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.CompanyName, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.CompanyName)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">First Name:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.ContactPersonFirstName, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.ContactPersonFirstName)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Last Name:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.ContactPersonLastName, new { @class = "span11" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Mobile No:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.MobileNo, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.MobileNo)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Phone No:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.PhoneNo, new { @class = "span11" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Email:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.Email, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.Email)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Address 1:</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(x => x.Address1, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.Address1)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Address 2:</label>
+                                        <div class="controls">
+                                            @Html.TextAreaFor(x => x.Address2, new { @class = "span11" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="widget-box">
+                                    <div class="control-group">
+                                        <label class="control-label">Country:</label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(x => x.Country, new SelectList(ViewBag.BindCountry, "CountryId", "CountryName"), "Select Country", new { @class = "span11 select2" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.Country)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">State:</label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(x => x.State, new SelectList(ViewBag.BindState, "StateId", "StateName"), "Select State", new { @class = "span11 select2" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.State)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">City:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.City, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.City)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Postal/Zip Code:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.PostalZipCode, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.PostalZipCode)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">GST No:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.GSTNo, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.GSTNo)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">PAN No:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.PANNo, new { @class = "span11" })
+                                            <span class="YError">@Html.ValidationMessageFor(x => x.PANNo)</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">TAN No:</label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(x => x.TANNo, new { @class = "span11" })
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"></label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Country").change(function () {
+
+                var Data1 = "<option value=''></option>";
+                var CountryId = $("#Country").val();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("BindState", "Master", new { area="Admin"})",
+                    data: '{ CountryId: "' + CountryId + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        $.each(resp, function (key, value) {
+                            Data1 += "<option value='" + value.StateId + "'>" + value.StateName + "</option>";
+                            //$("#State").append($("<option></option>").val(value.StateId).html());
+                        });
+                        $("#State").html(Data1);
+                    },
+                    error: function (resp) {
+                        alert('something went wrong !');
+                    }
+                });
+            })
+        });
+    </script>
+    @*=== jQeury Gritter, a growl-like notifications ===*@
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GritterNoteUpdate();
+                //location.href = "@Url.Action("CorporateMemberList", "Master", new { area="Admin"})";
+            });
+        </script>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GritterNoteError();
+            });
+        </script>
+    }
+}

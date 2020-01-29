@@ -1,0 +1,104 @@
+﻿@model ChemiFriend.Web.Models.InputModel.UsermasterModel
+
+@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutNew.cshtml";
+}
+
+@using (Html.BeginForm("CreateUser", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <div id="content">
+        <div id="content-header">
+            <div class="btnOnTop"><button type="submit" class="btn btn-success">Save</button>&nbsp;<a href="@Url.Action("GetUserMasterList", "Account", new { area = "Admin" })" style="display:none;" class="btn btn-info">Manage User</a></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3"></div>
+                <div class="span6">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Create User</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <div class="control-group">
+                                <label class="control-label">Name</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "span11" })
+                                    <span class="YError">@Html.ValidationMessageFor(x => x.Name)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Phone</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(x => x.Phone, new { @class = "span11" })
+                                    <span class="YError">@Html.ValidationMessageFor(x => x.Phone)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Email</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "span11" })
+                                    <span class="YError">@Html.ValidationMessageFor(x => x.Email)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Role</label>
+                                <div class="controls">
+                                    @Html.DropDownListFor(x => x.Role, new SelectList(ViewBag.Role, "RoleId", "Role"), "Select Role", new { @class = "span11" })
+                                    <span class="YError">@Html.ValidationMessageFor(x => x.Role)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    //Start Model PopUp
+    <a id="IdPopUp" href="#myModal" data-toggle="modal" class="btn btn-success" style="display:none">View Popup</a>
+    <div id="myModal" class="modal hide">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Auto Generated Credential</h3>
+        </div>
+        <div class="modal-body">
+            <div>
+                <p>Please note down your username and password</p>
+                <text>User: <b>@ViewBag.UserName</b></text><br />
+                <text>Password: <b>@ViewBag.Password</b></text>
+            </div>
+        </div>
+    </div>
+    //End Model PopUp
+}
+
+@section scripts
+{
+    @*=== jQeury Gritter, a growl-like notifications ===*@
+
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#IdPopUp").click();
+                var msg = '@ViewBag.Success';
+                GritterNoteSuccess(msg);
+            });
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Error';
+                GritterNoteError(msg);
+            });
+        </script>
+    }
+}

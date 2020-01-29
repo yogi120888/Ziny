@@ -1,0 +1,126 @@
+﻿@model ChemiFriend.Web.Models.InputModel.ProductSubCategoryModel
+@using System.Configuration;
+
+@{
+    ViewBag.Title = "EditProductSubCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+}
+
+<link href="~/Areas/Admin/Content/js/ImgPreview/AjaxImagePreview.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/js/ImgPreview/AjaxImagePreview.jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#ImageFile").change(function () {
+            $("#dvPreview").html("");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            if (regex.test($(this).val().toLowerCase())) {
+                if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                    $("#dvPreview").show();
+                    $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                }
+                else {
+                    if (typeof (FileReader) != "undefined") {
+                        $("#dvPreview").show();
+                        $("#dvPreview").append("<img width='150' height='150' />"); // Set Hight Width
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("#dvPreview img").attr("src", e.target.result);
+                            // Hide Editable Image
+                            $("#dvShowImg").hide();
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                }
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+    });
+</script>
+
+@using (Html.BeginForm("EditProductSubCategory", "Product", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(x => x.ProductSubCategoryId)
+    <div id="content">
+        <div id="content-header">
+            
+            <div class="btnOnTop"><button type="submit" class="btn btn-success">Update</button>&nbsp;<a href="@Url.Action("GetProductSubCategoryList", "Product", new { area = "Admin" })" class="btn btn-info">Brand List</a></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Add Brand</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <div class="control-group">
+                                <label class="control-label">Company</label>
+                                <div class="controls">
+                                    @*@Html.TextBoxFor(x => x.ProductCategoryId, new { @class = "span11" })*@
+                                    @Html.DropDownListFor(x => x.ProductCategoryId, new SelectList(ViewBag.BindProductCategory, "ProductCategoryId", "ProductCategoryName"), "Select Company", new { @class = "span11" })
+                                    <span class="YError">@Html.ValidationMessageFor(x => x.ProductCategoryId)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Brand</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(x => x.ProductSubCategoryName, new { @class = "span11" })
+                                    <span class="YError">@Html.ValidationMessageFor(x => x.ProductSubCategoryName)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" id="vdImage">Upload Brand:</label>
+                                <div class="controls">
+                                    @*@Html.TextBoxFor(x => x.ImageFile, new { type = "file", @class = "span11" })*@
+                                    <input type="file" id="ImageFile" name="ImageFile" class="span11" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div id="dvShowImg" style="padding:10px;">
+                                    @if (Model != null && !string.IsNullOrEmpty(Model.ProductSubCategoryImagePath))
+                                    {
+                                        string ImagePath = BaseUrl + "Images/UploadImg/" + Model.ProductSubCategoryImagePath;
+                                        <img src="@ImagePath" width="150" height="150" />
+                                    }
+                                </div>
+                                <div id="dvPreview">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @*=== jQeury Gritter, a growl-like notifications ===*@
+
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Success';
+                GritterNoteSuccess(msg);
+            });
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Error';
+                GritterNoteError(msg);
+            });
+        </script>
+    }
+}

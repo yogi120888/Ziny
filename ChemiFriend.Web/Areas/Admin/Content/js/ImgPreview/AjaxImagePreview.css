@@ -1,0 +1,10 @@
+﻿
+#dvPreview {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+    min-height: 200px;
+    min-width: 200px;
+    max-height: 250px;
+    max-width: 250px;
+    display: none;
+    padding:10px;
+}

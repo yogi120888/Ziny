@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA8F4C82-9463-455E-A953-D4BD5A5E7B32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChemiFriend.Data</RootNamespace>
+    <AssemblyName>ChemiFriend.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataContext\DataBaseContext.cs" />
+    <Compile Include="GenricRepository\GenericRepository.cs" />
+    <Compile Include="GenricRepository\IGenericRepository.cs" />
+    <Compile Include="IRepository\IcommonRepository.cs" />
+    <Compile Include="IRepository\IDealRepository.cs" />
+    <Compile Include="IRepository\IOrderItemRepository.cs" />
+    <Compile Include="IRepository\IOrderRepository.cs" />
+    <Compile Include="IRepository\IPaymentRepository.cs" />
+    <Compile Include="IRepository\IProductCategoryRepository.cs" />
+    <Compile Include="IRepository\IProductRepository.cs" />
+    <Compile Include="IRepository\IProductSubCategoryRepository.cs" />
+    <Compile Include="IRepository\IRegistrationRepository.cs" />
+    <Compile Include="IRepository\ISchemeRepository.cs" />
+    <Compile Include="IRepository\IShipmentRepository.cs" />
+    <Compile Include="IRepository\IUserMasterRepository.cs" />
+    <Compile Include="Migrations\202001250957390_fsbdjkfsdkkh.cs" />
+    <Compile Include="Migrations\202001250957390_fsbdjkfsdkkh.designer.cs">
+      <DependentUpon>202001250957390_fsbdjkfsdkkh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001250959479_fsbdjkfsdkkhy.cs" />
+    <Compile Include="Migrations\202001250959479_fsbdjkfsdkkhy.designer.cs">
+      <DependentUpon>202001250959479_fsbdjkfsdkkhy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001251058100_fsbdjkfsdkkhyuu.cs" />
+    <Compile Include="Migrations\202001251058100_fsbdjkfsdkkhyuu.designer.cs">
+      <DependentUpon>202001251058100_fsbdjkfsdkkhyuu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001251114368_fsbdjkfsdkkhyuuytr.cs" />
+    <Compile Include="Migrations\202001251114368_fsbdjkfsdkkhyuuytr.designer.cs">
+      <DependentUpon>202001251114368_fsbdjkfsdkkhyuuytr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001271645160_ffddfd.cs" />
+    <Compile Include="Migrations\202001271645160_ffddfd.designer.cs">
+      <DependentUpon>202001271645160_ffddfd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\commonRepository.cs" />
+    <Compile Include="Repository\DealRepository.cs" />
+    <Compile Include="Repository\OrderItemRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\PaymentRepository.cs" />
+    <Compile Include="Repository\ProductCategoryRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\ProductSubCategoryRepository.cs" />
+    <Compile Include="Repository\RegistrationRepository.cs" />
+    <Compile Include="Repository\SchemeRepository.cs" />
+    <Compile Include="Repository\ShipmentRepository.cs" />
+    <Compile Include="Repository\UserMasterRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChemiFriend.Entity\ChemiFriend.Entity.csproj">
+      <Project>{c05b3919-d171-4b08-b87d-bee258e86606}</Project>
+      <Name>ChemiFriend.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChemiFriend.Utility\ChemiFriend.Utility.csproj">
+      <Project>{86dc4d06-035e-456c-ba4b-5fc6f66903a9}</Project>
+      <Name>ChemiFriend.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001250957390_fsbdjkfsdkkh.resx">
+      <DependentUpon>202001250957390_fsbdjkfsdkkh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001250959479_fsbdjkfsdkkhy.resx">
+      <DependentUpon>202001250959479_fsbdjkfsdkkhy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001251058100_fsbdjkfsdkkhyuu.resx">
+      <DependentUpon>202001251058100_fsbdjkfsdkkhyuu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001251114368_fsbdjkfsdkkhyuuytr.resx">
+      <DependentUpon>202001251114368_fsbdjkfsdkkhyuuytr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001271645160_ffddfd.resx">
+      <DependentUpon>202001271645160_ffddfd.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

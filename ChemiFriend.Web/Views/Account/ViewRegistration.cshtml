@@ -1,0 +1,193 @@
+﻿@model ChemiFriend.Web.Models.InputModel.RegistrationModel
+@using System.Configuration;
+
+@{
+    ViewBag.Title = "ViewRegistration";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+}
+
+@using (Html.BeginForm("ViewRegistration", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(x => x.RegistrationId)
+    @Html.HiddenFor(x => x.UserId)
+    <div id="content">
+        <div id="content-header">
+            @*<div class="btnOnTop"><button type="submit" class="btn btn-success">Save</button></div>*@
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="span6">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                                <h5>View Registration</h5>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <div class="control-group">
+                                    <label class="control-label">Firm Name</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.FirmName, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.FirmName)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Licence No.</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.LicenceNo, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.LicenceNo)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Download Licence Image</label>
+                                    <div class="controls">
+                                        @*@Html.TextBoxFor(x => x.LicenceImage, new { @type = "file", @class = "span11" })*@
+                                        @if (string.IsNullOrEmpty(Model.LicenceImage))
+                                        {
+                                            <text><span style="color:red">No Image Available</span></text>
+                                        }
+                                        else
+                                        {
+                                            string _licenceImage = BaseUrl + "Images/UploadImg/" + Model.LicenceImage;
+                                            <a href="@_licenceImage" target="_blank">Download</a>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">First Name</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.FirstName)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Last Name</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.LastName, new { @class = "span11" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Phone No.</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.PhoneNo, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.PhoneNo)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Email</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.Email, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.Email)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">State</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.State, new SelectList(ViewBag.BindState, "StateId", "StateName"), "Select State", new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.State)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">City</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.City, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.City)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                            </div>
+                            <div class="widget-content nopadding">
+                                <div class="control-group">
+                                    <label class="control-label">Zip Code</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.ZipCode, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.ZipCode)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Address 1</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(x => x.Address1, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.Address1)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Address 2</label>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(x => x.Address2, new { @class = "span11" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">PAN No.</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.PANNo, new { @class = "span11" })
+                                        <span class="YError">@Html.ValidationMessageFor(x => x.PANNo)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">GST No.</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(x => x.GSTNo, new { @class = "span11" })
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Download GST No. Image</label>
+                                    <div class="controls">
+                                        @*@Html.TextBoxFor(x => x.GSTNoImage, new { @type = "file", @class = "span11" })*@
+                                        @if (string.IsNullOrEmpty(Model.GSTNoImage))
+                                        {
+                                            <text><span style="color:red">No Image Available</span></text>
+                                        }
+                                        else
+                                        {
+                                            string _gSTNoImage = BaseUrl + "Images/UploadImg/" + Model.GSTNoImage;
+                                            <a href="@_gSTNoImage" target="_blank">Download</a>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts
+{
+    @*=== jQeury Gritter, a growl-like notifications ===*@
+
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Success';
+                GritterNoteSuccess(msg);
+            });
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Error';
+                GritterNoteError(msg);
+            });
+        </script>
+    }
+}

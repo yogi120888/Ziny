@@ -1,0 +1,119 @@
+﻿@model List<ChemiFriend.Entity.AllowanceMaster>
+@{
+    ViewBag.Title = "DriverAllowanceEntry";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int sno = 0;
+}
+
+@using (Html.BeginForm("DriverAllowanceEntry", "Master", FormMethod.Post, new { @Id = "AllowanceEntry", @class = "form-horizontal" }))
+{
+    <div id="content">
+        <div id="content-header">
+            
+            <div class="btnOnTop"><button id="btnSubmit" type="button" class="btn btn-success">@ViewBag.Button</button>&nbsp;<a href="@Url.Action("DriverList", "Master", new { area="Admin"})" class="btn btn-info">Driver List</a></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Driver Allowance Entry</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            @foreach (var item in Model)
+                            {
+                                sno += 1;
+                                <div class="control-group modelY">
+                                    <input type="hidden" class="DriverId" id="DriverId[@sno]" name="DriverId" value="@ViewBag.DriverId" />
+                                    <input type="hidden" class="MasterId" id="MasterId[@sno]" name="MasterId" value="@item.Id" />
+                                    <input type="hidden" class="AllowanceShift" id="AllowanceShift[@sno]" name="AllowanceShift" value="@item.Shift" />
+                                    <div class="control-group">
+                                        <label class="control-label">@item.Shift</label>
+                                        <div class="controls">
+                                            <input type="text" id="Amount[@sno]" name="Amount" class="Amount span11" value="@item.Amount" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                var param_item = new Array();
+                $('div.modelY').each(function (i) {
+                    if ($.trim($(this).find('.DriverId').val()) > 0 && parseInt($(this).find('.Amount').val()) > 0) {
+                        _param_item = {};
+                        _param_item.DriverId = $.trim($(this).find('.DriverId').val());
+                        _param_item.AllowanceShift = $.trim($(this).find('.AllowanceShift').val());
+                        _param_item.Amount = $.trim($(this).find('.Amount').val());
+                        _param_item.MasterId = $.trim($(this).find('.MasterId').val());
+                        _param_item.Status = true;
+
+                        param_item.push(_param_item);
+                    }
+                });
+                var param_item_detail = JSON.stringify(param_item);
+                if (param_item.length == 0) {
+                    alert('fdsfkldjsf');
+                    return false;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DriverAllowanceEntry", "Master", new { area="Admin"})",
+                    data: '{param_main:' + param_item_detail + '}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.RespType == "Updated")
+                        {
+                            GritterNoteUpdate();
+                        }
+                        else
+                        {
+                            GritterNoteSuccess();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GritterNoteSuccess();
+            });
+        </script>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GritterNoteError();
+            });
+        </script>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GritterMessage(ViewBag.Message);
+            });
+        </script>
+    }
+}

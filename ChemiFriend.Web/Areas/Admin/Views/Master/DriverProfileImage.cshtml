@@ -1,0 +1,260 @@
+﻿@model ChemiFriend.Entity.DriverRegistration
+
+@{
+    ViewBag.Title = "DriverProfileImage";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    string URLImage = string.Empty;
+    URLImage = "/Images/UploadImg/" + Convert.ToString(Session["DriverProfileImage"]);
+}
+
+<link href="~/Scripts/ResponsiveCrop/rcrop.min.css" rel="stylesheet" />
+<style>
+    body {
+        margin: 0;
+        padding: 0px
+    }
+
+    main {
+        min-height: 500px;
+        display: block
+    }
+
+    pre {
+        overflow: auto;
+    }
+
+    .demo {
+        padding: 20px;
+    }
+
+    .image-wrapper {
+        max-width: 600px;
+        min-width: 200px;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    #image-4-wrapper .rcrop-outer-wrapper {
+        opacity: .75;
+    }
+
+    #image-4-wrapper .rcrop-outer {
+        background: #000
+    }
+
+    #image-4-wrapper .rcrop-croparea-inner {
+        border: 1px dashed #fff;
+    }
+
+    #image-4-wrapper .rcrop-handler-corner {
+        width: 12px;
+        height: 12px;
+        background: none;
+        border: 0 solid #51aeff;
+    }
+
+    #image-4-wrapper .rcrop-handler-top-left {
+        border-top-width: 4px;
+        border-left-width: 4px;
+        top: -2px;
+        left: -2px
+    }
+
+    #image-4-wrapper .rcrop-handler-top-right {
+        border-top-width: 4px;
+        border-right-width: 4px;
+        top: -2px;
+        right: -2px
+    }
+
+    #image-4-wrapper .rcrop-handler-bottom-right {
+        border-bottom-width: 4px;
+        border-right-width: 4px;
+        bottom: -2px;
+        right: -2px
+    }
+
+    #image-4-wrapper .rcrop-handler-bottom-left {
+        border-bottom-width: 4px;
+        border-left-width: 4px;
+        bottom: -2px;
+        left: -2px
+    }
+
+    #image-4-wrapper .rcrop-handler-border {
+        display: none;
+    }
+
+    #image-4-wrapper .clayfy-touch-device.clayfy-handler {
+        background: none;
+        border: 0 solid #51aeff;
+        border-bottom-width: 6px;
+        border-right-width: 6px;
+    }
+
+    label {
+        display: inline-block;
+        width: 60px;
+        margin-top: 10px;
+    }
+
+    #update {
+        margin: 10px 0 0 60px;
+        padding: 10px 20px;
+    }
+
+    #cropped-original, #cropped-resized {
+        padding: 20px;
+        border: 4px solid #ddd;
+        min-height: 60px;
+        margin-top: 20px;
+    }
+
+        #cropped-original img, #cropped-resized img {
+            margin: 5px;
+        }
+</style>
+
+@using (Html.BeginForm("DriverProfileImage", "Master", FormMethod.Post, new { enctype = "multipart/form-data", @Id = "Registration", @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(x => x.RegistrationId)
+    @Html.HiddenFor(x => x.ProfilePhoto)
+    <div id="content">
+        <div id="content-header">
+            @**@
+            <div class="btnOnTop"></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Update Profile Image</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <div class="widget-box">
+                                <div class="control-group">
+                                    <label class="control-label">Profile Image:</label>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <div>
+                                            <div id="pnlUpload">
+                                                <input type="file" id="Upload" name="Upload" onclick="Choose();" />
+                                                <input type="button" id="btnUpload" onclick="UploadImage()" value="Upload" />
+                                            </div>
+                                            <div class="demo">
+                                                <div class="image-wrapper">
+                                                    <img id="image_3" src="@URLImage" height="300" width="300">
+                                                    <div id="custom-preview-wrapper" style="display:none;"></div>
+                                                    <div id="cropped-resized">
+                                                        <h3>Images resized (50x50)</h3>
+                                                    </div>
+                                                    <div id="cropped-original" style="display:none;">
+                                                        <h3>Images not resized (original size)</h3>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align:right;">
+                                                    <br />
+                                                    <button type="submit" class="btn btn-success">UPDATE</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @*<script src="~/Areas/Admin/Content/js/ImgCrop/js/jquery.Jcrop.js"></script>*@
+    <script src="~/Scripts/ResponsiveCrop/jquery.js"></script>
+    <script src="~/Scripts/ResponsiveCrop/rcrop.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            ReloadCropJS();
+        });
+        function ReloadCropJS() {
+            $('#image_3').rcrop({
+                minSize: [200, 200],
+                preserveAspectRatio: true,
+
+                preview: {
+                    display: true,
+                    size: [100, 100],
+                    wrapper: '#custom-preview-wrapper'
+                }
+            });
+            $('#image_3').on('rcrop-changed', function () {
+                var srcOriginal = $(this).rcrop('getDataURL');
+                var srcResized = $(this).rcrop('getDataURL', 50, 50);
+
+                $('#cropped-original').append('<img src="' + srcOriginal + '">');
+                $('#cropped-resized').html('<img src="' + srcResized + '">');
+                $("#ProfilePhoto").val(srcResized);
+                $("#btnUpload").hide();
+            });
+        }
+    </script>
+
+    @*=== jQeury Gritter, a growl-like notifications ===*@
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GritterNoteSuccess();
+                //location.href = "@Url.Action("CorporateMemberList", "Master", new { area="Admin"})";
+            });
+        </script>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GritterNoteError();
+            });
+        </script>
+    }
+
+    <script type="text/javascript">
+            function Choose()
+            {
+                $("#btnUpload").show();
+            }
+
+            function UploadImage() {
+            var fileUpload = $("#Upload").get(0);
+            var files = fileUpload.files;
+            var fileData = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            $.ajax({
+                url: "@Url.Action("DriverUploadImage", "Master", new { area="Admin"})",
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                       // $("#image_3").attr("src", result.imgUploadURL);
+                        //ReloadCropJS();
+                        window.location.href = window.location.href;
+                    },
+                    error: function (err) {
+
+                    }
+                });
+        }
+    </script>
+}

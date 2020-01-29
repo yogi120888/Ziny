@@ -1,0 +1,53 @@
+﻿@model List<ChemiFriend.Entity.Feedback>
+
+@{
+    ViewBag.Title = "FeedbackList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int Sno = 0;
+}
+
+<div id="content">
+    <div id="content-header">
+        
+        @*<div style="float:right;margin-right:100px;margin-top: 5px;"><a href="@Url.Action("Feedback", "Report", new { area="Admin"})" class="btn btn-info" style="text-align:right;">Add New</a></div>*@
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <h5>FEEDBACK LIST</h5>
+                <div>
+                    <table id="myGrid" class="table">
+                        <thead>
+                            <tr>
+                                <th class="dt-left">SNo.</th>
+                                <th class="dt-center">Category</th>
+                                <th class="dt-left">FeedBack</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                Sno += 1;
+                                <tr>
+                                    <td>@Sno</td>
+                                    <td class="dt-center">@((ChemiFriend.Utility.FeedbackCategory)item.FeedbackCategory) </td>
+                                    <td class="dt-left">@item.Feedbacks</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myGrid').DataTable();
+        });
+    </script>
+}

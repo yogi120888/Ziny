@@ -1,0 +1,115 @@
+﻿@model ChemiFriend.Web.Models.InputModel.ProductCategoryModel
+
+@{
+    ViewBag.Title = "CreateProductCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*<style type="text/css">
+        #dvPreview {
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+            min-height: 400px;
+            min-width: 400px;
+            max-height: 500px;
+            max-width: 500px;
+            display: none;
+        }
+    </style>*@
+<link href="~/Areas/Admin/Content/js/ImgPreview/AjaxImagePreview.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/js/ImgPreview/AjaxImagePreview.jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#ImageFile").change(function () {
+            $("#dvPreview").html("");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            if (regex.test($(this).val().toLowerCase())) {
+                if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                    $("#dvPreview").show();
+                    $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+                }
+                else {
+                    if (typeof (FileReader) != "undefined") {
+                        $("#dvPreview").show();
+                        $("#dvPreview").append("<img width='150' height='150' />");
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("#dvPreview img").attr("src", e.target.result);
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                }
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+    });
+</script>
+
+@using (Html.BeginForm("CreateProductCategory", "Product", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <div id="content">
+        <div id="content-header">
+            
+            <div class="btnOnTop"><button type="submit" class="btn btn-success">Save</button>&nbsp;<a href="@Url.Action("GetProductCategoryList", "Product", new { area = "Admin" })" class="btn btn-info">Company List</a></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>Add Company</h5>
+                        </div>
+                        <div class="widget-content nopadding">
+                            <div class="control-group">
+                                <label class="control-label">Company:</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(x => x.ProductCategoryName, new { @class = "span11" })
+                                    <span class="YError">@Html.ValidationMessageFor(x => x.ProductCategoryName)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" id="vdImage">Upload Logo:</label>
+                                <div class="controls">
+                                    @*@Html.TextBoxFor(x => x.ImageFile, new { type = "file", @class = "span11" })*@
+                                    <input type="file" id="ImageFile" name="ImageFile" class="span11" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div id="dvPreview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @*=== jQeury Gritter, a growl-like notifications ===*@
+
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Success';
+                GritterNoteSuccess(msg);
+            });
+        </script>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var msg = '@ViewBag.Error';
+                GritterNoteError(msg);
+            });
+        </script>
+    }
+}

@@ -1,0 +1,163 @@
+﻿@model List<ChemiFriend.Entity.JsonModel.GetUsermasterModel>
+@using System.Configuration;
+
+@{
+    ViewBag.Title = "GetUserList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string APIURL = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+}
+
+<div id="content">
+    <div id="content-header">
+        @*<div style="float:right;margin-right:100px;margin-top: 5px;"><a href="@Url.Action("AssingFixCabToCorporate", "CarBooking",  new { area="Admin"})" class="btn btn-info" style="text-align:right;">Add New</a></div>*@
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <h5>MANAGE INACTIVE USER LIST</h5>
+                <div>
+                    <table id="myGrid" class="table">
+                        <thead>
+                            <tr>
+                                <th class="dt-center">SNo.</th>
+                                <th class="dt-center">Name</th>
+                                <th class="dt-center">Mobile No.</th>
+                                <th class="dt-center">Email</th>
+                                <th class="dt-center">Role</th>
+                                <th class="dt-center">Username</th>
+                                <th class="dt-center">Password</th>
+                                <th class="dt-center">Status</th>
+                                <th class="dt-center">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myGrid').DataTable({
+                "ajax": {
+                    "url": "@APIURL/api/ApiUser/GetInActiveUserList",
+                    //"headers": { 'Token': token },
+                    "dataSrc": "data"
+                },
+                "columns": [
+                    {
+                        "data": null, "sortable": false, className: "dt-center",
+                        render: function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    { "data": "Name", className: "dt-center" },
+                    { "data": "Phone", className: "dt-center" },
+                    { "data": "Email", className: "dt-center" },
+                    { "data": "RoleName", className: "dt-center" },
+                    { "data": "UserName", className: "dt-center" },
+                    { "data": "Password", className: "dt-center" },
+                    {
+                        "data": null, className: 'dt-center',
+                        render: function (data, type, row, meta) {
+                            if (parseInt(row.Status) == 3) {
+                                return '<text"><span style="color:orange;">In Active</span></text>';
+                            }
+                            else if (parseInt(row.Status) == 2) {
+                                return '<text"><span style="color:red;">Deactive</span></text>';
+                            }
+                            else {
+                                return '<text"><span style="color:purple;">In Progress</span></text>';
+                            }
+                        }
+                    },
+                    {
+                        "data": null, className: 'dt-center',
+                        render: function (data, type, row, meta) {
+                            if (parseInt(row.Status) == 3) { // InActive
+                                return '<div class="btn-group">'
+                                    + '<button data-toggle="dropdown" class="btn btn-info dropdown-toggle">Action <span class="caret"></span></button>'
+                                    + '<ul class="dropdown-menu">'
+                                    + '<li><a href="/Account/ViewRegistration/' + row.UserId + '" target="_blank">View Registration</a></li>'
+                                    + '<li><a href="/Account/EditRegistration/' + row.UserId + '" target="_blank">Edit Registration</a></li>'
+                                    + '<li><a onclick="Approve(this);" id="' + row.UserId + '">Approve</a></li>'
+                                    + '<li><a onclick="IsDelete(this);" id="' + row.UserId + '">Delete</a></li>'
+                                    + '</ul></div>';
+                            }
+                            if (parseInt(row.Status) == 2) { // Deactive
+                                return '<div class="btn-group">'
+                                    + '<button data-toggle="dropdown" class="btn btn-info dropdown-toggle">Action <span class="caret"></span></button>'
+                                    + '<ul class="dropdown-menu">'
+                                    + '<li><a href="/Account/ViewRegistration/' + row.UserId + '" target="_blank">View Registration</a></li>'
+                                    + '<li><a href="/Account/EditRegistration/' + row.UserId + '" target="_blank">Edit Registration</a></li>'
+                                    + '<li><a onclick="IsDelete(this);" id="' + row.UserId + '">Delete</a></li>'
+                                    + '</ul></div>';
+                            }
+                            else { // New
+                                return '<div class="btn-group">'
+                                    + '<button data-toggle="dropdown" class="btn btn-info dropdown-toggle">Action <span class="caret"></span></button>'
+                                    + '<ul class="dropdown-menu">'
+                                    + '<li><a onclick="IsDelete(this);" id="' + row.UserId + '">Delete</a></li>'
+                                    + '</ul></div>';
+                            }
+                        }
+                    }
+                ]
+            });
+        });
+
+        // For approve user
+        function Approve(elm)
+        {
+            var TranId = $(elm).attr("id");
+            var con = confirm("Are you sure you want to approve this ?");
+            if (con) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("ApproveUser", "Account")",
+                    data: '{Id: "' + TranId + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        if (resp.Type == 'success')
+                        {
+                            GritterNoteSuccess('User approved successfully');
+                           // window.location.href = window.location.href;
+                        }
+                    },
+                    error: function (resp) {
+                        alert(resp.Message);
+                    }
+                });
+            }
+        }
+
+        //  Delete confirmation PopUp
+        function IsDelete(elm)
+        {
+            var TranId = $(elm).attr("id");
+            var con = confirm("Are you sure you want to delete this ?");
+            if (con) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DeleteUser", "Account")",
+                    data: '{Id: "' + TranId + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        if (resp.Type == 'success')
+                        {
+                            window.location.href = window.location.href;
+                        }
+                    },
+                    error: function (resp) {
+                        alert(resp.Message);
+                    }
+                });
+            }
+        }
+    </script>
+}

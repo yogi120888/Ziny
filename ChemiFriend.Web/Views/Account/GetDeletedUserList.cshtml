@@ -1,0 +1,61 @@
+﻿@model List<ChemiFriend.Entity.JsonModel.GetUsermasterModel>
+@using System.Configuration;
+
+@{
+    ViewBag.Title = "GetActiveUserList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string APIURL = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+}
+
+<div id="content">
+    <div id="content-header">
+        @*<div style="float:right;margin-right:100px;margin-top: 5px;"><a href="@Url.Action("AssingFixCabToCorporate", "CarBooking",  new { area="Admin"})" class="btn btn-info" style="text-align:right;">Add New</a></div>*@
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <h5>MANAGE DELETED USER LIST</h5>
+                <div>
+                    <table id="myGrid" class="table">
+                        <thead>
+                            <tr>
+                                <th class="dt-center">SNo.</th>
+                                <th class="dt-center">Name</th>
+                                <th class="dt-center">Mobile No.</th>
+                                <th class="dt-center">Email</th>
+                                <th class="dt-center">Role</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myGrid').DataTable({
+                "ajax": {
+                    "url": "@APIURL/api/ApiUser/GetDeletedUserList",
+                    //"headers": { 'Token': token },
+                    "dataSrc": "data"
+                },
+                "columns": [
+                    {
+                        "data": null, "sortable": false, className: "dt-center",
+                        render: function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    { "data": "Name", className: "dt-center" },
+                    { "data": "Phone", className: "dt-center" },
+                    { "data": "Email", className: "dt-center" },
+                    { "data": "RoleName", className: "dt-center" },
+                ]
+            });
+        });
+    </script>
+}

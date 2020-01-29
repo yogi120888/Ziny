@@ -1,0 +1,794 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{006F3524-78BD-49CA-B889-17DDD06860FF}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChemiFriend.Web</RootNamespace>
+    <AssemblyName>ChemiFriend.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DealController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\CustomAuthorize.cs" />
+    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CustomDateTimeBinder .cs" />
+    <Compile Include="Helpers\ManageUser.cs" />
+    <Compile Include="Helpers\PictureHelper.cs" />
+    <Compile Include="Infrastructure\AutoMapperAPIProfile.cs" />
+    <Compile Include="Infrastructure\ImageHelper.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageUploadModel\DocumentModel.cs" />
+    <Compile Include="Models\ImageUploadModel\UploadDocumentModel.cs" />
+    <Compile Include="Models\InputModel\DealModel.cs" />
+    <Compile Include="Models\InputModel\ProductCategoryModel.cs" />
+    <Compile Include="Models\InputModel\ProductModel.cs" />
+    <Compile Include="Models\InputModel\ProductSubCategoryModel.cs" />
+    <Compile Include="Models\InputModel\RegistrationModel.cs" />
+    <Compile Include="Models\InputModel\SchemeModel.cs" />
+    <Compile Include="Models\InputModel\UsermasterModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Response\ResponseModel.cs" />
+    <Compile Include="Models\Response\ResponseWithData.cs" />
+    <Compile Include="Models\UserAuthenticate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\bootstrap-responsive.min.css" />
+    <Content Include="Areas\Admin\Content\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Content\css\colorpicker.css" />
+    <Content Include="Areas\Admin\Content\css\datepicker.css" />
+    <Content Include="Areas\Admin\Content\css\fullcalendar.css" />
+    <Content Include="Areas\Admin\Content\css\jquery.gritter.css" />
+    <Content Include="Areas\Admin\Content\css\login.css" />
+    <Content Include="Areas\Admin\Content\css\maruti-login.css" />
+    <Content Include="Areas\Admin\Content\css\maruti-media.css" />
+    <Content Include="Areas\Admin\Content\css\maruti-style.css" />
+    <Content Include="Areas\Admin\Content\css\select2.css" />
+    <Content Include="Areas\Admin\Content\css\uniform.css" />
+    <Content Include="Areas\Admin\Content\images\alpha.png" />
+    <Content Include="Areas\Admin\Content\images\backgrounds\bodyBg.png" />
+    <Content Include="Areas\Admin\Content\images\backgrounds\default.jpg" />
+    <Content Include="Areas\Admin\Content\images\backgrounds\titleRowBg.png" />
+    <Content Include="Areas\Admin\Content\images\breadcrumb.png" />
+    <Content Include="Areas\Admin\Content\images\css-border-bg.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\av1.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\av2.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\av3.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\av4.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\av5.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\demo-image1.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\demo-image2.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\demo-image3.jpg" />
+    <Content Include="Areas\Admin\Content\images\demo\envelope.png" />
+    <Content Include="Areas\Admin\Content\images\dummy.jpg" />
+    <Content Include="Areas\Admin\Content\images\gallery\imgbox1.jpg" />
+    <Content Include="Areas\Admin\Content\images\gallery\imgbox2.jpg" />
+    <Content Include="Areas\Admin\Content\images\gallery\imgbox3.jpg" />
+    <Content Include="Areas\Admin\Content\images\gallery\imgbox4.jpg" />
+    <Content Include="Areas\Admin\Content\images\gallery\imgbox5.jpg" />
+    <Content Include="Areas\Admin\Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Areas\Admin\Content\images\glyphicons-halflings.png" />
+    <Content Include="Areas\Admin\Content\images\gritter.png" />
+    <Content Include="Areas\Admin\Content\images\hue.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\book.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\cabinet.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\calendar.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\client.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\database.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\download.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\graph.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\home.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\lock.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\mail.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\pdf.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\people.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\piechart.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\search.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\shopping-bag.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\survey.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\tag.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\user.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\wallet.png" />
+    <Content Include="Areas\Admin\Content\images\icons\16\web.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\book.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\cabinet.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\calendar.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\client.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\dashboard.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\database.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\download.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\graph.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\home.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\lock.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\mail.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\pdf.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\people.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\piechart.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\search.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\shopping-bag.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\survey.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\tag.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\user.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\wallet.png" />
+    <Content Include="Areas\Admin\Content\images\icons\32\web.png" />
+    <Content Include="Areas\Admin\Content\images\larrow.png" />
+    <Content Include="Areas\Admin\Content\images\line.png" />
+    <Content Include="Areas\Admin\Content\images\login-logo.png" />
+    <Content Include="Areas\Admin\Content\images\logo.png" />
+    <Content Include="Areas\Admin\Content\images\menu-active.png" />
+    <Content Include="Areas\Admin\Content\images\rarrow.png" />
+    <Content Include="Areas\Admin\Content\images\saturation.png" />
+    <Content Include="Areas\Admin\Content\images\select2.png" />
+    <Content Include="Areas\Admin\Content\images\spinner.gif" />
+    <Content Include="Areas\Admin\Content\images\sprite.png" />
+    <Content Include="Areas\Admin\Content\js\bootstrap-colorpicker.js" />
+    <Content Include="Areas\Admin\Content\js\bootstrap-datepicker.js" />
+    <Content Include="Areas\Admin\Content\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Content\js\Datetimpicker\jquery.datetimepicker.full.min.js" />
+    <Content Include="Areas\Admin\Content\js\Datetimpicker\jquery.datetimepicker.min.css" />
+    <Content Include="Areas\Admin\Content\js\Datetimpicker\jquery.js" />
+    <Content Include="Areas\Admin\Content\js\excanvas.min.js" />
+    <Content Include="Areas\Admin\Content\js\fullcalendar.min.js" />
+    <Content Include="Areas\Admin\Content\js\ImgPreview\AjaxImagePreview.css" />
+    <Content Include="Areas\Admin\Content\js\ImgPreview\AjaxImagePreview.jquery.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.dataTables.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.flot.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.flot.pie.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.flot.resize.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.gritter.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.Jcrop.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.peity.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.ui.custom.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.uniform.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.validate.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.wizard.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.calendar.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.charts.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.chat.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.dashboard.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.form_common.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.form_validation.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.interface.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.login.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.popover.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.tables.js" />
+    <Content Include="Areas\Admin\Content\js\maruti.wizard.js" />
+    <Content Include="Areas\Admin\Content\js\select2.min.js" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\w3layouts\css\bootstrap.css" />
+    <Content Include="Content\w3layouts\css\font-awesome.css" />
+    <Content Include="Content\w3layouts\css\skdslider.css" />
+    <Content Include="Content\w3layouts\css\style.css" />
+    <Content Include="Content\w3layouts\images\1.png" />
+    <Content Include="Content\w3layouts\images\10.png" />
+    <Content Include="Content\w3layouts\images\11.jpg" />
+    <Content Include="Content\w3layouts\images\111.jpg" />
+    <Content Include="Content\w3layouts\images\12.png" />
+    <Content Include="Content\w3layouts\images\13.png" />
+    <Content Include="Content\w3layouts\images\14.png" />
+    <Content Include="Content\w3layouts\images\15.png" />
+    <Content Include="Content\w3layouts\images\16.png" />
+    <Content Include="Content\w3layouts\images\17.png" />
+    <Content Include="Content\w3layouts\images\2.png" />
+    <Content Include="Content\w3layouts\images\22.jpg" />
+    <Content Include="Content\w3layouts\images\3.png" />
+    <Content Include="Content\w3layouts\images\4.png" />
+    <Content Include="Content\w3layouts\images\44.jpg" />
+    <Content Include="Content\w3layouts\images\5.png" />
+    <Content Include="Content\w3layouts\images\6.png" />
+    <Content Include="Content\w3layouts\images\7.png" />
+    <Content Include="Content\w3layouts\images\8.png" />
+    <Content Include="Content\w3layouts\images\9.png" />
+    <Content Include="Content\w3layouts\images\arrow.png" />
+    <Content Include="Content\w3layouts\images\b1.jpg" />
+    <Content Include="Content\w3layouts\images\b3.jpg" />
+    <Content Include="Content\w3layouts\images\bv1.png" />
+    <Content Include="Content\w3layouts\images\bv2.png" />
+    <Content Include="Content\w3layouts\images\bv3.png" />
+    <Content Include="Content\w3layouts\images\bv4.png" />
+    <Content Include="Content\w3layouts\images\bv5.png" />
+    <Content Include="Content\w3layouts\images\bv6.png" />
+    <Content Include="Content\w3layouts\images\bv7.png" />
+    <Content Include="Content\w3layouts\images\bv8.jpg" />
+    <Content Include="Content\w3layouts\images\bv8.png" />
+    <Content Include="Content\w3layouts\images\bv9.png" />
+    <Content Include="Content\w3layouts\images\card.png" />
+    <Content Include="Content\w3layouts\images\check.png" />
+    <Content Include="Content\w3layouts\images\close_1.png" />
+    <Content Include="Content\w3layouts\images\gu1.png" />
+    <Content Include="Content\w3layouts\images\gu2.png" />
+    <Content Include="Content\w3layouts\images\gu3.png" />
+    <Content Include="Content\w3layouts\images\gu4.png" />
+    <Content Include="Content\w3layouts\images\gu5.png" />
+    <Content Include="Content\w3layouts\images\gu6.png" />
+    <Content Include="Content\w3layouts\images\gu7.png" />
+    <Content Include="Content\w3layouts\images\gu8.png" />
+    <Content Include="Content\w3layouts\images\gu9.png" />
+    <Content Include="Content\w3layouts\images\hh1.png" />
+    <Content Include="Content\w3layouts\images\hh2.png" />
+    <Content Include="Content\w3layouts\images\hh3.png" />
+    <Content Include="Content\w3layouts\images\hh4.png" />
+    <Content Include="Content\w3layouts\images\hh5.png" />
+    <Content Include="Content\w3layouts\images\hh6.png" />
+    <Content Include="Content\w3layouts\images\hh7.png" />
+    <Content Include="Content\w3layouts\images\hh8.png" />
+    <Content Include="Content\w3layouts\images\hh9.png" />
+    <Content Include="Content\w3layouts\images\icon1.png" />
+    <Content Include="Content\w3layouts\images\icon2.png" />
+    <Content Include="Content\w3layouts\images\offer.png" />
+    <Content Include="Content\w3layouts\images\p2.jpg" />
+    <Content Include="Content\w3layouts\images\p3.jpg" />
+    <Content Include="Content\w3layouts\images\p4.jpg" />
+    <Content Include="Content\w3layouts\images\pc1.png" />
+    <Content Include="Content\w3layouts\images\pc2.png" />
+    <Content Include="Content\w3layouts\images\pc3.png" />
+    <Content Include="Content\w3layouts\images\pc4.png" />
+    <Content Include="Content\w3layouts\images\pc5.png" />
+    <Content Include="Content\w3layouts\images\pc6.png" />
+    <Content Include="Content\w3layouts\images\pc7.png" />
+    <Content Include="Content\w3layouts\images\pc8.png" />
+    <Content Include="Content\w3layouts\images\pc9.jpg" />
+    <Content Include="Content\w3layouts\images\pf1.png" />
+    <Content Include="Content\w3layouts\images\pf2.png" />
+    <Content Include="Content\w3layouts\images\pf3.png" />
+    <Content Include="Content\w3layouts\images\pf4.png" />
+    <Content Include="Content\w3layouts\images\pf5.png" />
+    <Content Include="Content\w3layouts\images\pf6.png" />
+    <Content Include="Content\w3layouts\images\pf7.png" />
+    <Content Include="Content\w3layouts\images\pf8.png" />
+    <Content Include="Content\w3layouts\images\pf9.png" />
+    <Content Include="Content\w3layouts\images\si1.jpg" />
+    <Content Include="Content\w3layouts\images\star.png" />
+    <Content Include="Content\w3layouts\images\star1.png" />
+    <Content Include="Content\w3layouts\images\t1.jpg" />
+    <Content Include="Content\w3layouts\images\t2.jpg" />
+    <Content Include="Content\w3layouts\images\t3.jpg" />
+    <Content Include="Content\w3layouts\images\t4.jpg" />
+    <Content Include="Content\w3layouts\images\tick.png" />
+    <Content Include="Content\w3layouts\js\bootstrap.min.js" />
+    <Content Include="Content\w3layouts\js\easing.js" />
+    <Content Include="Content\w3layouts\js\jquery-1.11.1.min.js" />
+    <Content Include="Content\w3layouts\js\minicart.min.js" />
+    <Content Include="Content\w3layouts\js\move-top.js" />
+    <Content Include="Content\w3layouts\js\responsiveslides.min.js" />
+    <Content Include="Content\w3layouts\js\skdslider.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Dashboard\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\CorporateRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="HTML\buttons.html" />
+    <Content Include="HTML\calendar.html" />
+    <Content Include="HTML\charts.html" />
+    <Content Include="HTML\chat.html" />
+    <Content Include="HTML\css\bootstrap-responsive.min.css" />
+    <Content Include="HTML\css\bootstrap.min.css" />
+    <Content Include="HTML\css\colorpicker.css" />
+    <Content Include="HTML\css\datepicker.css" />
+    <Content Include="HTML\css\fullcalendar.css" />
+    <Content Include="HTML\css\jquery.gritter.css" />
+    <Content Include="HTML\css\maruti-login.css" />
+    <Content Include="HTML\css\maruti-media.css" />
+    <Content Include="HTML\css\maruti-style.css" />
+    <Content Include="HTML\css\select2.css" />
+    <Content Include="HTML\css\uniform.css" />
+    <Content Include="HTML\form-common.html" />
+    <Content Include="HTML\form-validation.html" />
+    <Content Include="HTML\form-wizard.html" />
+    <Content Include="HTML\gallery.html" />
+    <Content Include="HTML\grid.html" />
+    <Content Include="HTML\images\backgrounds\bodyBg.png" />
+    <Content Include="HTML\images\backgrounds\default.jpg" />
+    <Content Include="HTML\images\backgrounds\titleRowBg.png" />
+    <Content Include="HTML\images\gallery\imgbox1.jpg" />
+    <Content Include="HTML\images\gallery\imgbox2.jpg" />
+    <Content Include="HTML\images\gallery\imgbox3.jpg" />
+    <Content Include="HTML\images\gallery\imgbox4.jpg" />
+    <Content Include="HTML\images\gallery\imgbox5.jpg" />
+    <Content Include="HTML\img\alpha.png" />
+    <Content Include="HTML\img\breadcrumb.png" />
+    <Content Include="HTML\img\css-border-bg.jpg" />
+    <Content Include="HTML\img\demo\av1.jpg" />
+    <Content Include="HTML\img\demo\av2.jpg" />
+    <Content Include="HTML\img\demo\av3.jpg" />
+    <Content Include="HTML\img\demo\av4.jpg" />
+    <Content Include="HTML\img\demo\av5.jpg" />
+    <Content Include="HTML\img\demo\demo-image1.jpg" />
+    <Content Include="HTML\img\demo\demo-image2.jpg" />
+    <Content Include="HTML\img\demo\demo-image3.jpg" />
+    <Content Include="HTML\img\demo\envelope.png" />
+    <Content Include="HTML\img\glyphicons-halflings-white.png" />
+    <Content Include="HTML\img\glyphicons-halflings.png" />
+    <Content Include="HTML\img\gritter.png" />
+    <Content Include="HTML\img\hue.png" />
+    <Content Include="HTML\img\icons\16\book.png" />
+    <Content Include="HTML\img\icons\16\cabinet.png" />
+    <Content Include="HTML\img\icons\16\calendar.png" />
+    <Content Include="HTML\img\icons\16\client.png" />
+    <Content Include="HTML\img\icons\16\database.png" />
+    <Content Include="HTML\img\icons\16\download.png" />
+    <Content Include="HTML\img\icons\16\graph.png" />
+    <Content Include="HTML\img\icons\16\home.png" />
+    <Content Include="HTML\img\icons\16\lock.png" />
+    <Content Include="HTML\img\icons\16\mail.png" />
+    <Content Include="HTML\img\icons\16\pdf.png" />
+    <Content Include="HTML\img\icons\16\people.png" />
+    <Content Include="HTML\img\icons\16\piechart.png" />
+    <Content Include="HTML\img\icons\16\search.png" />
+    <Content Include="HTML\img\icons\16\shopping-bag.png" />
+    <Content Include="HTML\img\icons\16\survey.png" />
+    <Content Include="HTML\img\icons\16\tag.png" />
+    <Content Include="HTML\img\icons\16\user.png" />
+    <Content Include="HTML\img\icons\16\wallet.png" />
+    <Content Include="HTML\img\icons\16\web.png" />
+    <Content Include="HTML\img\icons\32\book.png" />
+    <Content Include="HTML\img\icons\32\cabinet.png" />
+    <Content Include="HTML\img\icons\32\calendar.png" />
+    <Content Include="HTML\img\icons\32\client.png" />
+    <Content Include="HTML\img\icons\32\dashboard.png" />
+    <Content Include="HTML\img\icons\32\database.png" />
+    <Content Include="HTML\img\icons\32\download.png" />
+    <Content Include="HTML\img\icons\32\graph.png" />
+    <Content Include="HTML\img\icons\32\home.png" />
+    <Content Include="HTML\img\icons\32\lock.png" />
+    <Content Include="HTML\img\icons\32\mail.png" />
+    <Content Include="HTML\img\icons\32\pdf.png" />
+    <Content Include="HTML\img\icons\32\people.png" />
+    <Content Include="HTML\img\icons\32\piechart.png" />
+    <Content Include="HTML\img\icons\32\search.png" />
+    <Content Include="HTML\img\icons\32\shopping-bag.png" />
+    <Content Include="HTML\img\icons\32\survey.png" />
+    <Content Include="HTML\img\icons\32\tag.png" />
+    <Content Include="HTML\img\icons\32\user.png" />
+    <Content Include="HTML\img\icons\32\wallet.png" />
+    <Content Include="HTML\img\icons\32\web.png" />
+    <Content Include="HTML\img\larrow.png" />
+    <Content Include="HTML\img\line.png" />
+    <Content Include="HTML\img\login-logo.png" />
+    <Content Include="HTML\img\logo.png" />
+    <Content Include="HTML\img\menu-active.png" />
+    <Content Include="HTML\img\rarrow.png" />
+    <Content Include="HTML\img\saturation.png" />
+    <Content Include="HTML\img\select2.png" />
+    <Content Include="HTML\img\spinner.gif" />
+    <Content Include="HTML\img\sprite.png" />
+    <Content Include="HTML\index.html" />
+    <Content Include="HTML\index2.html" />
+    <Content Include="HTML\interface.html" />
+    <Content Include="HTML\js\bootstrap-colorpicker.js" />
+    <Content Include="HTML\js\bootstrap-datepicker.js" />
+    <Content Include="HTML\js\bootstrap.min.js" />
+    <Content Include="HTML\js\excanvas.min.js" />
+    <Content Include="HTML\js\fullcalendar.min.js" />
+    <Content Include="HTML\js\jquery.dataTables.min.js" />
+    <Content Include="HTML\js\jquery.flot.min.js" />
+    <Content Include="HTML\js\jquery.flot.pie.min.js" />
+    <Content Include="HTML\js\jquery.flot.resize.min.js" />
+    <Content Include="HTML\js\jquery.gritter.min.js" />
+    <Content Include="HTML\js\jquery.min.js" />
+    <Content Include="HTML\js\jquery.peity.min.js" />
+    <Content Include="HTML\js\jquery.ui.custom.js" />
+    <Content Include="HTML\js\jquery.uniform.js" />
+    <Content Include="HTML\js\jquery.validate.js" />
+    <Content Include="HTML\js\jquery.wizard.js" />
+    <Content Include="HTML\js\maruti.calendar.js" />
+    <Content Include="HTML\js\maruti.charts.js" />
+    <Content Include="HTML\js\maruti.chat.js" />
+    <Content Include="HTML\js\maruti.dashboard.js" />
+    <Content Include="HTML\js\maruti.form_common.js" />
+    <Content Include="HTML\js\maruti.form_validation.js" />
+    <Content Include="HTML\js\maruti.interface.js" />
+    <Content Include="HTML\js\maruti.js" />
+    <Content Include="HTML\js\maruti.login.js" />
+    <Content Include="HTML\js\maruti.popover.js" />
+    <Content Include="HTML\js\maruti.tables.js" />
+    <Content Include="HTML\js\maruti.wizard.js" />
+    <Content Include="HTML\js\select2.min.js" />
+    <Content Include="HTML\login.html" />
+    <Content Include="HTML\tables.html" />
+    <Content Include="HTML\widgets.html" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Areas\Admin\Views\Master\EditRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\CustomerRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\CustomerList.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\EditCustomerRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\VendorList.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\VendorRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\EditVendorRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\DriverRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\UploadProfileImage.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\DriverList.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\EditDriverRegistration.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\DriverProfileImage.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\CorporateMemberList.cshtml" />
+    <Content Include="Areas\Admin\Content\images\demo\Thumbs.db" />
+    <Content Include="Areas\Admin\Content\images\icons\32\Thumbs.db" />
+    <Content Include="HTML\img\demo\Thumbs.db" />
+    <Content Include="HTML\img\icons\32\Thumbs.db" />
+    <Content Include="HTML\img\Thumbs.db" />
+    <Content Include="Areas\Admin\Views\Master\FeedbackList.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\DriverAllowanceEntry.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\ViewDriverProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\VendorProfile.cshtml" />
+    <Content Include="Content\w3layouts\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\w3layouts\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\w3layouts\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\w3layouts\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\w3layouts\fonts\FontAwesome.otf" />
+    <Content Include="Content\w3layouts\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\w3layouts\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\w3layouts\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\w3layouts\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Views\Product\CreateProductCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\GetProductCategoryList.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\EditProductCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\CreateProductSubCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\GetProductSubCategoryList.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\EditProductSubCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\CreateProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\GetProductList.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\EditProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutNew.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ResponsiveCrop\jquery.js" />
+    <Content Include="Scripts\ResponsiveCrop\rcrop.css" />
+    <Content Include="Scripts\ResponsiveCrop\rcrop.js" />
+    <Content Include="Scripts\ResponsiveCrop\rcrop.min.css" />
+    <Content Include="Scripts\ResponsiveCrop\rcrop.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Scripts\ResponsiveCrop\rcrop.css.map" />
+    <Content Include="Views\ApplicationKeys\GenerateKeys.cshtml" />
+    <Content Include="Views\Account\CreateUserProfile.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Deal\CreateDeal.cshtml" />
+    <Content Include="Views\Shared\_LayoutMaruti.cshtml" />
+    <Content Include="Views\Account\CreateUser.cshtml" />
+    <Content Include="Views\Account\GetActiveUserList.cshtml" />
+    <Content Include="Views\Account\GetInActiveUserList.cshtml" />
+    <Content Include="Views\Account\GetDeletedUserList.cshtml" />
+    <Content Include="Views\Account\CreateRegistration.cshtml" />
+    <Content Include="Views\Account\RequestForApproving.cshtml" />
+    <Content Include="Views\Account\ViewRegistration.cshtml" />
+    <Content Include="Views\Account\EditRegistration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChemiFriend.Data\ChemiFriend.Data.csproj">
+      <Project>{da8f4c82-9463-455e-a953-d4bd5a5e7b32}</Project>
+      <Name>ChemiFriend.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChemiFriend.Entity\ChemiFriend.Entity.csproj">
+      <Project>{c05b3919-d171-4b08-b87d-bee258e86606}</Project>
+      <Name>ChemiFriend.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChemiFriend.Utility\ChemiFriend.Utility.csproj">
+      <Project>{86dc4d06-035e-456c-ba4b-5fc6f66903a9}</Project>
+      <Name>ChemiFriend.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55460/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
