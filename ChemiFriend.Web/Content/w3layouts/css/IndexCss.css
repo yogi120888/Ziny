@@ -1,0 +1,77 @@
+﻿
+.newproducts-w3agile {
+    padding: 1em 0;
+    background: #f5f5f5;
+}
+
+.top-brands h2, .newproducts-w3agile h3, .login h2, .register h2, .faq-w3agile h3, .brands h3 {
+    text-align: center;
+    color: #212121;
+    padding-bottom: 0.2em;
+    position: relative;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.agile_top_brands_grids {
+    margin-top: 10px;
+}
+
+.products {
+    padding: 1em 0;
+}
+
+.products-right-grids {
+    margin-bottom: 1em;
+}
+
+.ban-bottom-w3l {
+    padding: 0em 0;
+}
+
+ul.paging {
+    margin: .5em auto 0;
+}
+
+.brands {
+    padding: 1em 0;
+    background: #eed3b6;
+}
+
+.brands-agile {
+    margin-top: 1em;
+}
+
+.ban-bottom-w3l {
+    padding: 0em 0;
+    margin-top: -17px;
+}
+
+input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    font-size: 14px;
+    color: #999;
+    outline: none;
+    border: 1px solid #cccccc;
+    background: none;
+    -webkit-appearance: none;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+}
+select {
+    border: 1px solid #212121;
+    outline: none;
+    font-size: 14px;
+    color: #212121;
+    padding: 0.5em;
+    width: 100%;
+    cursor: pointer;
+}
+.sorting-left {
+    margin-right: 1em;
+}
+.agile_top_brand_left_grid1 {
+    padding: 0em;
+}

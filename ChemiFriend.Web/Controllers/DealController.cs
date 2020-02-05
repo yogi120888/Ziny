@@ -112,7 +112,7 @@ namespace ChemiFriend.Web.Controllers
                     {
                         // Get UserId
                         dealModel.CreatedBy = UserAuthenticate.UserId;
-                        string apiURL = BaseUrl + "api/ApiScheme/CreateDeal";
+                        string apiURL = BaseUrl + "api/ApiDeal/CreateDeal";
                         client.BaseAddress = new Uri(apiURL);
                         client.DefaultRequestHeaders.Accept.Clear();
                         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -140,6 +140,7 @@ namespace ChemiFriend.Web.Controllers
                     ViewBag.Error = "Error:" + ex.Message;
                 }
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
 
             return View();
         }
@@ -156,21 +157,27 @@ namespace ChemiFriend.Web.Controllers
         }
 
         /// <summary>
-        /// Get Scheme With DealList
+        /// Get Product Details
         /// </summary>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpGet]
-        public ActionResult GetSchemeWithDealList()
-        {
-            return View();
-        }
-
         [HttpGet]
         public ActionResult GetProductDetails(int Id)
         {
             var details = _productRepository.GetProductList().Where(x => x.ProductId == Id).FirstOrDefault();
             return Json(details, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GetDealList()
+        {
+            return View();
+        }
+
 
         #endregion
 

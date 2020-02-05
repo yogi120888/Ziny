@@ -13,8 +13,12 @@ namespace ChemiFriend.Entity.JsonModel
         public string DealTypeName { get; set; }
         public int DealApplicableForId { get; set; }
         public string DealApplicableFor { get; set; }
+        public string ProductCategory { get; set; }
         public Int64 ProductId { get; set; }
         public string ProductName { get; set; }
+        public int ProductCodeId { get; set; } // Like Molecules
+        public string ProductCode { get; set; } // Like Molecules
+        public string ProductImagePath { get; set; }
         public int ProductTypeId { get; set; }
         public string ProductType { get; set; }
         public DateTime DealStartDate { get; set; }

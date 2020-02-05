@@ -196,7 +196,7 @@
     <Compile Include="Controllers\ApiCommonController.cs" />
     <Compile Include="Controllers\ApiProductController.cs" />
     <Compile Include="Controllers\ApiUserController.cs" />
-    <Compile Include="Controllers\ApiSchemeController.cs" />
+    <Compile Include="Controllers\ApiDealController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ApiOrderController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

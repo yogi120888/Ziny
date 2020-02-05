@@ -23,6 +23,7 @@ using ChemiFriend.Web.Filters;
 using ChemiFriend.Web.Models.ImageUploadModel;
 using System.IO;
 using AutoMapper;
+using ChemiFriend.Entity.JsonModel;
 
 namespace ChemiFriend.Web.Controllers
 {
@@ -34,20 +35,23 @@ namespace ChemiFriend.Web.Controllers
         IUserMasterRepository _user;
         IcommonRepository _commonRepository;
         IRegistrationRepository _registrationRepository;
+        IDealRepository _dealRepository;
         public AccountController()
         {
             _user = new UserMasterRepository();
             _commonRepository = new commonRepository();
             _registrationRepository = new RegistrationRepository();
+            _dealRepository = new DealRepository();
         }
 
         #region[Public Method]
 
         /// <summary>
-        /// Index
+        /// Home page
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Index()
         {
             if (UserAuthenticate.IsAuthenticated)
@@ -59,8 +63,72 @@ namespace ChemiFriend.Web.Controllers
                 }
                 //return RedirectToAction("Index", "Account");
             }
-            return View();
+
+            SearchDealModel model = new SearchDealModel();
+            var lstDealType = new List<SelectListItem>
+            {
+                 new SelectListItem{ Text="All Deals", Value = "1" },
+                 new SelectListItem{ Text="Trending Deals", Value = "2" },
+                 new SelectListItem{ Text="Regular Deals", Value = "3" },
+                 new SelectListItem{ Text="Local Deals", Value = "4" },
+                 new SelectListItem{ Text="Bulk deals", Value = "5" },
+                 new SelectListItem{ Text="Regular Products", Value = "6" }
+            };
+
+            var lstSorting = new List<SelectListItem>
+            {
+                 new SelectListItem{ Text="Resent Deals", Value = "1" },
+                 new SelectListItem{ Text="Closing Soon", Value = "2" },
+                 new SelectListItem{ Text="Closing Late", Value = "3" },
+                 new SelectListItem{ Text="Product Name A to Z", Value = "4" },
+                 new SelectListItem{ Text="Product Name Z to A", Value = "5" },
+                 new SelectListItem{ Text="Rate Low to High", Value = "6" },
+                 new SelectListItem{ Text="Rate High to Low", Value = "7" }
+            };
+
+            ViewBag.BindDealType = new SelectList(lstDealType, "Value", "Text", model.DealType);
+            ViewBag.BindSorting = new SelectList(lstSorting, "Value", "Text", model.Sort);
+
+            var _getList = _dealRepository.GetDealList().ToList();
+            model.getDealModels = _getList;
+            return View(model);
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult Index(SearchDealModel model)
+        {
+            var lstDealType = new List<SelectListItem>
+            {
+                 new SelectListItem{ Text="All Deals", Value = "1" },
+                 new SelectListItem{ Text="Trending Deals", Value = "2" },
+                 new SelectListItem{ Text="Regular Deals", Value = "3" },
+                 new SelectListItem{ Text="Local Deals", Value = "4" },
+                 new SelectListItem{ Text="Bulk deals", Value = "5" },
+                 new SelectListItem{ Text="Regular Products", Value = "6" }
+            };
+
+            var lstSorting = new List<SelectListItem>
+            {
+                 new SelectListItem{ Text="Resent Deals", Value = "1" },
+                 new SelectListItem{ Text="Closing Soon", Value = "2" },
+                 new SelectListItem{ Text="Closing Late", Value = "3" },
+                 new SelectListItem{ Text="Product Name A to Z", Value = "4" },
+                 new SelectListItem{ Text="Product Name Z to A", Value = "5" },
+                 new SelectListItem{ Text="Rate Low to High", Value = "6" },
+                 new SelectListItem{ Text="Rate High to Low", Value = "7" }
+            };
+
+            ViewBag.BindDealType = new SelectList(lstDealType, "Value", "Text", model.DealType);
+            ViewBag.BindSorting = new SelectList(lstSorting, "Value", "Text", model.Sort);
+
+            var _getList = _dealRepository.GetDealList().ToList();
+            model.getDealModels = _getList;
+
+            return View(model);
+        }
+
+
 
         /// <summary>
         /// Get Login
@@ -507,7 +575,6 @@ namespace ChemiFriend.Web.Controllers
             }
             return Json(_response, JsonRequestBehavior.AllowGet);
         }
-
 
 
         //[AllowAnonymous]

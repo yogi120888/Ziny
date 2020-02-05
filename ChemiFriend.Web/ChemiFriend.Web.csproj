@@ -358,6 +358,7 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\w3layouts\css\bootstrap.css" />
     <Content Include="Content\w3layouts\css\font-awesome.css" />
+    <Content Include="Content\w3layouts\css\IndexCss.css" />
     <Content Include="Content\w3layouts\css\skdslider.css" />
     <Content Include="Content\w3layouts\css\style.css" />
     <Content Include="Content\w3layouts\images\1.png" />
@@ -594,6 +595,7 @@
     <Content Include="HTML\login.html" />
     <Content Include="HTML\tables.html" />
     <Content Include="HTML\widgets.html" />
+    <Content Include="Images\DummyPic.jpg" />
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -727,6 +729,7 @@
     <Content Include="Views\Account\RequestForApproving.cshtml" />
     <Content Include="Views\Account\ViewRegistration.cshtml" />
     <Content Include="Views\Account\EditRegistration.cshtml" />
+    <Content Include="Views\Deal\GetDealList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

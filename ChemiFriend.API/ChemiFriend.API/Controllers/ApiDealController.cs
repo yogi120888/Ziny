@@ -19,13 +19,13 @@ using System.Web.Http;
 
 namespace ChemiFriend.API.Controllers
 {
-    public class ApiSchemeController : ApiController
+    public class ApiDealController : ApiController
     {
         IDealRepository _dealRepository;
         ISchemeRepository _schemeRepository;
 
         #region [Construtor]
-        public ApiSchemeController()
+        public ApiDealController()
         {
             _dealRepository = new DealRepository();
             _schemeRepository = new SchemeRepository();

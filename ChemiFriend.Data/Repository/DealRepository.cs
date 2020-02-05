@@ -29,18 +29,27 @@ namespace ChemiFriend.Data.Repository
         public IQueryable<GetDealModel> GetDealList()
         {
             var query = (from de in _entities.Deals
+                         join pr in _entities.Products on de.ProductId equals pr.ProductId
+                         join pc in _entities.ProductCategories on pr.ProductCategoryId equals pc.ProductCategoryId
+                         join pdc in _entities.productCodes on pr.ProductCodeId equals pdc.ProductCodeId
+                         join pts in _entities.ProductTypes on de.ProductTypeId equals pts.ProductTypeId
                          join dt in _entities.DealTypes on de.DealType equals dt.DealTypeId
                          join fo in _entities.FormTypes on de.FormType equals fo.FormTypeId
                          join pt in _entities.PackTypes on de.PackType equals pt.PackTypeId
                          join ga in _entities.GSTApplicables on de.GST equals ga.GSTApplicableId
+                         where de.IsDeleted == false
                          select new GetDealModel
                          {
                              DealId = de.DealId,
                              DealType = de.DealType,
                              DealTypeName = dt.DealTypeName,
                              DealApplicableForId = de.DealApplicableFor,
+                             ProductCategory = pc.ProductCategoryName,
+                             ProductImagePath = de.ProductImagePath,
                              ProductId = de.ProductId,
-                             ProductName = de.ProductName,
+                             ProductName = pr.ProductName,
+                             ProductCodeId = pr.ProductCodeId,
+                             ProductCode = pdc.ProductCodes,
                              ProductTypeId = de.ProductTypeId,
                              DealStartDate = de.DealStartDate,
                              DealEndDate = de.DealEndDate,
@@ -49,13 +58,14 @@ namespace ChemiFriend.Data.Repository
                              Brand = de.Brand,
                              FormTypeId = de.FormType,
                              FormType = fo.FormTypeName,
+                             ProductType = pts.ProductTypeName,
+                             PackType = pt.PackTypeName,
                              MRP = de.MRP,
                              PTR = de.PTR,
                              Composition = de.Composition,
                              StockAvailable = de.StockAvailable == null ? 0 : de.StockAvailable.Value,
                              MaxQuantityForRetailer = de.MaxQuantityForRetailer == null ? 0 : de.MaxQuantityForRetailer.Value,
                              PackTypeId = de.PackType,
-                             PackType = pt.PackTypeName,
                              PackSize = de.PackSize,
                              GSTApplicableId = de.GST,
                              GST = ga.GST,
@@ -66,7 +76,6 @@ namespace ChemiFriend.Data.Repository
                              ModifiedBy = de.ModifiedBy,
                              ModifiedDate = de.ModifiedDate
                          });
-
             return query;
         }
 
