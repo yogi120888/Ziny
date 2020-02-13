@@ -63,6 +63,7 @@
     <Compile Include="JsonModel\GetSchemeModel.cs" />
     <Compile Include="JsonModel\GetSchemeWithDealModel.cs" />
     <Compile Include="JsonModel\GetUsermasterModel.cs" />
+    <Compile Include="JsonModel\PaginationModel.cs" />
     <Compile Include="JsonModel\SearchDealModel.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderItem.cs" />

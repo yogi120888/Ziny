@@ -730,6 +730,8 @@
     <Content Include="Views\Account\ViewRegistration.cshtml" />
     <Content Include="Views\Account\EditRegistration.cshtml" />
     <Content Include="Views\Deal\GetDealList.cshtml" />
+    <Content Include="Views\Account\_LoadProduct.cshtml" />
+    <Content Include="Views\Deal\GetDealDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

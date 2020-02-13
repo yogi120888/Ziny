@@ -169,13 +169,16 @@ namespace ChemiFriend.Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Deal Detail
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
-        public ActionResult GetDealList()
+        public ActionResult GetDealDetail(Int64 Id)
         {
-            return View();
+            var deails = _dealRepository.GetDealList().Where(x=> x.DealId == Id).FirstOrDefault();
+
+            return View(deails);
         }
 
 

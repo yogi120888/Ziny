@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChemiFriend.Entity.JsonModel
 {
-    public class SearchDealModel
+    public class SearchDealModel : PaginationModel
     {
         public string Search { get; set; } 
         public string DealType { get; set; } 

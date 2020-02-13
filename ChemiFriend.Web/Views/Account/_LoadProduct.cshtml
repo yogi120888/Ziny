@@ -1,0 +1,103 @@
+﻿@model ChemiFriend.Entity.JsonModel.SearchDealModel
+@using System.Configuration;
+@{
+    string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+}
+
+<div class="agile_top_brands_grids">
+    @if (Model.getDealModels.Count > 0)
+    {
+        foreach (var item in Model.getDealModels)
+        {
+            <div class="col-md-3 top_brand_left">
+                <div class="hover14 column">
+                    <div class="agile_top_brand_left_grid">
+                        <div class="agile_top_brand_left_grid1">
+                            <figure>
+                                <div class="snipcart-item block">
+                                    <div class="snipcart-thumb">
+                                        @if (string.IsNullOrEmpty(item.ProductImagePath))
+                                        {
+                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="~/Images/DummyPic.jpg" height="220" width="250" /></a>
+                                        }
+                                        else
+                                        {
+                                            string imgPath = BaseUrl + "Images/UploadImg/" + item.ProductImagePath;
+                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="@imgPath" height="220" width="250"></a>
+                                        }
+                                        <p>@item.ProductName</p>
+                                        <table border="0" width="100%;">
+                                            <tr>
+                                                <th width="33%">MRP</th>
+                                                <th width="33%">RATE</th>
+                                                <th width="33%">DEAL</th>
+                                            </tr>
+                                            <tr>
+                                                <td><small>$35.99</small></td>
+                                                <td><small>$35.99</small></td>
+                                                <td><small>$35.99</small></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="snipcart-details top_brand_home_details">
+                                        <form action="#" method="post">
+                                            <fieldset>
+                                                <input type="hidden" name="cmd" value="_cart">
+                                                <input type="hidden" name="add" value="1">
+                                                <input type="hidden" name="business" value=" ">
+                                                <input type="hidden" name="item_name" value="Fortune Sunflower Oil">
+                                                <input type="hidden" name="amount" value="35.99">
+                                                <input type="hidden" name="discount_amount" value="1.00">
+                                                <input type="hidden" name="currency_code" value="USD">
+                                                <input type="hidden" name="return" value=" ">
+                                                <input type="hidden" name="cancel_return" value=" ">
+                                                <input type="submit" name="submit" value="Add to cart" class="button">
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="clearfix"> </div>
+    }
+    else
+    {
+        <div><text>There is no Product</text></div>
+    }
+</div>
+<nav class="numbering">
+    <ul class="pagination paging" id="paging">
+        @*<li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>*@
+        @if (Model.getDealModels.Count > 0)
+        {
+            for (int i = 1; i <= Model.TotalPageCount; i++)
+            {
+                if (Model.PageIndex == i)
+                {
+                    <li class="active"><a onclick="IsActive(this)" href="javascript:void(0)">@i</a></li>
+                }
+                else
+                {
+                    <li><a onclick="IsActive(this)" href="javascript:void(0)">@i</a></li>
+
+                }
+            }
+        }
+        @*<li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>*@
+    </ul>
+</nav>
+
+

@@ -42,6 +42,7 @@ namespace ChemiFriend.Web.Controllers
             _commonRepository = new commonRepository();
             _registrationRepository = new RegistrationRepository();
             _dealRepository = new DealRepository();
+
         }
 
         #region[Public Method]
@@ -65,6 +66,14 @@ namespace ChemiFriend.Web.Controllers
             }
 
             SearchDealModel model = new SearchDealModel();
+            var lstPazeSize = new List<SelectListItem>
+            {
+                 new SelectListItem{ Text="8", Value = "8" },
+                 new SelectListItem{ Text="12", Value = "12" },
+                 new SelectListItem{ Text="16", Value = "16" },
+                 new SelectListItem{ Text="20", Value = "20" },
+            };
+
             var lstDealType = new List<SelectListItem>
             {
                  new SelectListItem{ Text="All Deals", Value = "1" },
@@ -86,49 +95,39 @@ namespace ChemiFriend.Web.Controllers
                  new SelectListItem{ Text="Rate High to Low", Value = "7" }
             };
 
+            ViewBag.BindPageSize = new SelectList(lstPazeSize, "Value", "Text", model.PageSize);
             ViewBag.BindDealType = new SelectList(lstDealType, "Value", "Text", model.DealType);
             ViewBag.BindSorting = new SelectList(lstSorting, "Value", "Text", model.Sort);
 
-            var _getList = _dealRepository.GetDealList().ToList();
-            model.getDealModels = _getList;
             return View(model);
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Index(SearchDealModel model)
+        public ActionResult _LoadProduct(SearchDealModel model)
         {
-            var lstDealType = new List<SelectListItem>
+            var query = _dealRepository.GetDealList();
+            if (!string.IsNullOrEmpty(model.DealType))
             {
-                 new SelectListItem{ Text="All Deals", Value = "1" },
-                 new SelectListItem{ Text="Trending Deals", Value = "2" },
-                 new SelectListItem{ Text="Regular Deals", Value = "3" },
-                 new SelectListItem{ Text="Local Deals", Value = "4" },
-                 new SelectListItem{ Text="Bulk deals", Value = "5" },
-                 new SelectListItem{ Text="Regular Products", Value = "6" }
-            };
 
-            var lstSorting = new List<SelectListItem>
+            }
+            if (!string.IsNullOrEmpty(model.Sort))
             {
-                 new SelectListItem{ Text="Resent Deals", Value = "1" },
-                 new SelectListItem{ Text="Closing Soon", Value = "2" },
-                 new SelectListItem{ Text="Closing Late", Value = "3" },
-                 new SelectListItem{ Text="Product Name A to Z", Value = "4" },
-                 new SelectListItem{ Text="Product Name Z to A", Value = "5" },
-                 new SelectListItem{ Text="Rate Low to High", Value = "6" },
-                 new SelectListItem{ Text="Rate High to Low", Value = "7" }
-            };
 
-            ViewBag.BindDealType = new SelectList(lstDealType, "Value", "Text", model.DealType);
-            ViewBag.BindSorting = new SelectList(lstSorting, "Value", "Text", model.Sort);
+            }
+            if (!string.IsNullOrEmpty(model.Search))
+            {
+                query = query.Where(x => x.ProductName.Contains(model.Search));
+            }
 
-            var _getList = _dealRepository.GetDealList().ToList();
+            model.TotalRecordCount = query.Count();
+            var _getList = query.OrderBy(a => a.DealId).Skip(((model.PageIndex - 1) * model.PageSize)).Take(model.PageSize).ToList();
+            int pageCount = (model.TotalRecordCount / model.PageSize) + ((model.TotalRecordCount % model.PageSize) > 0 ? 1 : 0);
+            model.TotalPageCount = pageCount;
             model.getDealModels = _getList;
 
-            return View(model);
+            return PartialView(model);
         }
-
-
 
         /// <summary>
         /// Get Login
