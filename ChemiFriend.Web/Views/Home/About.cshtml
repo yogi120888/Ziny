@@ -1,34 +1,65 @@
 ﻿@{
     ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+<style type="text/css">
+    .about, .about-team, .contact, .codes {
+        padding: 1em 0;
+    }
+    .about-agileinfo {
+        margin-top: 1em;
+    }
+</style>
+<!-- about -->
+<div class="about">
+    <div class="container">
+        <h3 class="w3_agile_header">About Us</h3>
+        <div class="about-agileinfo w3layouts">
+            <div class="col-md-12 about-wthree-grids grid-top">
+                <h4>BUSINESS CONCEPT </h4>
+                <p class="top">We sell pharmaceutical products at best price to all over.</p>
+                <h4>DIGITAL B2B PLATFORM </h4>
+                <p class="top">We provide transparent and digital b2b platform for ease of doing business.</p>
+                <h4>WHY ZINY</h4>
+                <p class="top">
+                    ZINY is a web and mobile app based platform that provides a unique experience to the small and
+                    bulk purchasers. ZINY provides the widest pharmaceutical products from regional, national and
+                    international brands at one place to the online retailers and distributors who deal with medicine
+                    at good margins, thereby allowing them to focus more on their business and servicing more and
+                    more customers.
+                </p>
+                <h4>MANAGED INVENTORY</h4>
+                <p class="top">
+                    Here at Ziny we are managing thousand of brands and other pharmaceutical products which are
+                    used on daily basis in the market. We are connecting retailers and distributors to purchase
+                    pharmaceutical products and branded medicines in bulk and at competitive price with best offers
+                    online.
+                </p>
+                <h4>
+                    PROFIT MAKING
+                </h4>
+                <p class="top">
+                    Our aim is to provide the maximum benefit to the retailers and distributors who are associated
+                    with us. We have tried to provide them high margin on branded items/products with easy access.
+                </p>
 
-<article>
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-</article>
-
-<aside>
-    <h3>Aside Title</h3>
-    <p>
-        Use this area to provide additional information.
-    </p>
-    <ul>
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>
-</aside>
+                <h4>
+                    EASY PAYMENT OPTION
+                </h4>
+                <p>
+                    Ziny is providing easy payment options to the retailers and distributors i.e., the option to make
+                    the payments at their convenience by connecting them with NBFC, Banks etc. We are also
+                    providing <b>COD</b> option so that The customer does not need to own a credit/debit card/net banking
+                    to purchase. AlsoImpulse purchases may increase as payment is not due at the time of ordering.
+                    Through <b>COD</b> option The credibility of retailers may be increased because the consumer only
+                    has to pay when the item is delivered. There is also the option of paying through credit cards that
+                    provides enhanced credit for up to 45 days. One can pay online as well. All these options give
+                    the retailers an extra advantage in terms of their <b>working capital finance.</b>
+                </p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //about -->

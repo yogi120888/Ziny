@@ -1,50 +1,81 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style type="text/css">
+    .about, .about-team, .contact, .codes {
+        padding: 3em 0;
+    }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+    .about-agileinfo {
+        margin-top: 3em;
+    }
+    .w3_agileits_contact_grid_left {
+        padding: 5px;
+        position: relative;
+    }
+    .agileits_w3layouts_map_pos {
+        position: absolute;
+        right: -25%;
+        top: 5%;
+        width: 60%;
+        padding: 2em;
+        background: #3399cc;
+    }
+</style>
+<!-- contact -->
+<div class="about">
+    <div class="container">
+        <h3 class="w3_agile_header">Contact Us</h3>
+        <div class="w3_agileits_contact_grids">
+            <div class="col-md-6 w3_agileits_contact_grid_left">
+                <div class="agile_map">
+                    <iframe src="https://maps.google.com/maps?q=decent%20colony%20B%20D%20Flour%20Mill%2C%20Ambala%20Cantt.%20Haryana.%20Pin%20Code%20133001&t=&z=13&ie=UTF8&iwloc=&output=embed" style="border:0"></iframe>
+                </div>
+                <div class="agileits_w3layouts_map_pos">
+                    <div class="agileits_w3layouts_map_pos1">
+                        <h3>Contact Info</h3>
+                        <p>
+                            8/3/2, Decent Colony, Behind B.D. Flour Mill, Ambala Cantt. Haryana. Pin Code-
+                            133001. India.
+                        </p>
+                        <ul class="wthree_contact_info_address">
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>+91-9729979577</li>
+                        </ul>
+                        <div class="w3_agile_social_icons w3_agile_social_icons_contact">
+                            <ul>
+                                <li><a href="#" class="icon icon-cube agile_facebook"></a></li>
+                                <li><a href="#" class="icon icon-cube agile_rss"></a></li>
+                                <li><a href="#" class="icon icon-cube agile_t"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 w3_agileits_contact_grid_right">
+                <h2 class="w3_agile_header">Leave a<span> Message</span></h2>
 
-<section class="contact">
-    <header>
-        <h3>Phone</h3>
-    </header>
-    <p>
-        <span class="label">Main:</span>
-        <span>425.555.0100</span>
-    </p>
-    <p>
-        <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
-    </p>
-</section>
+                <form action="#" method="post">
+                    <span class="input input--ichiro">
+                        <input class="input__field input__field--ichiro" type="text" id="input-25" name="Name" placeholder=" " required="" />
+                        <label class="input__label input__label--ichiro" for="input-25">
+                            <span class="input__label-content input__label-content--ichiro">Your Name</span>
+                        </label>
+                    </span>
+                    <span class="input input--ichiro">
+                        <input class="input__field input__field--ichiro" type="email" id="input-26" name="Email" placeholder=" " required="" />
+                        <label class="input__label input__label--ichiro" for="input-26">
+                            <span class="input__label-content input__label-content--ichiro">Your Email</span>
+                        </label>
+                    </span>
+                    <textarea name="Message" placeholder="Your message here..." required=""></textarea>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
 
-<section class="contact">
-    <header>
-        <h3>Email</h3>
-    </header>
-    <p>
-        <span class="label">Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
-    </p>
-</section>
-
-<section class="contact">
-    <header>
-        <h3>Address</h3>
-    </header>
-    <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
-    </p>
-</section>
+<!-- contact -->

@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .about, .about-team, .contact, .codes {
+        padding: 2em 0;
+    }
+
+    .about-agileinfo {
+        margin-top: 1em;
+    }
+
+    .faq-w3agile {
+        padding: 0em 0;
+    }
+
+    ul.faq {
+        margin-top: 1em;
+    }
+
+    .faq-w3agile .faq li {
+        margin-top: .5em;
+        list-style-type: decimal;
+        padding-left: 0.5em;
+    }
+</style>
+<!-- about -->
+<div class="about">
+    <div class="container">
+        <h3 class="w3_agile_header">Frequently asked questions(FAQ's)</h3>
+        <div class="about-agileinfo w3layouts">
+            <div class="col-md-12 about-wthree-grids grid-top">
+                <h4>WHY ZINY</h4>
+                <p class="top">
+                    <b>ZINY</b> is a web and mobile app based platform that provides a unique experience to the small
+                    and bulk purchasers. ZINY provides the widest pharmaceutical products from regional,
+                    national and international brands at one place to the online retailers and distributors who deal
+                    with medicine at good margins, thereby allowing them to focus more on their business and
+                    servicing more and more customers.
+                </p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //about -->
+<!-- help-page -->
+<div class="faq-w3agile">
+    <div class="container">
+        <h4 class="w3_agile_header">RETAILER’S SIGN UP</h4>
+        <ul class="faq">
+            @*<li class="item1">
+                    <a href="javascript:void(0)" title="click here">Open the browser (Google Chrome, Mozilla Firefox, Internet Explore, Safari Etc.)</a>
+                    <ul>
+                        <li class="subitem1"><p> In the address bar enter ZINY.CO.IN (In Small).</p></li>
+                    </ul>
+                </li>*@
+            <li><p> Open the browser (Google Chrome, Mozilla Firefox, Internet Explore, Safari Etc.)</p></li>
+            <li><p> In the address bar enter ZINY.CO.IN (In Small).</p></li>
+            <li><p> After Opening the Website Click on <b>CREATE ACCOUNT</b> Option.</p></li>
+            <li><p> Enter Required Details including Your Mobile Number for OTP purpose.</p></li>
+            <li><p> Select your role as Retailer.</p></li>
+            <li><p> Enter the OTP which is received on Your Mobile Number.</p></li>
+            <li><p> Save the Details.</p></li>
+            <li><p> A Popup Screen will open soon which shows Your Login ID and Password.</p></li>
+            <li><p> Note Down Login ID and Password which will be sent to your registered Email ID also.</p></li>
+            <li><p> After Login provide your Drug Licenses and GST No.(if available) and submit it for Verification purpose.</p></li>
+            <li><p> Your ID will get active for use only after Verification by Ziny Team.</p></li>
+            <li><p> Once Verification Done, Start Ordering.</p></li>
+        </ul>
+        <br /><br />
+        <h4 class="w3_agile_header">DISTRIBUTOR’S SIGN UP</h4>
+        <ul class="faq">
+            <li><p> Open the browser (Google Chrome, Mozilla Firefox, Internet Explore, Safari Etc.)</p></li>
+            <li><p> In the address bar enter ZINY.CO.IN (In Small).</p></li>
+            <li><p> After Opening the Website Click on CREATE ACCOUNT Option.</p></li>
+            <li><p> Enter Required Details including Your Mobile Number for OTP purpose.</p></li>
+            <li><p> Select your role as Distributor.</p></li>
+            <li><p> Enter the OTP which is received on Your Mobile Number.</p></li>
+            <li><p> Save the Details.</p></li>
+            <li><p> A Popup Screen will open soon which shows Your Login ID and Password.</p></li>
+            <li><p> Note Down Login ID and Password which will be sent to your registered Email ID also.</p></li>
+            <li><p> After Login provide your Drug Licenses and GST No.(if available) and submit it for Verification purpose.</p></li>
+            <li><p> Your ID will get active for use only after Verification by Ziny Team.</p></li>
+            <li><p> Once Verification Done, Start Ordering.</p></li>
+        </ul>
+        <br />
+        <!-- script for tabs -->
+        <script type="text/javascript">
+            $(function () {
+                var menu_ul = $('.faq > li > ul'),
+                    menu_a = $('.faq > li > a');
+                menu_ul.hide();
+                menu_a.click(function (e) {
+                    e.preventDefault();
+                    if (!$(this).hasClass('active')) {
+                        menu_a.removeClass('active');
+                        menu_ul.filter(':visible').slideUp('normal');
+                        $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                    } else {
+                        $(this).removeClass('active');
+                        $(this).next().stop(true, true).slideUp('normal');
+                    }
+                });
+
+            });
+        </script>
+        <!-- script for tabs -->
+    </div>
+</div>
+<!-- //help-page -->
