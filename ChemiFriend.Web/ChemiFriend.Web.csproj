@@ -211,6 +211,7 @@
     <Compile Include="Models\ImageUploadModel\UploadDocumentModel.cs" />
     <Compile Include="Models\InputModel\DealModel.cs" />
     <Compile Include="Models\InputModel\ProductCategoryModel.cs" />
+    <Compile Include="Models\InputModel\ProductCodeModel.cs" />
     <Compile Include="Models\InputModel\ProductModel.cs" />
     <Compile Include="Models\InputModel\ProductSubCategoryModel.cs" />
     <Compile Include="Models\InputModel\RegistrationModel.cs" />
@@ -460,7 +461,6 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Dashboard\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\CorporateRegistration.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -599,28 +599,11 @@
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Areas\Admin\Views\Master\EditRegistration.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\CustomerRegistration.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\CustomerList.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\EditCustomerRegistration.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\VendorList.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\VendorRegistration.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\EditVendorRegistration.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\DriverRegistration.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\UploadProfileImage.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\DriverList.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\EditDriverRegistration.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\DriverProfileImage.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\CorporateMemberList.cshtml" />
     <Content Include="Areas\Admin\Content\images\demo\Thumbs.db" />
     <Content Include="Areas\Admin\Content\images\icons\32\Thumbs.db" />
     <Content Include="HTML\img\demo\Thumbs.db" />
     <Content Include="HTML\img\icons\32\Thumbs.db" />
     <Content Include="HTML\img\Thumbs.db" />
-    <Content Include="Areas\Admin\Views\Master\FeedbackList.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\DriverAllowanceEntry.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\ViewDriverProfile.cshtml" />
-    <Content Include="Areas\Admin\Views\Master\VendorProfile.cshtml" />
     <Content Include="Content\w3layouts\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\w3layouts\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\w3layouts\fonts\fontawesome-webfont.woff" />
@@ -640,6 +623,9 @@
     <Content Include="Areas\Admin\Views\Product\GetProductList.cshtml" />
     <Content Include="Areas\Admin\Views\Product\EditProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutNew.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\CreateProductCode.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\GetProductCodeList.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\EditProductCode.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -732,6 +718,9 @@
     <Content Include="Views\Deal\GetDealList.cshtml" />
     <Content Include="Views\Account\_LoadProduct.cshtml" />
     <Content Include="Views\Deal\GetDealDetail.cshtml" />
+    <Content Include="Views\Account\_GetCategoryList.cshtml" />
+    <Content Include="Views\Account\GetSubCategoryList.cshtml" />
+    <Content Include="Views\Account\_GetSubCategoryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

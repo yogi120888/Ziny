@@ -66,6 +66,7 @@
     <Compile Include="IRepository\IOrderRepository.cs" />
     <Compile Include="IRepository\IPaymentRepository.cs" />
     <Compile Include="IRepository\IProductCategoryRepository.cs" />
+    <Compile Include="IRepository\IProductCodeRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\IProductSubCategoryRepository.cs" />
     <Compile Include="IRepository\IRegistrationRepository.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PaymentRepository.cs" />
     <Compile Include="Repository\ProductCategoryRepository.cs" />
+    <Compile Include="Repository\ProductCodeRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\ProductSubCategoryRepository.cs" />
     <Compile Include="Repository\RegistrationRepository.cs" />

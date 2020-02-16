@@ -1,0 +1,95 @@
+﻿@model ChemiFriend.Entity.JsonModel.SearchSubCategoryModel
+@{
+    ViewBag.Title = "GetSubCategoryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/w3layouts/css/IndexCss.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    function Search() {
+        var model = {};
+        model.CategoryId = $("#CategoryId").val();
+        model.Search = $("#Search").val();
+        model.Sort = $("#Sort").val();
+        model.PageSize = $("#PageSize").val();
+        model.PageIndex = $("#PageIndex").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Account/_GetSubCategoryList",
+            data: '{model: ' + JSON.stringify(model) + '}',
+            contentType: "application/json; charset=utf-8",
+            // dataType: "json",
+            success: function (response) {
+                $("#divBindBrand").html(response);
+            },
+            failure: function (response) {
+            },
+            error: function (response) {
+            }
+        });
+    }
+
+    $(function () {
+        Search();
+    });
+
+    function IsActive(elm) {
+        var selectedPaging = $(elm).text();
+        $("#PageIndex").val(selectedPaging);
+        Search();
+    }
+
+    $(function () {
+        $("#Sort").change(function () {
+            Search();
+        });
+    });
+    
+    $(function () {
+        $("#PageSize").change(function () {
+            Search();
+        });
+    });
+</script>
+
+<div class="logo_products">
+    <div class="container">
+        <div class="w3ls_logo_products_left">
+            <h1>LIST OF BRANDS</h1>
+        </div>
+        <div class="w3l_search" style="width:45%">
+            <input id="Search" type="text" name="Search" placeholder="Search for a Brand..." value="@Model.Search" />
+            <button type="button" id="btnSearch" onclick="Search();" class="btn btn-default search" aria-label="Left Align">
+                <i class="fa fa-search" aria-hidden="true"> </i>
+            </button>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!--- products --->
+<div class="products">
+    <div class="container">
+        <div class="col-md-12 products-right">
+            <div class="products-right-grid">
+                <div class="products-right-grids">
+                    @Html.HiddenFor(x => x.CategoryId)
+                    <div class="sorting-left" style="width:5%">
+                        @Html.DropDownListFor(x => x.PageSize, (SelectList)ViewBag.BindPageSize, new { @class = "frm-field required sect" })
+                    </div>
+                    <div class="sorting-left" style="width:25%">
+                        @Html.DropDownListFor(x => x.Sort, (SelectList)ViewBag.BindSorting, new { @class = "frm-field required sect" })
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div id="divBindBrand">
+                @*Add Partial View*@
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!--- products --->

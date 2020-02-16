@@ -36,13 +36,17 @@ namespace ChemiFriend.Web.Controllers
         IcommonRepository _commonRepository;
         IRegistrationRepository _registrationRepository;
         IDealRepository _dealRepository;
+        IProductCategoryRepository _productCategoryRepository;
+        IProductSubCategoryRepository _productSubCategoryRepository;
+
         public AccountController()
         {
             _user = new UserMasterRepository();
             _commonRepository = new commonRepository();
             _registrationRepository = new RegistrationRepository();
             _dealRepository = new DealRepository();
-
+            _productCategoryRepository = new ProductCategoryRepository();
+            _productSubCategoryRepository = new ProductSubCategoryRepository();
         }
 
         #region[Public Method]
@@ -66,6 +70,7 @@ namespace ChemiFriend.Web.Controllers
             }
 
             SearchDealModel model = new SearchDealModel();
+            model.PageIndex = model.PageIndex == 0 ? 1 : 1;
             var lstPazeSize = new List<SelectListItem>
             {
                  new SelectListItem{ Text="8", Value = "8" },
@@ -102,10 +107,16 @@ namespace ChemiFriend.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Load Products
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public ActionResult _LoadProduct(SearchDealModel model)
         {
+            model.PageIndex = model.PageIndex == 0 ? 1 : 1;
             var query = _dealRepository.GetDealList();
             if (!string.IsNullOrEmpty(model.DealType))
             {
@@ -128,6 +139,82 @@ namespace ChemiFriend.Web.Controllers
 
             return PartialView(model);
         }
+
+        /// <summary>
+        /// LIST OF COMPANIES
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult _GetCategoryList()
+        {
+            var CategoryList = _productCategoryRepository.FindBy(x => x.Status == (int)Status.Active && x.IsDeleted == false).ToList();
+            return View(CategoryList);
+        }
+
+        /// <summary>
+        /// LIST OF BRAND
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult GetSubCategoryList(Int64 Id)
+        {
+            var lstPazeSize = new List<SelectListItem>
+            {
+                 new SelectListItem{ Text="8", Value = "8" },
+                 new SelectListItem{ Text="16", Value = "16" },
+                 new SelectListItem{ Text="32", Value = "32" },
+                 new SelectListItem{ Text="40", Value = "40" }
+            };
+
+            var lstSorting = new List<SelectListItem>
+            {
+                 new SelectListItem{ Text="Product Name A to Z", Value = "1" },
+                 new SelectListItem{ Text="Product Name Z to A", Value = "2" },
+            };
+
+            ViewBag.BindPageSize = new SelectList(lstPazeSize, "Value", "Text");
+            ViewBag.BindSorting = new SelectList(lstSorting, "Value", "Text");
+
+            SearchSubCategoryModel model = new SearchSubCategoryModel();
+            model.PageIndex = model.PageIndex == 0 ? 1 : 1;
+            model.CategoryId = Id;
+            model.getSubCategoryModel = _productSubCategoryRepository.GetProductSubCategoryList().Where(x => x.ProductCategoryId == Id && x.Status == (int)Status.Active && x.IsDeleted == false).ToList();
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// LIST OF BRAND
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult _GetSubCategoryList(SearchSubCategoryModel model)
+        {
+            model.PageIndex = model.PageIndex == 0 ? 1 : 1;
+            var query = _productSubCategoryRepository.GetProductSubCategoryList().Where(x => x.ProductCategoryId == model.CategoryId && x.Status == (int)Status.Active && x.IsDeleted == false);
+            if (!string.IsNullOrEmpty(model.Sort))
+            {
+
+            }
+            if (!string.IsNullOrEmpty(model.Search))
+            {
+                query = query.Where(x => x.ProductSubCategoryName.Contains(model.Search));
+            }
+
+            model.TotalRecordCount = query.Count();
+            var _getList = query.OrderBy(x => x.ProductCategoryId).Skip(((model.PageIndex - 1) * model.PageSize)).Take(model.PageSize).ToList();
+            int pageCount = (model.TotalRecordCount / model.PageSize) + ((model.TotalRecordCount % model.PageSize) > 0 ? 1 : 0);
+            model.TotalPageCount = pageCount;
+            model.getSubCategoryModel = _getList;
+
+            return PartialView(model);
+        }
+
 
         /// <summary>
         /// Get Login

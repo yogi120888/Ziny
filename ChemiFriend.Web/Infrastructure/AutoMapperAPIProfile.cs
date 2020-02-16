@@ -29,6 +29,8 @@ namespace ChemiFriend.Web.Infrastructure
             CreateMap<Deal, DealModel>();
             CreateMap<SchemeModel, Scheme>();
             CreateMap<Scheme, SchemeModel>();
+            CreateMap<ProductCodeModel, ProductCode>();
+            CreateMap<ProductCode, ProductCodeModel>();
 
             //CreateMap<OrderModel, Order>();
             //CreateMap<OrderItemModel, OrderItem>();

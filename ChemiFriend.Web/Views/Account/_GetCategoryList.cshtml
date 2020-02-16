@@ -1,0 +1,23 @@
+﻿@model List<ChemiFriend.ENTITY.ProductCategory>
+@{
+    Layout = null;
+}
+
+<!--brands-->
+<div class="brands">
+    <div class="container">
+        <h3>LIST OF COMPANIES</h3>
+        <div class="brands-agile-1">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 w3layouts-brand">
+                    <div class="brands-w3l">
+                        <p><a href="@Url.Action("GetSubCategoryList", "Account", new { Id=item.ProductCategoryId })">@item.ProductCategoryName</a></p>
+                    </div>
+                </div>
+            }
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--//brands-->

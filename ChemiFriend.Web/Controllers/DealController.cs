@@ -176,7 +176,7 @@ namespace ChemiFriend.Web.Controllers
         [HttpGet]
         public ActionResult GetDealDetail(Int64 Id)
         {
-            var deails = _dealRepository.GetDealList().Where(x=> x.DealId == Id).FirstOrDefault();
+            var deails = _dealRepository.GetDealList().Where(x => x.DealId == Id).FirstOrDefault();
 
             return View(deails);
         }
