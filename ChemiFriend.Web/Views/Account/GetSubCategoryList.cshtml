@@ -46,7 +46,7 @@
             Search();
         });
     });
-    
+
     $(function () {
         $("#PageSize").change(function () {
             Search();
@@ -59,7 +59,7 @@
         <div class="w3ls_logo_products_left">
             <h1>LIST OF BRANDS</h1>
         </div>
-        <div class="w3l_search" style="width:45%">
+        <div class="w3l_search">
             <input id="Search" type="text" name="Search" placeholder="Search for a Brand..." value="@Model.Search" />
             <button type="button" id="btnSearch" onclick="Search();" class="btn btn-default search" aria-label="Left Align">
                 <i class="fa fa-search" aria-hidden="true"> </i>
@@ -76,10 +76,10 @@
             <div class="products-right-grid">
                 <div class="products-right-grids">
                     @Html.HiddenFor(x => x.CategoryId)
-                    <div class="sorting-left" style="width:5%">
+                    <div class="sorting-left">
                         @Html.DropDownListFor(x => x.PageSize, (SelectList)ViewBag.BindPageSize, new { @class = "frm-field required sect" })
                     </div>
-                    <div class="sorting-left" style="width:25%">
+                    <div class="sorting-left">
                         @Html.DropDownListFor(x => x.Sort, (SelectList)ViewBag.BindSorting, new { @class = "frm-field required sect" })
                     </div>
                     <div class="clearfix"> </div>

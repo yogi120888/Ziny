@@ -45,6 +45,23 @@ namespace ChemiFriend.Web.Controllers
             return View();
         }
 
+        public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
+
+        public ActionResult PrivacPolicy()
+        {
+            return View();
+        }
+
+        public ActionResult ReturnPolicy()
+        {
+            return View();
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _user != null)

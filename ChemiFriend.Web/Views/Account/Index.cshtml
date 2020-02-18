@@ -75,9 +75,9 @@
                 </ul>
             </div>*@
         <div class="w3ls_logo_products_left">
-            <h1>NEW OFFERS</h1>
+            <h1>TOP SELLING PRODUCS</h1>
         </div>
-        <div class="w3l_search" style="width:45%">
+        <div class="w3l_search">
             <input id="Search" type="text" name="Search" placeholder="Search for a Product..." value="@Model.Search" />
             <button type="button" id="btnSearch" onclick="Search();" class="btn btn-default search" aria-label="Left Align">
                 <i class="fa fa-search" aria-hidden="true"> </i>
@@ -95,14 +95,14 @@
                 @*@using (Html.BeginForm("Index", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
                     {*@
                 <div class="products-right-grids">
-                    <div class="sorting-left" style="width:5%">
+                    <div class="sorting-left">
                         @Html.DropDownListFor(x => x.PageSize, (SelectList)ViewBag.BindPageSize, new { @class = "frm-field required sect" })
                     </div>
-                    <div class="sorting-left" style="width:25%">
+                    <div class="sorting-left">
                         <input type="hidden" id="PageIndex" value="1" />
                         @Html.DropDownListFor(x => x.DealType, (SelectList)ViewBag.BindDealType, new { @class = "frm-field required sect" })
                     </div>
-                    <div class="sorting-left" style="width:25%">
+                    <div class="sorting-left">
                         @Html.DropDownListFor(x => x.Sort, (SelectList)ViewBag.BindSorting, new { @class = "frm-field required sect" })
                     </div>
                     <div class="clearfix"> </div>
@@ -302,7 +302,6 @@
     </div>
 </div>
 <!-- //new -->
-
 <!--brands-->
 @Html.Action("_GetCategoryList", "Account")
 <!--//brands-->

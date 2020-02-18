@@ -16,7 +16,7 @@
                             <figure>
                                 <div class="snipcart-item block">
                                     <div class="snipcart-thumb">
-                                        @if (string.IsNullOrEmpty(item.ProductSubCategoryImagePath))
+                                        @*@if (string.IsNullOrEmpty(item.ProductSubCategoryImagePath))
                                         {
                                             <a href="javascript:void(0)" target="_blank"><img src="~/Images/DummyPic.jpg" height="220" width="250" /></a>
                                         }
@@ -24,13 +24,13 @@
                                         {
                                             string imgPath = BaseUrl + "Images/UploadImg/" + item.ProductSubCategoryImagePath;
                                             <a href="javascript:void(0)" target="_blank"><img src="@imgPath" height="220" width="250"></a>
-                                        }
+                                        }*@
                                         <p><b>Company:</b> @item.ProductCategory</p>
                                         <p><b>Brand:</b> @item.ProductSubCategoryName</p>
                                     </div>
                                 </div>
                             </figure>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </div>

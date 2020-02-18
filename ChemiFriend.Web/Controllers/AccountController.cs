@@ -91,7 +91,7 @@ namespace ChemiFriend.Web.Controllers
 
             var lstSorting = new List<SelectListItem>
             {
-                 new SelectListItem{ Text="Resent Deals", Value = "1" },
+                 new SelectListItem{ Text="Recent Deals", Value = "1" },
                  new SelectListItem{ Text="Closing Soon", Value = "2" },
                  new SelectListItem{ Text="Closing Late", Value = "3" },
                  new SelectListItem{ Text="Product Name A to Z", Value = "4" },
@@ -214,6 +214,8 @@ namespace ChemiFriend.Web.Controllers
 
             return PartialView(model);
         }
+
+
 
 
         /// <summary>

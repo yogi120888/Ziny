@@ -24,7 +24,7 @@
                                 <th class="dt-left">SNo.</th>
                                 <th class="dt-left">Company</th>
                                 <th class="dt-left">Brand</th>
-                                <th class="dt-center">Image</th>
+                                @*<th class="dt-center">Image</th>*@
                                 <th class="dt-center">Action</th>
                             </tr>
                         </thead>
@@ -36,7 +36,7 @@
                                     <td class="dt-left">@SrNo</td>
                                     <td class="dt-left">@item.ProductCategory</td>
                                     <td class="dt-left">@item.ProductSubCategoryName</td>
-                                    <td class="dt-center">
+                                    @*<td class="dt-center">
                                         @if (!string.IsNullOrEmpty(item.ProductSubCategoryImagePath))
                                         {
                                             string ImagePath = BaseUrl + "Images/UploadImg/" + item.ProductSubCategoryImagePath;
@@ -46,7 +46,7 @@
                                         {
                                             <text>No Image</text>
                                         }
-                                    </td>
+                                    </td>*@
                                     <td class="dt-center">
                                         <div class="btn-group">
                                             <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">Action <span class="caret"></span></button>

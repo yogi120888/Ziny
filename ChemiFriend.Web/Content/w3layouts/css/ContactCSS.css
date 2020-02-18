@@ -1,0 +1,68 @@
+﻿
+.about, .about-team, .contact, .codes {
+    padding: 3em 0;
+}
+
+.about-agileinfo {
+    margin-top: 3em;
+}
+
+.w3_agileits_contact_grid_left {
+    padding: 5px;
+    position: relative;
+}
+
+.agileits_w3layouts_map_pos {
+    position: absolute;
+    right: -25%;
+    top: 5%;
+    width: 60%;
+    padding: 2em;
+    background: #3399cc;
+}
+
+@media (max-width: 480px) {
+
+    .agileits_w3layouts_map_pos {
+        position: absolute;
+        right: 0%;
+        top: 1%;
+        width: 60%;
+        padding: 1em;
+        background: #3399cc;
+    }
+    .agileits_w3layouts_map_pos1 {
+        padding: 1em;
+        border: 1px double #fff;
+    }
+}
+
+@media (max-width: 414px) {
+    .agileits_w3layouts_map_pos {
+        position: absolute;
+        right: 0%;
+        top: 1%;
+        width: 60%;
+        padding: 1em;
+        background: #3399cc;
+    }
+    .agileits_w3layouts_map_pos1 {
+        padding: 1em;
+        border: 1px double #fff;
+    }
+}
+
+@media (max-width: 384px) {
+    .agileits_w3layouts_map_pos {
+        position: absolute;
+        right: 0%;
+        top: 1%;
+        width: 60%;
+        padding: 1em;
+        background: #3399cc;
+    }
+    .agileits_w3layouts_map_pos1 {
+        padding: 1em;
+        border: 1px double #fff;
+    }
+}

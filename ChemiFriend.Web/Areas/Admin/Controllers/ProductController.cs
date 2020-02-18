@@ -275,11 +275,11 @@ namespace ChemiFriend.Web.Areas.Admin.Controllers
             ResponseModel _response = new ResponseModel();
             if (ModelState.IsValid)
             {
-                if (ImageFile == null)
-                {
-                    ViewBag.Error = "Brand Image is required.";
-                    return View();
-                }
+                //if (ImageFile == null)
+                //{
+                //    ViewBag.Error = "Brand Image is required.";
+                //    return View();
+                //}
 
                 try
                 {

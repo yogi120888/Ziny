@@ -358,6 +358,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\w3layouts\css\bootstrap.css" />
+    <Content Include="Content\w3layouts\css\ContactCSS.css" />
     <Content Include="Content\w3layouts\css\font-awesome.css" />
     <Content Include="Content\w3layouts\css\IndexCss.css" />
     <Content Include="Content\w3layouts\css\skdslider.css" />
@@ -596,6 +597,7 @@
     <Content Include="HTML\tables.html" />
     <Content Include="HTML\widgets.html" />
     <Content Include="Images\DummyPic.jpg" />
+    <Content Include="Images\ZinyLogo.jpg" />
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -722,6 +724,9 @@
     <Content Include="Views\Account\GetSubCategoryList.cshtml" />
     <Content Include="Views\Account\_GetSubCategoryList.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Home\PrivacPolicy.cshtml" />
+    <Content Include="Views\Home\ReturnPolicy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
