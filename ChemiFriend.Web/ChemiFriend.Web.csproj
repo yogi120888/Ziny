@@ -357,6 +357,9 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\swiper\jquery-3.4.1.js" />
+    <Content Include="Content\swiper\jquery.gScrollingCarousel.css" />
+    <Content Include="Content\swiper\jquery.gScrollingCarousel.js" />
     <Content Include="Content\w3layouts\css\bootstrap.css" />
     <Content Include="Content\w3layouts\css\ContactCSS.css" />
     <Content Include="Content\w3layouts\css\font-awesome.css" />
@@ -727,6 +730,9 @@
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
     <Content Include="Views\Home\PrivacPolicy.cshtml" />
     <Content Include="Views\Home\ReturnPolicy.cshtml" />
+    <Content Include="Views\Account\GetProductList.cshtml" />
+    <Content Include="Views\Account\_GetProductList.cshtml" />
+    <Content Include="Views\Account\_NewOffers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -65,7 +65,7 @@ namespace ChemiFriend.Data.Repository
                              ProductCategoryId = psc.ProductCategoryId,
                              ProductCategory = pc.ProductCategoryName,
                              ProductSubCategoryName = psc.ProductSubCategoryName,
-                             ProductSubCategoryImagePath = psc.ProductSubCategoryImagePath,
+                             ProductSubCategoryImagePath = pc.ProductCategoryImagePath,
                              Status = psc.Status,
                              IsDeleted = psc.IsDeleted,
                              CreatedBy = psc.CreatedBy,

@@ -54,6 +54,13 @@ namespace ChemiFriend.Web.Controllers
             ViewBag.BindPackType = _commonRepository.GetPackType().ToList();
             ViewBag.BindGSTApplicable = _commonRepository.GetGSTApplicable().ToList();
             ViewBag.BindSchemeType = _commonRepository.GetSchemeType().ToList();
+            IEnumerable<SelectListItem> _applicableTaxType = from ApplicableTaxType att in Enum.GetValues(typeof(ApplicableTaxType))
+                                                             select new SelectListItem
+                                                             {
+                                                                 Text = att.ToString(),
+                                                                 Value = Convert.ToInt32(att).ToString()
+                                                             };
+            ViewBag.ApplicableTaxType = _applicableTaxType;
 
             return View();
         }
@@ -73,6 +80,13 @@ namespace ChemiFriend.Web.Controllers
             ViewBag.BindPackType = _commonRepository.GetPackType().ToList();
             ViewBag.BindGSTApplicable = _commonRepository.GetGSTApplicable().ToList();
             ViewBag.BindSchemeType = _commonRepository.GetSchemeType().ToList();
+            IEnumerable<SelectListItem> _applicableTaxType = from ApplicableTaxType att in Enum.GetValues(typeof(ApplicableTaxType))
+                                                             select new SelectListItem
+                                                             {
+                                                                 Text = att.ToString(),
+                                                                 Value = Convert.ToInt32(att).ToString()
+                                                             };
+            ViewBag.ApplicableTaxType = _applicableTaxType;
 
             ResponseModel _response = new ResponseModel();
             if (ModelState.IsValid)

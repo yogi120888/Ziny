@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "_NewOffers";
+    Layout = null;
+}
+
+<link href="~/Content/swiper/jquery.gScrollingCarousel.css" rel="stylesheet" />
+<style>
+    #container {
+        margin: 0px auto;
+        max-width: 1150px;
+    }
+
+    .g-scrolling-carousel .items {
+        padding: 5px 0;
+        background-color: #fff;
+    }
+
+        .g-scrolling-carousel .items div {
+            display: inline-block; /* notice the comments between inline-block items */
+            margin-right: 10px;
+            width: 250px;
+            height: 200px;
+            /*line-height: 200px;*/
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #000000;
+        }
+</style>
+
+<div class="container" id="container">
+    <div class="g-scrolling-carousel">
+        <div class="items">
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #1</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #2</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #3</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #4</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #5</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #6</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #7</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #8</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #9</p>
+            </div>
+            <div>
+                <a href="javascript:void(0)">
+                    <img src="~/Images/DummyPic.jpg" width="220" />
+                </a>
+                <p>Item #10</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/Content/swiper/jquery-3.4.1.js"></script>
+<script src="~/Content/swiper/jquery.gScrollingCarousel.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".g-scrolling-carousel .items").gScrollingCarousel();
+    });</script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>

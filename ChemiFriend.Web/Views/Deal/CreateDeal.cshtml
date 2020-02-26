@@ -177,14 +177,14 @@
                                 <div class="control-group">
                                     <label class="control-label">MRP</label>
                                     <div class="controls">
-                                        @Html.TextBoxFor(x => x.MRP, new { @class = "span11" })
+                                        @Html.TextBoxFor(x => x.MRP, new { @class = "span11", onblur = "Calculate_PTR();" })
                                         <span class="YError">@Html.ValidationMessageFor(x => x.MRP)</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">PTR</label>
                                     <div class="controls">
-                                        @Html.TextBoxFor(x => x.PTR, new { @class = "span11" })
+                                        @Html.TextBoxFor(x => x.PTR, new { @class = "span11", onblur = "Calculate_PTR();" })
                                         <span class="YError">@Html.ValidationMessageFor(x => x.PTR)</span>
                                     </div>
                                 </div>
@@ -193,6 +193,12 @@
                                     <div class="controls">
                                         @Html.DropDownListFor(x => x.GST, new SelectList(ViewBag.BindGSTApplicable, "GSTApplicableId", "GST"), "Select GST", new { @class = "span11" })
                                         <span class="YError">@Html.ValidationMessageFor(x => x.GST)</span>
+                                    </div>
+                                </div>
+                                <div class="control-group" id="DPCO_NONDPCO">
+                                    <label class="control-label">DPCO-NONDPCO</label>
+                                    <div class="controls">
+                                        @Html.DropDownListFor(x => x.ApplicableTaxType, new SelectList(ViewBag.ApplicableTaxType, "Value", "Text"), "Select DPCO-NONDPCO", new { @class = "span11" })
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -329,7 +335,7 @@
                         $("#MarketingCompany").val(data.MarketingCompany);
                         $("#Brand").val(data.ProductSubCategory);
                         $("#MRP").val(data.MRP);
-                        $("#PTR").val(data.PTR);
+                        // $("#PTR").val(data.PTR);
                         $("#Composition").val(data.Composition);
                         //$("#StockAvailable").val(data.StockAvailable);
                     }
@@ -338,7 +344,82 @@
 
         }
     </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#DPCO_NONDPCO").hide();
+            Calculate_PTR();
+        });
 
+        $(function () {
+            $("#GST").change(function () {
+                var _valuse = $("#GST").val();
+                if (parseInt(_valuse) == 3) {
+                    $("#DPCO_NONDPCO").show();
+                }
+                else {
+                    $("#DPCO_NONDPCO").hide();
+                }
+                // Calculate PTR
+                Calculate_PTR();
+            });
+        });
+
+        $(function () {
+            $("#DPCO_NONDPCO").change(function () {
+                // Calculate PTR
+                Calculate_PTR();
+            });
+        });
+
+        function Calculate_PTR() {
+            var mrp = $("#MRP").val();
+            var applicableDPCO = $("DPCO_NONDPCO").val();
+            var _valuse = $("#GST").val();
+            var Applicable_value = 0;
+            if (parseInt(_valuse) == 1) {
+                $("#PTR").val(mrp);
+            }
+            if (parseInt(_valuse) == 2) {
+                Applicable_value = 0;
+                Applicable_value = 23.81;
+                $("#PTR").val((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) - ((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) * (isNaN(parseFloat(Applicable_value)) ? 0 : parseFloat(Applicable_value))) / 100).toFixed(2);
+            }
+            if (parseInt(_valuse) == 3) {
+                $("#PTR").val('');
+                var _DPCO_NONDPCO = $("#ApplicableTaxType").val();
+                if (parseInt(_DPCO_NONDPCO) > 0) {
+                    if (parseInt(_DPCO_NONDPCO) == 1) {
+                        Applicable_value = 0;
+                        Applicable_value = 25;
+                        $("#PTR").val((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) - ((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) * (isNaN(parseFloat(Applicable_value)) ? 0 : parseFloat(Applicable_value))) / 100).toFixed(2);
+                    }
+                    else {
+                        Applicable_value = 0;
+                        Applicable_value = 28.57;
+                        $("#PTR").val((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) - ((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) * (isNaN(parseFloat(Applicable_value)) ? 0 : parseFloat(Applicable_value))) / 100).toFixed(2);
+                    }
+                }
+                else {
+                    $("#PTR").val('');
+                }
+            }
+            if (parseInt(_valuse) == 4) {
+                Applicable_value = 0;
+                Applicable_value = 32.20;
+                $("#PTR").val((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) - ((isNaN(parseFloat(mrp)) ? 0 : parseFloat(mrp)) * (isNaN(parseFloat(Applicable_value)) ? 0 : parseFloat(Applicable_value))) / 100).toFixed(2);
+            }
+            if (parseInt(_valuse) == 5) {
+                $("#PTR").val('');
+            }
+        }
+
+        //function cal_Amount(elem) {
+        //    $(elem).parent().parent().parent().find(".txt_total_mtrs").val(((isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_extra_febric").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_extra_febric").val())) + (isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_printed_mtrs").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_printed_mtrs").val()))).toFixed(2));
+        //    $(elem).parent().parent().parent().find(".txt_printed_pcs").val(((isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_defect_pcs").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_defect_pcs").val())) + (isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_fresh_pcs").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_fresh_pcs").val()))).toFixed(0));
+        //    cal_Total();
+        //}
+
+    </script>
     @*=== jQeury Gritter, a growl-like notifications ===*@
 
     @if (!string.IsNullOrEmpty(ViewBag.Success))

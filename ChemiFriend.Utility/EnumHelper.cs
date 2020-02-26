@@ -25,6 +25,12 @@ namespace ChemiFriend.Utility
         InActive = 3 //ReadyToActive
     }
 
+    public enum ApplicableTaxType
+    {
+        DPCO = 1,  
+        NONDPCO = 2
+    }
+
     public enum Month
     {
         Jan = 1,

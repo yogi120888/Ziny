@@ -1,25 +1,37 @@
-﻿@model ChemiFriend.Entity.JsonModel.SearchSubCategoryModel
+﻿@model ChemiFriend.Entity.JsonModel.SearchProductModel
 @{
-    ViewBag.Title = "GetSubCategoryList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "GetProductList";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/Content/w3layouts/css/IndexCss.css" rel="stylesheet" />
+<style type="text/css">
+    .agile_top_brand_left_grid1 p {
+        color: #212121;
+        margin: 0em 0 0em;
+        line-height: 1.5em;
+        text-transform: capitalize;
+        font-size: 14px;
+        text-align: center;
+    }
+</style>
 
 <script type="text/javascript">
     function Search() {
         var model = {};
-        model.CategoryId = $("#CategoryId").val();
+        model.SubCategoryId = $("#SubCategoryId").val();
         model.Search = $("#Search").val();
 
         $.ajax({
             type: "POST",
-            url: "/Account/_GetSubCategoryList",
+            url: "/Account/_GetProductList",
             data: '{model: ' + JSON.stringify(model) + '}',
             contentType: "application/json; charset=utf-8",
             // dataType: "json",
             success: function (response) {
-                $("#divBindBrand").html(response);
+                $("#divProducts").html(response);
             },
             failure: function (response) {
             },
@@ -36,7 +48,7 @@
 <div class="logo_products">
     <div class="container">
         <div class="w3ls_logo_products_left">
-            <h2>LIST OF @ViewBag.Category's BRAND</h2>
+            <h2>LIST OF @ViewBag.SubCategory</h2>
         </div>
         <div class="w3l_search">
             <input id="Search" type="text" name="Search" placeholder="Search for a Brand..." value="@Model.Search" />
@@ -53,9 +65,9 @@
     <div class="container">
         <div class="col-md-12 products-right">
             <div class="products-right-grid">
-                @Html.HiddenFor(x => x.CategoryId)
+                @Html.HiddenFor(x => x.SubCategoryId)
             </div>
-            <div id="divBindBrand">
+            <div id="divProducts">
                 @*Add Partial View*@
             </div>
         </div>

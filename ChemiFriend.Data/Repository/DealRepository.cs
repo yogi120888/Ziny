@@ -30,6 +30,7 @@ namespace ChemiFriend.Data.Repository
         {
             var query = (from de in _entities.Deals
                          join pr in _entities.Products on de.ProductId equals pr.ProductId
+                         join ps in _entities.ProductSubCategories on pr.ProductSubCategoryId equals ps.ProductSubCategoryId
                          join pc in _entities.ProductCategories on pr.ProductCategoryId equals pc.ProductCategoryId
                          join pdc in _entities.productCodes on pr.ProductCodeId equals pdc.ProductCodeId
                          join pts in _entities.ProductTypes on de.ProductTypeId equals pts.ProductTypeId
@@ -45,6 +46,8 @@ namespace ChemiFriend.Data.Repository
                              DealTypeName = dt.DealTypeName,
                              DealApplicableForId = de.DealApplicableFor,
                              ProductCategory = pc.ProductCategoryName,
+                             ProductSubCategoryId = pr.ProductSubCategoryId.Value,
+                             ProductSubCategory = ps.ProductSubCategoryName,
                              ProductImagePath = de.ProductImagePath,
                              ProductId = de.ProductId,
                              ProductName = pr.ProductName,
@@ -74,7 +77,9 @@ namespace ChemiFriend.Data.Repository
                              CreatedBy = de.CreatedBy,
                              CreatedDate = de.CreatedDate,
                              ModifiedBy = de.ModifiedBy,
-                             ModifiedDate = de.ModifiedDate
+                             ModifiedDate = de.ModifiedDate,
+                             DealEndDays = de.DealEndDate.Day - de.DealStartDate.Day,
+                             DealEndHours = de.DealEndDate.Hour - de.DealStartDate.Hour
                          });
             return query;
         }

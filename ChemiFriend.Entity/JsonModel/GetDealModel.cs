@@ -14,6 +14,8 @@ namespace ChemiFriend.Entity.JsonModel
         public int DealApplicableForId { get; set; }
         public string DealApplicableFor { get; set; }
         public string ProductCategory { get; set; }
+        public Int64 ProductSubCategoryId { get; set; }
+        public string ProductSubCategory { get; set; }
         public Int64 ProductId { get; set; }
         public string ProductName { get; set; }
         public int ProductCodeId { get; set; } // Like Molecules
@@ -24,6 +26,8 @@ namespace ChemiFriend.Entity.JsonModel
         public DateTime DealStartDate { get; set; }
         public DateTime DealEndDate { get; set; }
         public DateTime ProductExpiryDate { get; set; }
+        public int DealEndDays { get; set; }
+        public int DealEndHours { get; set; }
         public string MarketingCompany { get; set; }
         public string Brand { get; set; }
         public int FormTypeId { get; set; }

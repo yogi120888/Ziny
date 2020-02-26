@@ -38,6 +38,7 @@ namespace ChemiFriend.Web.Controllers
         IDealRepository _dealRepository;
         IProductCategoryRepository _productCategoryRepository;
         IProductSubCategoryRepository _productSubCategoryRepository;
+        IProductRepository _productRepository;
 
         public AccountController()
         {
@@ -47,6 +48,7 @@ namespace ChemiFriend.Web.Controllers
             _dealRepository = new DealRepository();
             _productCategoryRepository = new ProductCategoryRepository();
             _productSubCategoryRepository = new ProductSubCategoryRepository();
+            _productRepository = new ProductRepository();
         }
 
         #region[Public Method]
@@ -116,7 +118,7 @@ namespace ChemiFriend.Web.Controllers
         [HttpPost]
         public ActionResult _LoadProduct(SearchDealModel model)
         {
-            model.PageIndex = model.PageIndex == 0 ? 1 : 1;
+            model.PageIndex = model.PageIndex == 0 ? 1 : model.PageIndex;
             var query = _dealRepository.GetDealList();
             if (!string.IsNullOrEmpty(model.DealType))
             {
@@ -161,25 +163,8 @@ namespace ChemiFriend.Web.Controllers
         [HttpGet]
         public ActionResult GetSubCategoryList(Int64 Id)
         {
-            var lstPazeSize = new List<SelectListItem>
-            {
-                 new SelectListItem{ Text="8", Value = "8" },
-                 new SelectListItem{ Text="16", Value = "16" },
-                 new SelectListItem{ Text="32", Value = "32" },
-                 new SelectListItem{ Text="40", Value = "40" }
-            };
-
-            var lstSorting = new List<SelectListItem>
-            {
-                 new SelectListItem{ Text="Product Name A to Z", Value = "1" },
-                 new SelectListItem{ Text="Product Name Z to A", Value = "2" },
-            };
-
-            ViewBag.BindPageSize = new SelectList(lstPazeSize, "Value", "Text");
-            ViewBag.BindSorting = new SelectList(lstSorting, "Value", "Text");
-
+            ViewBag.Category = Convert.ToString(_productCategoryRepository.FindBy(x => x.ProductCategoryId == Id).Select(x => x.ProductCategoryName).FirstOrDefault()).ToUpper();
             SearchSubCategoryModel model = new SearchSubCategoryModel();
-            model.PageIndex = model.PageIndex == 0 ? 1 : 1;
             model.CategoryId = Id;
             model.getSubCategoryModel = _productSubCategoryRepository.GetProductSubCategoryList().Where(x => x.ProductCategoryId == Id && x.Status == (int)Status.Active && x.IsDeleted == false).ToList();
 
@@ -195,27 +180,60 @@ namespace ChemiFriend.Web.Controllers
         [HttpPost]
         public ActionResult _GetSubCategoryList(SearchSubCategoryModel model)
         {
-            model.PageIndex = model.PageIndex == 0 ? 1 : 1;
             var query = _productSubCategoryRepository.GetProductSubCategoryList().Where(x => x.ProductCategoryId == model.CategoryId && x.Status == (int)Status.Active && x.IsDeleted == false);
-            if (!string.IsNullOrEmpty(model.Sort))
-            {
-
-            }
             if (!string.IsNullOrEmpty(model.Search))
             {
                 query = query.Where(x => x.ProductSubCategoryName.Contains(model.Search));
             }
+            model.getSubCategoryModel = query.ToList();
 
-            model.TotalRecordCount = query.Count();
-            var _getList = query.OrderBy(x => x.ProductCategoryId).Skip(((model.PageIndex - 1) * model.PageSize)).Take(model.PageSize).ToList();
-            int pageCount = (model.TotalRecordCount / model.PageSize) + ((model.TotalRecordCount % model.PageSize) > 0 ? 1 : 0);
-            model.TotalPageCount = pageCount;
-            model.getSubCategoryModel = _getList;
+            return PartialView(model);
+        }
+
+        /// <summary>
+        /// Get Product List
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult GetProductList(Int64 Id)
+        {
+            ViewBag.SubCategory = Convert.ToString(_productSubCategoryRepository.FindBy(x => x.ProductSubCategoryId == Id).Select(x => x.ProductSubCategoryName).FirstOrDefault()).ToUpper();
+            SearchProductModel model = new SearchProductModel();
+            model.SubCategoryId = Id;
+            model.getProductModel = _productRepository.GetProductList().Where(x => x.ProductSubCategoryId == Id && x.Status == (int)Status.Active && x.IsDeleted == false).ToList();
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// List of Products
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult _GetProductList(SearchProductModel model)
+        {
+            var query = _productRepository.GetProductList().Where(x => x.ProductSubCategoryId == model.SubCategoryId && x.Status == (int)Status.Active && x.IsDeleted == false);
+            if (!string.IsNullOrEmpty(model.Search))
+            {
+                query = query.Where(x => x.ProductName.Contains(model.Search));
+            }
+            model.getProductModel = query.ToList();
 
             return PartialView(model);
         }
 
 
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult _NewOffers()
+        {
+            return View();
+        }
+        
 
 
         /// <summary>

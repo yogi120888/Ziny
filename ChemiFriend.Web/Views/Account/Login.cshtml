@@ -1,14 +1,28 @@
 ﻿@model ChemiFriend.Models.LoginModel
 @{
-     Layout = "~/Views/Shared/_LayoutMaruti.cshtml";
+    Layout = "~/Views/Shared/_LayoutMaruti.cshtml";
 }
+
+<style type="text/css">
+    #loginbox .controls {
+        padding: 3px 20px;
+    }
+</style>
 
 <div id="loginbox">
     @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
     {
         @Html.AntiForgeryToken()
         <div id="loginform" class="form-vertical">
-            <div class="control-group normal_text"> <h3> Login @*<img src="~/Content/images/logo.png" alt="Logo" />*@</h3></div>
+            <div class="control-group normal_text">
+                <h3> Login </h3>
+                <div style="float:left;margin-top:-20px;padding:10px;">
+                    <a style="color:#fff;" href="@Url.Action("CreateUser", "Account")">Create Account</a>
+                </div>
+                <div style="float:right;margin-top:-20px;padding:10px;">
+                    <a style="color:#fff;" href="@Url.Action("Index", "Account")">Go back to Home</a>
+                </div>
+            </div>
             <div class="control-group">
                 <div class="controls">
                     <div class="main_input_box">
@@ -31,7 +45,7 @@
             </div>
             <span class="field-validation-error" style="padding-left:10px;"> @ViewBag.Message</span>
             <div class="form-actions">
-                <span class="pull-left"><a href="#" class="flip-link btn btn-inverse" id="to-recover">Lost password?</a></span>
+                <span class="pull-left"><a href="#" class="flip-link btn btn-inverse" id="to-recover">Forgot Password?</a></span>
                 <span class="pull-right"><input type="submit" class="btn btn-success" value="Login" /></span>
             </div>
         </div>

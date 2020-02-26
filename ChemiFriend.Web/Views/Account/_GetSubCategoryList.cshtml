@@ -16,21 +16,22 @@
                             <figure>
                                 <div class="snipcart-item block">
                                     <div class="snipcart-thumb">
-                                        @*@if (string.IsNullOrEmpty(item.ProductSubCategoryImagePath))
+                                        @if (string.IsNullOrEmpty(item.ProductSubCategoryImagePath))
                                         {
-                                            <a href="javascript:void(0)" target="_blank"><img src="~/Images/DummyPic.jpg" height="220" width="250" /></a>
+                                            <a href="@Url.Action("GetProductList", "Account", new { Id=item.ProductSubCategoryId })" target="_blank"><img src="~/Images/DummyPic.jpg" height="220" width="250" /></a>
                                         }
                                         else
                                         {
                                             string imgPath = BaseUrl + "Images/UploadImg/" + item.ProductSubCategoryImagePath;
-                                            <a href="javascript:void(0)" target="_blank"><img src="@imgPath" height="220" width="250"></a>
-                                        }*@
-                                        <p><b>Company:</b> @item.ProductCategory</p>
-                                        <p><b>Brand:</b> @item.ProductSubCategoryName</p>
+                                            <a href="@Url.Action("GetProductList", "Account", new { Id=item.ProductSubCategoryId })" target="_blank"><img src="@imgPath" height="220" width="250"></a>
+                                        }
+                                        <p>
+                                            <a href="@Url.Action("GetProductList", "Account", new { Id=item.ProductSubCategoryId })" target="_blank">@item.ProductSubCategoryName.ToUpper() </a>
+                                        </p>
                                     </div>
                                 </div>
                             </figure>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,36 +40,6 @@
     }
     else
     {
-        <div><text>There is no Product</text></div>
+        <div><text>There is no Brand Available</text></div>
     }
 </div>
-<nav class="numbering">
-    <ul class="pagination paging" id="paging">
-        @*<li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>*@
-        @if (Model.getSubCategoryModel.Count > 0)
-        {
-            for (int i = 1; i <= Model.TotalPageCount; i++)
-            {
-                if (Model.PageIndex == i)
-                {
-                    <li class="active"><a onclick="IsActive(this)" href="javascript:void(0)">@i</a></li>
-                }
-                else
-                {
-                    <li><a onclick="IsActive(this)" href="javascript:void(0)">@i</a></li>
-
-                }
-            }
-        }
-        @*<li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>*@
-    </ul>
-</nav>

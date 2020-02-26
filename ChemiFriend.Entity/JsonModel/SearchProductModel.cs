@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChemiFriend.Entity.JsonModel
 {
-    public class SearchSubCategoryModel 
+    public class SearchProductModel
     {
-        public Int64 CategoryId { get; set; }
+        public Int64 SubCategoryId { get; set; }
         public string Search { get; set; }
-        public List<GetProductSubCategoryModel> getSubCategoryModel { get; set; }
+        public List<GetProductModel> getProductModel { get; set; }
     }
 }

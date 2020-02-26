@@ -41,6 +41,7 @@ namespace ChemiFriend.API.Models.InputModel
         public string PackSize { get; set; }
         [Required]
         public int GST { get; set; }
+        public int ApplicableTaxType { get; set; } // DPCO/NONDPCO
         public byte Status { get; set; }
         public bool IsDeleted { get; set; }
         public Int64 CreatedBy { get; set; }

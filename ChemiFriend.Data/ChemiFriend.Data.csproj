@@ -73,25 +73,9 @@
     <Compile Include="IRepository\ISchemeRepository.cs" />
     <Compile Include="IRepository\IShipmentRepository.cs" />
     <Compile Include="IRepository\IUserMasterRepository.cs" />
-    <Compile Include="Migrations\202001250957390_fsbdjkfsdkkh.cs" />
-    <Compile Include="Migrations\202001250957390_fsbdjkfsdkkh.designer.cs">
-      <DependentUpon>202001250957390_fsbdjkfsdkkh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001250959479_fsbdjkfsdkkhy.cs" />
-    <Compile Include="Migrations\202001250959479_fsbdjkfsdkkhy.designer.cs">
-      <DependentUpon>202001250959479_fsbdjkfsdkkhy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001251058100_fsbdjkfsdkkhyuu.cs" />
-    <Compile Include="Migrations\202001251058100_fsbdjkfsdkkhyuu.designer.cs">
-      <DependentUpon>202001251058100_fsbdjkfsdkkhyuu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001251114368_fsbdjkfsdkkhyuuytr.cs" />
-    <Compile Include="Migrations\202001251114368_fsbdjkfsdkkhyuuytr.designer.cs">
-      <DependentUpon>202001251114368_fsbdjkfsdkkhyuuytr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001271645160_ffddfd.cs" />
-    <Compile Include="Migrations\202001271645160_ffddfd.designer.cs">
-      <DependentUpon>202001271645160_ffddfd.cs</DependentUpon>
+    <Compile Include="Migrations\202002230629517_dsnfndslfppp.cs" />
+    <Compile Include="Migrations\202002230629517_dsnfndslfppp.designer.cs">
+      <DependentUpon>202002230629517_dsnfndslfppp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,20 +108,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001250957390_fsbdjkfsdkkh.resx">
-      <DependentUpon>202001250957390_fsbdjkfsdkkh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001250959479_fsbdjkfsdkkhy.resx">
-      <DependentUpon>202001250959479_fsbdjkfsdkkhy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001251058100_fsbdjkfsdkkhyuu.resx">
-      <DependentUpon>202001251058100_fsbdjkfsdkkhyuu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001251114368_fsbdjkfsdkkhyuuytr.resx">
-      <DependentUpon>202001251114368_fsbdjkfsdkkhyuuytr.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001271645160_ffddfd.resx">
-      <DependentUpon>202001271645160_ffddfd.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002230629517_dsnfndslfppp.resx">
+      <DependentUpon>202002230629517_dsnfndslfppp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

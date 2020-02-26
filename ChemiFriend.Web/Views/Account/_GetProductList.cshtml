@@ -1,20 +1,13 @@
-﻿@model ChemiFriend.Entity.JsonModel.SearchDealModel
+﻿@model ChemiFriend.Entity.JsonModel.SearchProductModel
 @using System.Configuration;
 @{
     string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
 }
-<style>
-    hr {
-        margin-top: 0px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #eee;
-    }
-</style>
+
 <div class="agile_top_brands_grids">
-    @if (Model.getDealModels.Count > 0)
+    @if (Model.getProductModel.Count > 0)
     {
-        foreach (var item in Model.getDealModels)
+        foreach (var item in Model.getProductModel)
         {
             <div class="col-md-3 top_brand_left">
                 <div class="hover14 column">
@@ -25,22 +18,13 @@
                                     <div class="snipcart-thumb">
                                         @if (string.IsNullOrEmpty(item.ProductImagePath))
                                         {
-                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="~/Images/DummyPic.jpg" height="220" width="250" /></a>
+                                            <a href="javascript:void(0)" target="_blank"><img src="~/Images/DummyPic.jpg" height="220" width="250" /></a>
                                         }
                                         else
                                         {
                                             string imgPath = BaseUrl + "Images/UploadImg/" + item.ProductImagePath;
-                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="@imgPath" height="220" width="250"></a>
+                                            <a href="javascript:void(0)" target="_blank"><img src="@imgPath" height="220" width="250"></a>
                                         }
-                                        @if (item.DealEndDays > 0)
-                                        {
-                                            <small> Deal Ends in: <b>@item.DealEndDays Days</b> </small>
-                                        }
-                                        else
-                                        {
-                                            <small> Deal Ends in: <b>@item.DealEndHours Hours</b> </small>
-                                        }
-                                        <hr />
                                         <p>@item.ProductName</p>
                                         <table border="0" width="100%;">
                                             <tr>
@@ -49,9 +33,9 @@
                                                 <th width="33%">DEAL</th>
                                             </tr>
                                             <tr>
-                                                <td><small>@item.MRP</small></td>
-                                                <td><small>@item.PTR</small></td>
-                                                <td><small>No Offer</small></td>
+                                                <td><small>$35.99</small></td>
+                                                <td><small>$35.99</small></td>
+                                                <td><small>$35.99</small></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -82,38 +66,6 @@
     }
     else
     {
-        <div><text>There is no Product</text></div>
+        <div><text>There is no Product Available</text></div>
     }
 </div>
-<nav class="numbering">
-    <ul class="pagination paging" id="paging">
-        @*<li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>*@
-        @if (Model.getDealModels.Count > 0)
-        {
-            for (int i = 1; i <= Model.TotalPageCount; i++)
-            {
-                if (Model.PageIndex == i)
-                {
-                    <li class="active"><a onclick="IsActive(this)" href="javascript:void(0)">@i</a></li>
-                }
-                else
-                {
-                    <li><a onclick="IsActive(this)" href="javascript:void(0)">@i</a></li>
-
-                }
-            }
-        }
-        @*<li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>*@
-    </ul>
-</nav>
-
-
