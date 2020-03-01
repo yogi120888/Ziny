@@ -57,6 +57,7 @@
     <Compile Include="FormType.cs" />
     <Compile Include="GSTApplicable.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="JsonModel\AddToCartModel.cs" />
     <Compile Include="JsonModel\GetDealModel.cs" />
     <Compile Include="JsonModel\GetProductModel.cs" />
     <Compile Include="JsonModel\GetProductSubCategoryModel.cs" />

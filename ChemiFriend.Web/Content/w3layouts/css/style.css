@@ -238,7 +238,7 @@ ul.multi-column-dropdown h6 {
     font-size: 20px;
     color:#fe9126;
     margin: 0 0 0em;
-    padding-bottom: 1em;
+    padding-bottom: 0em;
     border-bottom: 1px solid #E4E4E4;
     text-transform: capitalize;
 }
@@ -246,14 +246,13 @@ ul.multi-column-dropdown h6 {
     list-style-type: none;
     margin: 14px 0;
 }
-.multi-column-dropdown li a {
-    display: block;
-    clear: both;
-    line-height: 1.428571429;
-    color: #999 !important;
-    white-space: normal;
-	font-weight:500 !important;
-}
+    .multi-column-dropdown li a {
+        display: block;
+        clear: both;
+        line-height: 1.428571429;
+        color: #1c4775 !important;
+        font-weight: 500 !important;
+    }
 .dropdown-menu.columns-3 {
     min-width: 190px;
     padding: 20px 30px;

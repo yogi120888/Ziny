@@ -48,7 +48,8 @@ namespace ChemiFriend.Entity.JsonModel
         public DateTime CreatedDate { get; set; }
         public Int64? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
-      //  public List<GetSchemeModel> lstSchemes { get; set; }
+        //public List<GetSchemeModel> lstSchemes { get; set; }
+        public List<Scheme> lstSchemes { get; set; }
     }
 }
 

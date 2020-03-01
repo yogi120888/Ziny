@@ -38,6 +38,7 @@
 
     $(function () {
         Search();
+        AddToCart("load");
     });
 
     function IsActive(elm) {
@@ -68,6 +69,43 @@
             Search();
         });
     });
+</script>
+<script type="text/javascript">
+    function AddToCart(elm) {
+        if (elm == "load") {
+            var _count = @Convert.ToInt32(Session["count"]);
+            $("#CartCount").html(_count);
+            return false;
+        }
+        $(elm).val('Added');
+        $(elm).attr("disabled", "disabled");
+
+        var model = {};
+        model.UserId = $(elm).parent().find('.UserId').val();
+        model.DealId = $(elm).parent().find(".DealId").val();
+        model.ProductId = $(elm).parent().find(".ProductId").val();
+        model.Quantity = $(elm).closest('.snipcart-item').find(".Quantity").val();
+        model.SchemeId = $(elm).closest('.snipcart-item').find(".SchemeId").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Account/AddToCart",
+            data: '{model: ' + JSON.stringify(model) + '}',
+            contentType: "application/json; charset=utf-8",
+            // dataType: "json",
+            success: function (resp) {
+                if (resp.Type == "success") {
+                    $("#CartCount").html(resp.Count);
+                }
+            },
+            failure: function (resp) {
+                $("#CartCount").html(0);
+            },
+            error: function (resp) {
+                $("#CartCount").html(0);
+            }
+        });
+    }
 </script>
 
 <div class="logo_products">
@@ -120,7 +158,6 @@
     </div>
 </div>
 <!--- //products --->
-
 <!-- new -->
 <div class="newproducts-w3agile">
     <div class="container">

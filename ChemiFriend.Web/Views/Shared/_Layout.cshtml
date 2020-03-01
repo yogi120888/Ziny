@@ -69,7 +69,7 @@
                 <form action="#" method="post" class="last">
                     <input type="hidden" name="cmd" value="_cart">
                     <input type="hidden" name="display" value="1">
-                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                    <button class="w3view-cart" type="button" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true">&nbsp;[<span id="CartCount">0</span>]</i></button>
                 </form>
             </div>
             <div class="clearfix"> </div>
@@ -125,7 +125,7 @@
                                     <div class="row">
                                         <div class="multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <h6>Manage Deal</h6>
+                                                <h6></h6>
                                                 <li><a href="@Url.Action("CreateDeal", "Deal")">Create Deal</a></li>
                                             </ul>
                                         </div>
@@ -134,6 +134,20 @@
                             </li>
                         }
                         <li><a href="@Url.Action("About", "Home")">About</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category<b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <div class="row">
+                                    <div class="multi-gd-img">
+                                        <ul class="multi-column-dropdown">
+                                            <h6></h6>
+                                            <li><a href="javascrip:void(0)">Pharma</a></li>
+                                            <li><a href="javascrip:void(0)">Surgical</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </ul>
+                        </li>
                         <li><a href="@Url.Action("FAQ", "Home")">FAQ's</a></li>
                         <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                     </ul>

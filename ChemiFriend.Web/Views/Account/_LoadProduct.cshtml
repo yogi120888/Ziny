@@ -2,13 +2,40 @@
 @using System.Configuration;
 @{
     string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+    int count = 0;
 }
 <style>
     hr {
         margin-top: 0px;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
         border: 0;
         border-top: 1px solid #eee;
+    }
+
+    .agile_top_brand_left_grid1 p {
+        color: #212121;
+        margin: 0.5em 0 0.5em;
+        line-height: 1.5em;
+        text-transform: capitalize;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .ddlSchemes {
+        padding: 0em;
+    }
+
+    td, th {
+        padding: 1px;
+    }
+
+    input[type="number"] {
+        width: 50px;
+        border: 1px solid black;
+    }
+
+    .snipcart-details {
+        margin: 0.5em auto 0em;
     }
 </style>
 <div class="agile_top_brands_grids">
@@ -16,6 +43,7 @@
     {
         foreach (var item in Model.getDealModels)
         {
+            count += 1;
             <div class="col-md-3 top_brand_left">
                 <div class="hover14 column">
                     <div class="agile_top_brand_left_grid">
@@ -25,12 +53,12 @@
                                     <div class="snipcart-thumb">
                                         @if (string.IsNullOrEmpty(item.ProductImagePath))
                                         {
-                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="~/Images/DummyPic.jpg" height="220" width="250" /></a>
+                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="~/Images/DummyPic.jpg" height="200" width="220" /></a>
                                         }
                                         else
                                         {
                                             string imgPath = BaseUrl + "Images/UploadImg/" + item.ProductImagePath;
-                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="@imgPath" height="220" width="250"></a>
+                                            <a href="@Url.Action("GetDealDetail", "Deal", new { Id=item.DealId})" target="_blank"><img src="@imgPath" height="200" width="220"></a>
                                         }
                                         @if (item.DealEndDays > 0)
                                         {
@@ -46,28 +74,41 @@
                                             <tr>
                                                 <th width="33%">MRP</th>
                                                 <th width="33%">RATE</th>
-                                                <th width="33%">DEAL</th>
+                                                <th width="33%">Quantity</th>
                                             </tr>
                                             <tr>
                                                 <td><small>@item.MRP</small></td>
                                                 <td><small>@item.PTR</small></td>
-                                                <td><small>No Offer</small></td>
+                                                <td style="text-align:right;"><input type="number" class="Quantity" value="1" min="1" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    @if (item.lstSchemes.Count > 0)
+                                                    {
+                                                        <select id="SchemeId" class="SchemeId ddlSchemes">
+                                                            @foreach (var innerItem in item.lstSchemes)
+                                                            {
+                                                                <option value="@innerItem.SchemeId">@innerItem.DealScheme</option>
+                                                            }
+                                                        </select>
+                                                    }
+                                                    else
+                                                    {
+                                                        <select id="ddlSchemes" class="SchemeId ddlSchemes">
+                                                            <option value="0">No Scheme</option>
+                                                        </select>
+                                                    }
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="snipcart-details top_brand_home_details">
                                         <form action="#" method="post">
                                             <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart">
-                                                <input type="hidden" name="add" value="1">
-                                                <input type="hidden" name="business" value=" ">
-                                                <input type="hidden" name="item_name" value="Fortune Sunflower Oil">
-                                                <input type="hidden" name="amount" value="35.99">
-                                                <input type="hidden" name="discount_amount" value="1.00">
-                                                <input type="hidden" name="currency_code" value="USD">
-                                                <input type="hidden" name="return" value=" ">
-                                                <input type="hidden" name="cancel_return" value=" ">
-                                                <input type="submit" name="submit" value="Add to cart" class="button">
+                                                <input type="hidden" name="UserId" class="UserId" value="@ChemiFriend.Models.UserAuthenticate.UserId">
+                                                <input type="hidden" name="DealId" class="DealId" value="@item.DealId">
+                                                <input type="hidden" name="ProductId" class="ProductId" value="@item.ProductId">
+                                                <input type="button" value="Add to cart" class="button AddToCart" onclick="AddToCart(this)">
                                             </fieldset>
                                         </form>
                                     </div>

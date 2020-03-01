@@ -11,16 +11,23 @@
         padding: 1em 0;
     }
 
+    .agileinfo_single_right_details {
+        margin: 0 !important;
+        width: 50% !important;
+    }
     .w3agile_description p {
+        font-size: 14px;
         color: #1c4775;
+        line-height: 2em;
+        margin: .5em 0 0;
+        width: 95%;
     }
 </style>
 <link href="~/Content/w3layouts/css/IndexCss.css" rel="stylesheet" />
 <!-- //breadcrumbs -->
 <div class="products">
-    <div class="container">
+    <div class="container" style="border:1px solid;padding:10px;">
         <div class="agileinfo_single">
-
             <div class="col-md-3 agileinfo_single_left">
                 @if (string.IsNullOrEmpty(Model.ProductImagePath))
                 {
@@ -32,7 +39,6 @@
                     <img src="@imgPath" class="img-responsive" />
                 }
             </div>
-
             <div class="col-md-5 agileinfo_single_right">
                 <h4>@Model.ProductName.ToUpper()</h4>
                 <div class="w3agile_description">
@@ -44,19 +50,19 @@
                     <p>
                         <b>@Model.ProductCode</b> <text>.</text>
                     </p>
-                    <div>FORM: <b>@Model.FormType</b>, PACK TYPE: <b>@Model.PackType</b>, PACK SIZE: <b>@Model.PackSize</b> </div>
+                    <p>FORM: <b>@Model.FormType</b>, PACK TYPE: <b>@Model.PackType</b>, PACK SIZE: <b>@Model.PackSize</b> </p>
                 </div>
                 <div class="snipcart-item block">
 
                 </div>
             </div>
-            
+
             <div class="col-md-4 agileinfo_single_right">
                 <div class="snipcart-item block">
                     <div class="snipcart-thumb agileinfo_single_right_snipcart">
-                        <h4 class="m-sing">MRP: @Model.MRP</h4>
-                        <h4 class="m-sing">Rate: @Model.PTR</h4>
-                        <h4 class="m-sing">Offer: No Offer</h4>
+                        <p>MRP: <b>@Model.MRP</b></p>
+                        <p>Rate: <b>@Model.PTR</b></p>
+                        <p>Offer: No Offer</p>
                     </div>
                     <div class="snipcart-details agileinfo_single_right_details">
                         <form action="#" method="post">

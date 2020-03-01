@@ -79,7 +79,7 @@ namespace ChemiFriend.Data.Repository
                              ModifiedBy = de.ModifiedBy,
                              ModifiedDate = de.ModifiedDate,
                              DealEndDays = de.DealEndDate.Day - de.DealStartDate.Day,
-                             DealEndHours = de.DealEndDate.Hour - de.DealStartDate.Hour
+                             DealEndHours = de.DealEndDate.Hour - de.DealStartDate.Hour,
                          });
             return query;
         }

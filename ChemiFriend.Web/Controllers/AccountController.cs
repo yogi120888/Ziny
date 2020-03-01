@@ -36,6 +36,7 @@ namespace ChemiFriend.Web.Controllers
         IcommonRepository _commonRepository;
         IRegistrationRepository _registrationRepository;
         IDealRepository _dealRepository;
+        ISchemeRepository _schemeRepository;
         IProductCategoryRepository _productCategoryRepository;
         IProductSubCategoryRepository _productSubCategoryRepository;
         IProductRepository _productRepository;
@@ -46,6 +47,7 @@ namespace ChemiFriend.Web.Controllers
             _commonRepository = new commonRepository();
             _registrationRepository = new RegistrationRepository();
             _dealRepository = new DealRepository();
+            _schemeRepository = new SchemeRepository();
             _productCategoryRepository = new ProductCategoryRepository();
             _productSubCategoryRepository = new ProductSubCategoryRepository();
             _productRepository = new ProductRepository();
@@ -137,9 +139,43 @@ namespace ChemiFriend.Web.Controllers
             var _getList = query.OrderBy(a => a.DealId).Skip(((model.PageIndex - 1) * model.PageSize)).Take(model.PageSize).ToList();
             int pageCount = (model.TotalRecordCount / model.PageSize) + ((model.TotalRecordCount % model.PageSize) > 0 ? 1 : 0);
             model.TotalPageCount = pageCount;
+            // bind schemes
+            foreach (var item in _getList)
+            {
+                item.lstSchemes = _schemeRepository.FindBy(x => x.DealId == item.DealId).ToList();
+            }
             model.getDealModels = _getList;
 
             return PartialView(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult AddToCart(AddToCartModel model)
+        {
+            try
+            {
+                if (Session["cart"] == null)
+                {
+                    List<AddToCartModel> li = new List<AddToCartModel>();
+                    li.Add(model);
+                    Session["cart"] = li;
+                    Session["count"] = 1;
+                }
+                else
+                {
+                    List<AddToCartModel> li = new List<AddToCartModel>();
+                    li.Add(model);
+                    Session["cart"] = li;
+                    Session["count"] = Convert.ToInt32(Session["count"]) + 1;
+                }
+                int count = Convert.ToInt32(Session["count"]);
+                return Json(new { Type = "success", Count = count, }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Type = "error", Count = 0, }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
@@ -226,15 +262,12 @@ namespace ChemiFriend.Web.Controllers
             return PartialView(model);
         }
 
-
         [AllowAnonymous]
         [HttpGet]
         public ActionResult _NewOffers()
         {
             return View();
         }
-        
-
 
         /// <summary>
         /// Get Login
