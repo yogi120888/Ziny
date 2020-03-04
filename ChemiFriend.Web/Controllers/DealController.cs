@@ -91,12 +91,11 @@ namespace ChemiFriend.Web.Controllers
             ResponseModel _response = new ResponseModel();
             if (ModelState.IsValid)
             {
-                //if (dealModel.lstSchemes.Count() <= 0)
-                //{
-                //    ViewBag.Error = "Please add at least 1 scheme";
-                //    return View();
-                //}
-
+                if (dealModel.lstSchemes.Count() <= 0)
+                {
+                    ViewBag.Error = "Please add at least 1 scheme";
+                    return View();
+                }
                 if (dealModel.lstSchemes != null && dealModel.lstSchemes.Count > 0)
                 {
                     foreach (var item in dealModel.lstSchemes)

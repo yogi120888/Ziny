@@ -30,7 +30,7 @@ namespace ChemiFriend.Entity
         public int PackType { get; set; }
         public string PackSize { get; set; }
         public int GST { get; set; }
-        public int ApplicableTaxType { get; set; } // DPCO/NONDPCO
+        public int? ApplicableTaxType { get; set; } // DPCO/NONDPCO
         public string ProductImagePath { get; set; }
        // public List<Scheme> lstSchemes { get; set; }
     }

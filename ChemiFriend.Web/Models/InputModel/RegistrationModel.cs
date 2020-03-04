@@ -18,7 +18,7 @@ namespace ChemiFriend.Web.Models.InputModel
         public string LicenceNo { get; set; }
         //[Required] --- To do 
         public string LicenceImage { get; set; }
-        public DocumentModel DocLicence { get; set; }
+        public List<DocumentModel> lstDocLicence { get; set; }
         [Required]
         public string FirstName { get; set; }
         public string LastName { get; set; }

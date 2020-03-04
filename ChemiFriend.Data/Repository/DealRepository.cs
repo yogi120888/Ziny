@@ -177,6 +177,26 @@ namespace ChemiFriend.Data.Repository
 
             return query;
         }
+
+        public IQueryable<OrderDetailModel> GetOrderDetail()
+        {
+            var query = (from pr in Context.Products
+                         join dl in Context.Deals on pr.ProductId equals dl.ProductId
+                         join sc in Context.Schemes on dl.DealId equals sc.DealId
+                         select new OrderDetailModel
+                         {
+                             DealId = dl.DealId,
+                             ProductId =pr.ProductId,
+                             Product =pr.ProductName,
+                             ProductImagePath =pr.ProductImagePath,
+                             SchemeId =sc.SchemeId,
+                             Scheme = sc.DealScheme,
+                             DealPrice = dl.PTR,
+                         });
+            return query;
+        }
+
+
         #endregion
     }
 }

@@ -26,14 +26,14 @@ namespace ChemiFriend.API.Controllers
         IcommonRepository _common;
         IUserMasterRepository _userMaster;
         IRegistrationRepository _registrationRepository;
-
+        ILicenceImagesReposiory _licenceImagesReposiory;
         #region [Construtor]
         public ApiUserController()
         {
             _common = new commonRepository();
             _userMaster = new UserMasterRepository();
             _registrationRepository = new RegistrationRepository();
-
+            _licenceImagesReposiory = new LicenceImagesReposiory();
         }
         #endregion
 
@@ -121,22 +121,31 @@ namespace ChemiFriend.API.Controllers
                     _userMaster.SaveChanges();
                 }
                 // For Uploading Licence image ----
-                if (registrationModel.DocLicence != null)
+                foreach (var item in registrationModel.lstDocLicence)
                 {
-                    UploadDocumentModel UploadDocument = new UploadDocumentModel();
-                    UploadDocument.documents = new List<DocumentModel>();
-                    UploadDocument.ImageSize = 250;
-                    UploadDocument.ImageQuality = 250;
-                    UploadDocument.documents.Add(registrationModel.DocLicence);
-                    List<string> uploadedFileName = SavePicture(UploadDocument);
-                    if (uploadedFileName.Count > 0)
+                    if (item != null)
                     {
-                        Registration _registration = _registrationRepository.FindBy(x => x.RegistrationId == Result.RegistrationId).FirstOrDefault();
-                        if (_registration != null)
+                        UploadDocumentModel UploadDocument = new UploadDocumentModel();
+                        UploadDocument.documents = new List<DocumentModel>();
+                        UploadDocument.ImageSize = 250;
+                        UploadDocument.ImageQuality = 250;
+                        UploadDocument.documents.Add(item);
+                        List<string> uploadedFileName = SavePicture(UploadDocument);
+                        if (uploadedFileName.Count > 0)
                         {
-                            _registration.LicenceImage = uploadedFileName[0].ToString();
-                            _registrationRepository.Update(_registration);
-                            _registrationRepository.SaveChanges();
+                            //Registration _registration = _registrationRepository.FindBy(x => x.RegistrationId == Result.RegistrationId).FirstOrDefault();
+                            //if (_registration != null)
+                            //{
+                            //    _registration.LicenceImage = uploadedFileName[0].ToString();
+                            //    _registrationRepository.Update(_registration);
+                            //    _registrationRepository.SaveChanges();
+                            //}
+                            LicenceImages licenceImages = new LicenceImages();
+                            licenceImages.ImagePath = uploadedFileName[0].ToString();
+                            licenceImages.RegistrationId = Result.RegistrationId;
+                            licenceImages.IsActive = true;
+                            _licenceImagesReposiory.Add(licenceImages);
+                            _licenceImagesReposiory.SaveChanges();
                         }
                     }
                 }
@@ -213,39 +222,45 @@ namespace ChemiFriend.API.Controllers
             if (IsResponse)
             {
                 // For Uploading Licence image ----
-                if (registrationModel.DocLicence != null)
+                foreach (var item in registrationModel.lstDocLicence)
                 {
-                    UploadDocumentModel UploadDocument = new UploadDocumentModel();
-                    UploadDocument.documents = new List<DocumentModel>();
-                    UploadDocument.ImageSize = 250;
-                    UploadDocument.ImageQuality = 250;
-                    UploadDocument.documents.Add(registrationModel.DocLicence);
-                    List<string> uploadedFileName = SavePicture(UploadDocument);
-                    if (uploadedFileName.Count > 0)
+                    if (registrationModel.lstDocLicence != null)
                     {
-                        if (_registration != null)
+                        UploadDocumentModel UploadDocument = new UploadDocumentModel();
+                        UploadDocument.documents = new List<DocumentModel>();
+                        UploadDocument.ImageSize = 250;
+                        UploadDocument.ImageQuality = 250;
+                        UploadDocument.documents.Add(item);
+                        List<string> uploadedFileName = SavePicture(UploadDocument);
+                        if (uploadedFileName.Count > 0)
                         {
-                            // delete exiting images
-                            string ImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + _registration.LicenceImage);
-                            if (System.IO.File.Exists(ImgPath))
-                            {
-                                System.IO.File.Delete(ImgPath);
-                            }
-                            string ImgOriginalPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "Original_" + _registration.LicenceImage);
-                            if (System.IO.File.Exists(ImgOriginalPath))
-                            {
-                                System.IO.File.Delete(ImgOriginalPath);
-                            }
-                            string TImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "T" + _registration.LicenceImage);
-                            if (System.IO.File.Exists(TImgPath))
-                            {
-                                System.IO.File.Delete(TImgPath);
-                            }
-                            //------------------------------
+                            //if (_registration != null)
+                            //{
+                            //    // delete exiting images
+                            //    string ImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + _registration.LicenceImage);
+                            //    if (System.IO.File.Exists(ImgPath))
+                            //    {
+                            //        System.IO.File.Delete(ImgPath);
+                            //    }
+                            //    string ImgOriginalPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "Original_" + _registration.LicenceImage);
+                            //    if (System.IO.File.Exists(ImgOriginalPath))
+                            //    {
+                            //        System.IO.File.Delete(ImgOriginalPath);
+                            //    }
+                            //    string TImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "T" + _registration.LicenceImage);
+                            //    if (System.IO.File.Exists(TImgPath))
+                            //    {
+                            //        System.IO.File.Delete(TImgPath);
+                            //    }
+                            //    //------------------------------
 
-                            _registration.LicenceImage = uploadedFileName[0].ToString();
-                            _registrationRepository.Update(_registration);
-                            _registrationRepository.SaveChanges();
+                            //    LicenceImages licenceImages = new LicenceImages();
+                            //    licenceImages.ImagePath = uploadedFileName[0].ToString();
+                            //    licenceImages.RegistrationId = _registration.RegistrationId;
+                            //    licenceImages.IsActive = true;
+                            //    _licenceImagesReposiory.Add(licenceImages);
+                            //    _licenceImagesReposiory.SaveChanges();
+                            //}
                         }
                     }
                 }
@@ -264,17 +279,17 @@ namespace ChemiFriend.API.Controllers
                         if (_registration != null)
                         {
                             // delete exiting images
-                            string ImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + _registration.LicenceImage);
+                            string ImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + _registration.GSTNoImage);
                             if (System.IO.File.Exists(ImgPath))
                             {
                                 System.IO.File.Delete(ImgPath);
                             }
-                            string ImgOriginalPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "Original_" + _registration.LicenceImage);
+                            string ImgOriginalPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "Original_" + _registration.GSTNoImage);
                             if (System.IO.File.Exists(ImgOriginalPath))
                             {
                                 System.IO.File.Delete(ImgOriginalPath);
                             }
-                            string TImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "T" + _registration.LicenceImage);
+                            string TImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "T" + _registration.GSTNoImage);
                             if (System.IO.File.Exists(TImgPath))
                             {
                                 System.IO.File.Delete(TImgPath);

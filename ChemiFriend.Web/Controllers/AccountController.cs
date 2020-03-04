@@ -155,6 +155,7 @@ namespace ChemiFriend.Web.Controllers
         {
             try
             {
+
                 if (Session["cart"] == null)
                 {
                     List<AddToCartModel> li = new List<AddToCartModel>();
@@ -164,7 +165,8 @@ namespace ChemiFriend.Web.Controllers
                 }
                 else
                 {
-                    List<AddToCartModel> li = new List<AddToCartModel>();
+                    List<AddToCartModel> li = (List<AddToCartModel>)Session["cart"];
+                    //List<Mobiles> li = (List<Mobiles>)Session["cart"];
                     li.Add(model);
                     Session["cart"] = li;
                     Session["count"] = Convert.ToInt32(Session["count"]) + 1;
@@ -176,6 +178,29 @@ namespace ChemiFriend.Web.Controllers
             {
                 return Json(new { Type = "error", Count = 0, }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult MyOrder()
+        {
+            List<OrderDetailModel> objModel = new List<OrderDetailModel>();
+            if (Session["cart"] != null)
+            {
+                List<AddToCartModel> list = new List<AddToCartModel>();
+                list = (List<AddToCartModel>)Session["cart"];
+                foreach (var item in list)
+                {
+                    var _orderDetail = _dealRepository.GetOrderDetail().Where(x => x.ProductId == item.ProductId && x.DealId == item.DealId && x.SchemeId == item.SchemeId).FirstOrDefault();
+                    if (_orderDetail != null)
+                    {
+                        _orderDetail.UserId = item.UserId;
+                        _orderDetail.Quantity = item.Quantity;
+                    }
+                    objModel.Add(_orderDetail);
+                }
+            }
+            return View(objModel);
         }
 
         /// <summary>
@@ -492,7 +517,7 @@ namespace ChemiFriend.Web.Controllers
         /// <param name="registrationModel"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult CreateRegistration(RegistrationModel registrationModel, HttpPostedFileBase LicenceImage, HttpPostedFileBase GSTNoImage)
+        public ActionResult CreateRegistration(RegistrationModel registrationModel, HttpPostedFileBase[] LicenceImage, HttpPostedFileBase GSTNoImage)
         {
             ViewBag.BindState = _commonRepository.GetState(1).ToList();
             ResponseModel _response = new ResponseModel();
@@ -501,17 +526,23 @@ namespace ChemiFriend.Web.Controllers
                 try
                 {
                     // Image byte converter
-                    if (LicenceImage != null)
+                    if (LicenceImage != null && LicenceImage.Count() > 0)
                     {
-                        registrationModel.DocLicence = new DocumentModel();
-                        using (var memoryStream = new MemoryStream())
+                        List<DocumentModel> _lstLicence = new List<DocumentModel>();
+                        foreach (var item in LicenceImage)
                         {
-                            LicenceImage.InputStream.CopyTo(memoryStream);
-                            byte[] imageBytes = memoryStream.ToArray();
-                            registrationModel.DocLicence.Filebytes = imageBytes;
-                            registrationModel.DocLicence.FileName = LicenceImage.FileName;
-                            registrationModel.DocLicence.FileExtenstion = Path.GetExtension(LicenceImage.FileName);
+                            DocumentModel _Licence = new DocumentModel();
+                            using (var memoryStream = new MemoryStream())
+                            {
+                                item.InputStream.CopyTo(memoryStream);
+                                byte[] imageBytes = memoryStream.ToArray();
+                                _Licence.Filebytes = imageBytes;
+                                _Licence.FileName = item.FileName;
+                                _Licence.FileExtenstion = Path.GetExtension(item.FileName);
+                            }
+                            _lstLicence.Add(_Licence);
                         }
+                        registrationModel.lstDocLicence = _lstLicence;
                     }
                     // Image byte converter
                     if (GSTNoImage != null)
@@ -603,7 +634,7 @@ namespace ChemiFriend.Web.Controllers
         /// <param name="GSTNoImage"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult EditRegistration(RegistrationModel registrationModel, HttpPostedFileBase LicenceImage, HttpPostedFileBase GSTNoImage)
+        public ActionResult EditRegistration(RegistrationModel registrationModel, HttpPostedFileBase[] LicenceImage, HttpPostedFileBase GSTNoImage)
         {
             ViewBag.BindState = _commonRepository.GetState(1).ToList();
             ResponseModel _response = new ResponseModel();
@@ -614,15 +645,15 @@ namespace ChemiFriend.Web.Controllers
                     // Image byte converter
                     if (LicenceImage != null)
                     {
-                        registrationModel.DocLicence = new DocumentModel();
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            LicenceImage.InputStream.CopyTo(memoryStream);
-                            byte[] imageBytes = memoryStream.ToArray();
-                            registrationModel.DocLicence.Filebytes = imageBytes;
-                            registrationModel.DocLicence.FileName = LicenceImage.FileName;
-                            registrationModel.DocLicence.FileExtenstion = Path.GetExtension(LicenceImage.FileName);
-                        }
+                        //registrationModel.DocLicence = new DocumentModel();
+                        //using (var memoryStream = new MemoryStream())
+                        //{
+                        //    LicenceImage.InputStream.CopyTo(memoryStream);
+                        //    byte[] imageBytes = memoryStream.ToArray();
+                        //    registrationModel.DocLicence.Filebytes = imageBytes;
+                        //    registrationModel.DocLicence.FileName = LicenceImage.FileName;
+                        //    registrationModel.DocLicence.FileExtenstion = Path.GetExtension(LicenceImage.FileName);
+                        //}
                     }
                     // Image byte converter
                     if (GSTNoImage != null)

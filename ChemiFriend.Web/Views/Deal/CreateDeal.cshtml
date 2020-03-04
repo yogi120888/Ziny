@@ -234,14 +234,14 @@
                                     </thead>
                                     <tbody id="tbodyScheme">
                                         <tr class="rowCount">
-                                            @*<td class="dt-center" width="250px;">@Html.DropDownListFor(x => x.lstSchemes[0].SchemeTypeId, new SelectList(ViewBag.BindSchemeType, "SchemeTypeId", "SchemeTypeName"), "Select Scheme Type", new { @class = "span12 SchemeTypeId", style = "width:100%" })</td>
-                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].MinOrderQuantity, new { @class = "span12 MinOrderQuantity" })</td>
-                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].DealRate, new { @class = "span12 DealRate" })</td>
-                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].Saving, new { @class = "span12 Saving" })</td>
-                                                <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].DealScheme, new { @class = "span12 DealScheme" })</td>
-                                                <td class="dt-center">
-                                                    <button id="btnRemove" type="button" class="btn" style="color:red;font-size:large;font-weight:bold; display:none;"><span>X</span></button>
-                                                </td>*@
+                                            <td class="dt-center" width="250px;">@Html.DropDownListFor(x => x.lstSchemes[0].SchemeTypeId, new SelectList(ViewBag.BindSchemeType, "SchemeTypeId", "SchemeTypeName"), "Select Scheme Type", new { @class = "span12 SchemeTypeId", style = "width:100%" })</td>
+                                            <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].MinOrderQuantity, new { @class = "span12 MinOrderQuantity" })</td>
+                                            <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].DealRate, new { @class = "span12 DealRate" })</td>
+                                            <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].Saving, new { @class = "span12 Saving" })</td>
+                                            <td class="dt-center">@Html.TextBoxFor(x => x.lstSchemes[0].DealScheme, new { @class = "span12 DealScheme" })</td>
+                                            <td class="dt-center">
+                                                <button id="btnRemove" type="button" class="btn" style="color:red;font-size:large;font-weight:bold; display:none;"><span>X</span></button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
@@ -287,31 +287,36 @@
             //add dynamic rows
             var count = 0;
             $("#AddRows").click(function () {
+                count = parseInt($("tr.rowCount").length - 1);
+                count += 1;
                 $("#tbodyScheme tr:last").after('<tr class="rowCount">'
                     + '<td class= "dt-center" width = "250px;">'
-                    + '<select class="span12 SchemeTypeId" id="lstSchemes_"' + count + '"__SchemeTypeId" name="lstSchemes["' + count + '"].SchemeTypeId" style="width:100%;display:none;">' + SchemeTypeList + '</select></td>'
-                    + '<td class="dt-center"><input class="span12 MinOrderQuantity" id="lstSchemes_"' + count + '"__MinOrderQuantity" name="lstSchemes["' + count + '"].MinOrderQuantity" type="text"></td>'
-                    + '<td class="dt-center"><input class="span12 DealRate" id="lstSchemes_"' + count + '"__DealRate" name="lstSchemes["' + count + '"].DealRate" type="text"></td>'
-                    + '<td class="dt-center"><input class="span12 Saving" id="lstSchemes_"' + count + '"__Saving" name="lstSchemes["' + count + '"].Saving" type="text"></td>'
-                    + '<td class= "dt-center"><input class="span12 DealScheme" id="lstSchemes_"' + count + '"__DealScheme" name="lstSchemes["' + count + '"].DealScheme" type="text"></td>'
+                    + '<select class="span12 SchemeTypeId" id="lstSchemes_' + count + '__SchemeTypeId" name="lstSchemes[' + count + '].SchemeTypeId" style="width:100%;display:none;">' + SchemeTypeList + '</select></td>'
+                    + '<td class="dt-center"><input class="span12 MinOrderQuantity" id="lstSchemes_' + count + '__MinOrderQuantity" name="lstSchemes[' + count + '].MinOrderQuantity" type="text"></td>'
+                    + '<td class="dt-center"><input class="span12 DealRate" id="lstSchemes_' + count + '__DealRate" name="lstSchemes[' + count + '].DealRate" type="text"></td>'
+                    + '<td class="dt-center"><input class="span12 Saving" id="lstSchemes_' + count + '__Saving" name="lstSchemes[' + count + '].Saving" type="text"></td>'
+                    + '<td class= "dt-center"><input class="span12 DealScheme" id="lstSchemes_' + count + '__DealScheme" name="lstSchemes[' + count + '].DealScheme" type="text"></td>'
                     + '<td class="dt-center">'
                     + '<button id="btnRemove" type="button" class="btn" style="color:red;font-size:large;font-weight:bold;" onclick="RemoveRow(this);"><span>X</span></button>'
                     + '</td></tr>');
                 $('#myGrid tbody:eq(0) tr:last').find('.SchemeTypeId').select2();
-                //count = parseInt($("tr.rowCount").length - 1);
-                count += 1;
-                srno();
+                // srno();
             });
         });
 
         function srno() {
             $('tr.rowCount').each(function (i) {
                 var count = parseInt((i + 1) - 1);
-                $(this).find('.SchemeTypeId').attr('name', 'lstSchemes[' + count + '].SchemeTypeId');
-                $(this).find('input.MinOrderQuantity').attr('name', 'lstSchemes[' + count + '].MinOrderQuantity');
-                $(this).find('input.DealRate').attr('name', 'lstSchemes[' + count + '].DealRate');
-                $(this).find('input.Saving').attr('name', 'lstSchemes[' + count + '].Saving');
-                $(this).find('input.DealScheme').attr('name', 'lstSchemes[' + count + '].DealScheme');
+                $(this).find(".SchemeTypeId").removeAttr("name");
+                $(this).find(".SchemeTypeId").attr("name", "lstSchemes[" + count + "].SchemeTypeId");
+                $(this).find("input.MinOrderQuantity").removeAttr("name");
+                $(this).find("input.MinOrderQuantity").attr("name", "lstSchemes[" + count + "].MinOrderQuantity");
+                $(this).find("input.DealRate").removeAttr("name");
+                $(this).find("input.DealRate").attr("name", "lstSchemes[" + count + "].DealRate");
+                $(this).find("input.Saving").removeAttr("name");
+                $(this).find("input.Saving").attr("name", "lstSchemes[" + count + "].Saving");
+                $(this).find("input.DealScheme").removeAttr("name");
+                $(this).find("input.DealScheme").attr("name", "lstSchemes[" + count + "].DealScheme");
                 //$(this).find('span.itemCount:eq(0)').html(count);
             });
         }
@@ -412,13 +417,6 @@
                 $("#PTR").val('');
             }
         }
-
-        //function cal_Amount(elem) {
-        //    $(elem).parent().parent().parent().find(".txt_total_mtrs").val(((isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_extra_febric").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_extra_febric").val())) + (isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_printed_mtrs").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_printed_mtrs").val()))).toFixed(2));
-        //    $(elem).parent().parent().parent().find(".txt_printed_pcs").val(((isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_defect_pcs").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_defect_pcs").val())) + (isNaN(parseFloat($(elem).parent().parent().parent().find(".txt_fresh_pcs").val())) ? 0 : parseFloat($(elem).parent().parent().parent().find(".txt_fresh_pcs").val()))).toFixed(0));
-        //    cal_Total();
-        //}
-
     </script>
     @*=== jQeury Gritter, a growl-like notifications ===*@
 

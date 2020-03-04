@@ -19,6 +19,7 @@ namespace ChemiFriend.Data.DataContext
 
         public DbSet<Usermaster> Usermasters { get; set; }
         public DbSet<Registration> Registrations { get; set; }
+        public DbSet<LicenceImages> LicenceImages { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductSubCategory> ProductSubCategories { get; set; }
         public DbSet<Product> Products { get; set; }

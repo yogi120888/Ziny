@@ -35,6 +35,11 @@
         });
     </script>
     <!-- start-smoth-scrolling -->
+    <style>
+        .w3view-cart {
+            background: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,7 +74,8 @@
                 <form action="#" method="post" class="last">
                     <input type="hidden" name="cmd" value="_cart">
                     <input type="hidden" name="display" value="1">
-                    <button class="w3view-cart" type="button" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true">&nbsp;[<span id="CartCount">0</span>]</i></button>
+                    @*<button class="w3view-cart" type="button" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true">&nbsp;[<span id="CartCount">0</span>]</i></button>*@
+                    <a href="@Url.Action("MyOrder", "Account")" class="w3view-cart"><i class="fa fa-cart-arrow-down" aria-hidden="true">&nbsp;[<span id="CartCount">0</span>]</i></a>
                 </form>
             </div>
             <div class="clearfix"> </div>

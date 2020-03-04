@@ -11,5 +11,6 @@ namespace ChemiFriend.Data.IRepository
         IQueryable<GetDealModel> GetDealList();
         IQueryable<GetDealModel> GetDealDetailsById(Int64 dealId);
         IQueryable<GetSchemeWithDealModel> GetSchemeWithDeal();
+        IQueryable<OrderDetailModel> GetOrderDetail();
     }
 }

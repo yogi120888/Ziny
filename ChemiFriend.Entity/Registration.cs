@@ -16,7 +16,6 @@ namespace ChemiFriend.ENTITY
         public Usermaster Usermasters { get; set; }
         public string FirmName { get; set; }
         public string LicenceNo { get; set; }
-        public string LicenceImage { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNo { get; set; }

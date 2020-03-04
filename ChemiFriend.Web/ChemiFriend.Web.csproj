@@ -733,6 +733,7 @@
     <Content Include="Views\Account\GetProductList.cshtml" />
     <Content Include="Views\Account\_GetProductList.cshtml" />
     <Content Include="Views\Account\_NewOffers.cshtml" />
+    <Content Include="Views\Account\MyOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -77,6 +77,11 @@
             $("#CartCount").html(_count);
             return false;
         }
+        var _userId = $(elm).parent().find('.UserId').val();
+        if (parseInt(_userId) <= 0) {
+            alert('You will have to do login firstly.');
+            return;
+        }
         $(elm).val('Added');
         $(elm).attr("disabled", "disabled");
 
