@@ -46,7 +46,7 @@ namespace ChemiFriend.API.Controllers
 
             var model = Mapper.Map<DealModel, Deal>(dealModel);
             model.CreatedDate = DateTime.Now;
-            model.Status = 0;
+            model.Status = (int)Status.Created;
             model.IsDeleted = false;
 
             _dealRepository.Add(model);
@@ -66,7 +66,7 @@ namespace ChemiFriend.API.Controllers
                         objScheme.DealRate = item.DealRate;
                         objScheme.Saving = item.Saving;
                         objScheme.DealScheme = item.DealScheme;
-                        objScheme.Status = (int)Status.New;
+                        objScheme.Status = (int)Status.Created;
                         objScheme.IsDeleted = false;
                         objScheme.CreatedBy = item.CreatedBy;
                         objScheme.CreatedDate = DateTime.Now;

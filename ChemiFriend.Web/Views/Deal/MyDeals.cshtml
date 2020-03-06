@@ -2,7 +2,7 @@
 @using System.Configuration;
 
 @{
-    ViewBag.Title = "GetDealList";
+    ViewBag.Title = "MyDeals";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
     string ListStatus = @ViewBag.ListStatus;
@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
-                <h5>@ListStatus DEAL LIST</h5>
+                <h5>MY DEAL LIST</h5>
                 <div>
                     <table id="myGrid" class="table">
                         <thead>
@@ -31,7 +31,6 @@
                                 <th class="dt-center">Start Date</th>
                                 <th class="dt-center">End Date</th>
                                 <th class="dt-center">Expiry Date</th>
-                                <th class="dt-center">Created By</th>
                                 <th class="dt-center">Staus</th>
                                 <th class="dt-center">Action</th>
                             </tr>
@@ -51,7 +50,6 @@
                                     <td class="dt-center">@Convert.ToDateTime(item.DealStartDate).ToString("dd MMM yyyy")</td>
                                     <td class="dt-center">@Convert.ToDateTime(item.DealEndDate).ToString("dd MMM yyyy")</td>
                                     <td class="dt-center">@Convert.ToDateTime(item.ProductExpiryDate).ToString("dd MMM yyyy")</td>
-                                    <td class="dt-center">@item.User</td>
                                     <td class="dt-center">
                                         @if (item.Status == (int)ChemiFriend.Utility.Status.Active)
                                         {
@@ -82,8 +80,6 @@
                                                 else
                                                 {
                                                     <li><a target="_blank" href="@Url.Action("GetSchemeList", "Deal", new { DealId=item.DealId })">View Schemes</a></li>
-                                                    <li><a onclick="IsApprove(this);" id="@item.DealId">Approve</a></li>
-                                                    <li><a onclick="IsDeactivate(this);" id="@item.DealId">Deactivate</a></li>
                                                 }
                                             </ul>
                                         </div>
@@ -105,7 +101,7 @@
             $('#myGrid').DataTable({});
         });
 
-        //  Approve confirmation PopUp
+        // Approve confirmation PopUp
         function IsApprove(elm)
         {
             var TranId = $(elm).attr("id");
@@ -114,35 +110,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "@Url.Action("ApproveDeal", "Deal")",
-                    data: '{Id: "' + TranId + '" }',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (resp) {
-                        if (resp.Type == 'success')
-                        {
-                            var msg = resp.Message;
-                            GritterNoteSuccess(msg)
-                            //window.location.href = window.location.href;
-                        }
-                    },
-                    error: function (resp) {
-                        alert(resp.RespMessage);
-                    }
-                });
-            }
-        }
-
-        //  Deactivate confirmation PopUp
-        function IsDeactivate(elm)
-        {
-            var TranId = $(elm).attr("id");
-            var con = confirm("Are you sure you want to deactivate this ?");
-            if (con) {
-
-                $.ajax({
-                    type: "POST",
-                    url: "@Url.Action("DeacivateDeal", "Deal")",
+                    url: "@Url.Action("Approve--Deal", "Deal")",
                     data: '{Id: "' + TranId + '" }',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -162,4 +130,3 @@
         }
     </script>
 }
-

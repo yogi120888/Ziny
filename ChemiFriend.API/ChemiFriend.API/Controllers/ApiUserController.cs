@@ -133,13 +133,6 @@ namespace ChemiFriend.API.Controllers
                         List<string> uploadedFileName = SavePicture(UploadDocument);
                         if (uploadedFileName.Count > 0)
                         {
-                            //Registration _registration = _registrationRepository.FindBy(x => x.RegistrationId == Result.RegistrationId).FirstOrDefault();
-                            //if (_registration != null)
-                            //{
-                            //    _registration.LicenceImage = uploadedFileName[0].ToString();
-                            //    _registrationRepository.Update(_registration);
-                            //    _registrationRepository.SaveChanges();
-                            //}
                             LicenceImages licenceImages = new LicenceImages();
                             licenceImages.ImagePath = uploadedFileName[0].ToString();
                             licenceImages.RegistrationId = Result.RegistrationId;
@@ -153,12 +146,12 @@ namespace ChemiFriend.API.Controllers
                 // For Uploading image ----
                 if (registrationModel.DocGSTNo != null)
                 {
-                    UploadDocumentModel UploadDocument = new UploadDocumentModel();
-                    UploadDocument.documents = new List<DocumentModel>();
-                    UploadDocument.ImageSize = 250;
-                    UploadDocument.ImageQuality = 250;
-                    UploadDocument.documents.Add(registrationModel.DocGSTNo);
-                    List<string> uploadedFileName = SavePicture(UploadDocument);
+                    UploadDocumentModel UploadDocumentGSTNo = new UploadDocumentModel();
+                    UploadDocumentGSTNo.documents = new List<DocumentModel>();
+                    UploadDocumentGSTNo.ImageSize = 250;
+                    UploadDocumentGSTNo.ImageQuality = 250;
+                    UploadDocumentGSTNo.documents.Add(registrationModel.DocGSTNo);
+                    List<string> uploadedFileName = SavePicture(UploadDocumentGSTNo);
                     if (uploadedFileName.Count > 0)
                     {
                         Registration _registration = _registrationRepository.FindBy(x => x.RegistrationId == Result.RegistrationId).FirstOrDefault();
@@ -221,46 +214,56 @@ namespace ChemiFriend.API.Controllers
             var IsResponse = _registrationRepository.UpdateUserProfile(_registration);
             if (IsResponse)
             {
-                // For Uploading Licence image ----
-                foreach (var item in registrationModel.lstDocLicence)
+                if (_registration != null)
                 {
-                    if (registrationModel.lstDocLicence != null)
+                    var lstImages = _licenceImagesReposiory.FindBy(x => x.RegistrationId == _registration.RegistrationId && x.IsActive == true).ToList();
+                    if (lstImages.Count > 0)
                     {
-                        UploadDocumentModel UploadDocument = new UploadDocumentModel();
-                        UploadDocument.documents = new List<DocumentModel>();
-                        UploadDocument.ImageSize = 250;
-                        UploadDocument.ImageQuality = 250;
-                        UploadDocument.documents.Add(item);
-                        List<string> uploadedFileName = SavePicture(UploadDocument);
-                        if (uploadedFileName.Count > 0)
+                        foreach (var _images in lstImages)
                         {
-                            //if (_registration != null)
-                            //{
-                            //    // delete exiting images
-                            //    string ImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + _registration.LicenceImage);
-                            //    if (System.IO.File.Exists(ImgPath))
-                            //    {
-                            //        System.IO.File.Delete(ImgPath);
-                            //    }
-                            //    string ImgOriginalPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "Original_" + _registration.LicenceImage);
-                            //    if (System.IO.File.Exists(ImgOriginalPath))
-                            //    {
-                            //        System.IO.File.Delete(ImgOriginalPath);
-                            //    }
-                            //    string TImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "T" + _registration.LicenceImage);
-                            //    if (System.IO.File.Exists(TImgPath))
-                            //    {
-                            //        System.IO.File.Delete(TImgPath);
-                            //    }
-                            //    //------------------------------
+                            // delete exiting images
+                            string ImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + _images.ImagePath);
+                            if (System.IO.File.Exists(ImgPath))
+                            {
+                                System.IO.File.Delete(ImgPath);
+                            }
+                            string ImgOriginalPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "Original_" + _images.ImagePath);
+                            if (System.IO.File.Exists(ImgOriginalPath))
+                            {
+                                System.IO.File.Delete(ImgOriginalPath);
+                            }
+                            string TImgPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/UploadImg/" + "T" + _images.ImagePath);
+                            if (System.IO.File.Exists(TImgPath))
+                            {
+                                System.IO.File.Delete(TImgPath);
+                            }
 
-                            //    LicenceImages licenceImages = new LicenceImages();
-                            //    licenceImages.ImagePath = uploadedFileName[0].ToString();
-                            //    licenceImages.RegistrationId = _registration.RegistrationId;
-                            //    licenceImages.IsActive = true;
-                            //    _licenceImagesReposiory.Add(licenceImages);
-                            //    _licenceImagesReposiory.SaveChanges();
-                            //}
+                            // Delete exting rows from LicenceImages table
+                            _licenceImagesReposiory.Delete(_images);
+                            _licenceImagesReposiory.SaveChanges();
+                        }
+                    }
+
+                    // For Uploading Licence image ----
+                    foreach (var item in registrationModel.lstDocLicence)
+                    {
+                        if (item != null)
+                        {
+                            UploadDocumentModel UploadDocument = new UploadDocumentModel();
+                            UploadDocument.documents = new List<DocumentModel>();
+                            UploadDocument.ImageSize = 250;
+                            UploadDocument.ImageQuality = 250;
+                            UploadDocument.documents.Add(item);
+                            List<string> uploadedFileName = SavePicture(UploadDocument);
+                            if (uploadedFileName.Count > 0)
+                            {
+                                LicenceImages licenceImages = new LicenceImages();
+                                licenceImages.ImagePath = uploadedFileName[0].ToString();
+                                licenceImages.RegistrationId = _registration.RegistrationId;
+                                licenceImages.IsActive = true;
+                                _licenceImagesReposiory.Add(licenceImages);
+                                _licenceImagesReposiory.SaveChanges();
+                            }
                         }
                     }
                 }

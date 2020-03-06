@@ -19,7 +19,7 @@ namespace ChemiFriend.Utility
 
     public enum Status
     {
-        New = 0,
+        Created = 0,
         Active = 1,
         Deactive = 2,
         InActive = 3 //ReadyToActive

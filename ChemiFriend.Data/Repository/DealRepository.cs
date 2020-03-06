@@ -38,6 +38,8 @@ namespace ChemiFriend.Data.Repository
                          join fo in _entities.FormTypes on de.FormType equals fo.FormTypeId
                          join pt in _entities.PackTypes on de.PackType equals pt.PackTypeId
                          join ga in _entities.GSTApplicables on de.GST equals ga.GSTApplicableId
+                         join daf in _entities.DealApplicableFors on de.DealApplicableFor equals daf.DealApplicableForId
+                         join um in _entities.Usermasters on de.CreatedBy equals um.UserId
                          where de.IsDeleted == false
                          select new GetDealModel
                          {
@@ -45,6 +47,7 @@ namespace ChemiFriend.Data.Repository
                              DealType = de.DealType,
                              DealTypeName = dt.DealTypeName,
                              DealApplicableForId = de.DealApplicableFor,
+                             DealApplicableFor = daf.Applicable,
                              ProductCategory = pc.ProductCategoryName,
                              ProductSubCategoryId = pr.ProductSubCategoryId.Value,
                              ProductSubCategory = ps.ProductSubCategoryName,
@@ -80,6 +83,35 @@ namespace ChemiFriend.Data.Repository
                              ModifiedDate = de.ModifiedDate,
                              DealEndDays = de.DealEndDate.Day - de.DealStartDate.Day,
                              DealEndHours = de.DealEndDate.Hour - de.DealStartDate.Hour,
+                             User = um.Name + "(" + um.Phone + ")"
+                         });
+            return query;
+        }
+
+        public IQueryable<GetSchemeModel> GetSchemeList()
+        {
+            var query = (from sc in _entities.Schemes
+                         join st in _entities.SchemeTypes on sc.SchemeTypeId equals st.SchemeTypeId
+                         join um in _entities.Usermasters on sc.CreatedBy equals um.UserId
+                         where sc.IsDeleted == false && sc.Status == (int)Status.Active
+                         select new GetSchemeModel
+                         {
+                             SchemeId = sc.SchemeId,
+                             DealId = sc.DealId,
+                             SchemeTypeId = sc.SchemeTypeId,
+                             SchemeType = st.SchemeTypeName,
+                             MinOrderQuantity = sc.MinOrderQuantity,
+                             Discount = sc.Discount,
+                             DealRate = sc.DealRate,
+                             Saving = sc.Saving,
+                             DealScheme = sc.DealScheme,
+                             Status = sc.Status,
+                             IsDeleted = sc.IsDeleted,
+                             CreatedBy = sc.CreatedBy,
+                             CreatedDate = sc.CreatedDate,
+                             ModifiedBy = sc.ModifiedBy,
+                             ModifiedDate = sc.ModifiedDate,
+                             User = um.Name + "(" + um.Phone + ")"
                          });
             return query;
         }
@@ -186,10 +218,10 @@ namespace ChemiFriend.Data.Repository
                          select new OrderDetailModel
                          {
                              DealId = dl.DealId,
-                             ProductId =pr.ProductId,
-                             Product =pr.ProductName,
-                             ProductImagePath =pr.ProductImagePath,
-                             SchemeId =sc.SchemeId,
+                             ProductId = pr.ProductId,
+                             Product = pr.ProductName,
+                             ProductImagePath = pr.ProductImagePath,
+                             SchemeId = sc.SchemeId,
                              Scheme = sc.DealScheme,
                              DealPrice = dl.PTR,
                          });

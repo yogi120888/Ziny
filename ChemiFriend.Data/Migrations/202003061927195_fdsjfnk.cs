@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class fsdkfldsyy : DbMigration
+    public partial class fdsjfnk : DbMigration
     {
         public override void Up()
         {
@@ -13,15 +13,19 @@
                     {
                         ImageId = c.Long(nullable: false, identity: true),
                         ImagePath = c.String(),
-                        LicenceId = c.Long(nullable: false),
-                        IsActive = c.Boolean(nullable: true),
+                        RegistrationId = c.Long(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ImageId);
             
+            AlterColumn("dbo.Deals", "ApplicableTaxType", c => c.Int());
+            DropColumn("dbo.Registrations", "LicenceImage");
         }
         
         public override void Down()
         {
+            AddColumn("dbo.Registrations", "LicenceImage", c => c.String());
+            AlterColumn("dbo.Deals", "ApplicableTaxType", c => c.Int(nullable: false));
             DropTable("dbo.LicenceImages");
         }
     }

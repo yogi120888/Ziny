@@ -20,6 +20,7 @@ namespace ChemiFriend.Entity.JsonModel
         public byte Status { get; set; }
         public bool IsDeleted { get; set; }
         public Int64 CreatedBy { get; set; }
+        public string User { get; set; }
         public DateTime CreatedDate { get; set; }
         public Int64? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }

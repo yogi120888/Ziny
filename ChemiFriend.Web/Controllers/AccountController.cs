@@ -40,6 +40,7 @@ namespace ChemiFriend.Web.Controllers
         IProductCategoryRepository _productCategoryRepository;
         IProductSubCategoryRepository _productSubCategoryRepository;
         IProductRepository _productRepository;
+        ILicenceImagesReposiory _licenceImagesReposiory;
 
         public AccountController()
         {
@@ -51,6 +52,7 @@ namespace ChemiFriend.Web.Controllers
             _productCategoryRepository = new ProductCategoryRepository();
             _productSubCategoryRepository = new ProductSubCategoryRepository();
             _productRepository = new ProductRepository();
+            _licenceImagesReposiory = new LicenceImagesReposiory();
         }
 
         #region[Public Method]
@@ -340,7 +342,7 @@ namespace ChemiFriend.Web.Controllers
                     {
                         return RedirectToAction("RequestForApproving", "Account");
                     }
-                    else if (registrationDetails == null && user.Status == (int)Status.New)
+                    else if (registrationDetails == null && user.Status == (int)Status.Created)
                     {
                         return RedirectToAction("CreateRegistration", "Account");
                     }
@@ -606,7 +608,8 @@ namespace ChemiFriend.Web.Controllers
             RegistrationModel registrationModel = new RegistrationModel();
             Registration registration = _registrationRepository.FindBy(x => x.UserId == Id).FirstOrDefault();
             var model = Mapper.Map<Registration, RegistrationModel>(registration);
-
+            // Get imaglistes 
+            ViewBag.ImagesList = _licenceImagesReposiory.FindBy(x => x.RegistrationId == registration.RegistrationId && x.IsActive == true).ToList();
             return View(model);
         }
 
@@ -643,18 +646,25 @@ namespace ChemiFriend.Web.Controllers
                 try
                 {
                     // Image byte converter
-                    if (LicenceImage != null)
+                    if (LicenceImage != null && LicenceImage.Count() > 0)
                     {
-                        //registrationModel.DocLicence = new DocumentModel();
-                        //using (var memoryStream = new MemoryStream())
-                        //{
-                        //    LicenceImage.InputStream.CopyTo(memoryStream);
-                        //    byte[] imageBytes = memoryStream.ToArray();
-                        //    registrationModel.DocLicence.Filebytes = imageBytes;
-                        //    registrationModel.DocLicence.FileName = LicenceImage.FileName;
-                        //    registrationModel.DocLicence.FileExtenstion = Path.GetExtension(LicenceImage.FileName);
-                        //}
+                        List<DocumentModel> _lstLicence = new List<DocumentModel>();
+                        foreach (var item in LicenceImage)
+                        {
+                            DocumentModel _Licence = new DocumentModel();
+                            using (var memoryStream = new MemoryStream())
+                            {
+                                item.InputStream.CopyTo(memoryStream);
+                                byte[] imageBytes = memoryStream.ToArray();
+                                _Licence.Filebytes = imageBytes;
+                                _Licence.FileName = item.FileName;
+                                _Licence.FileExtenstion = Path.GetExtension(item.FileName);
+                            }
+                            _lstLicence.Add(_Licence);
+                        }
+                        registrationModel.lstDocLicence = _lstLicence;
                     }
+
                     // Image byte converter
                     if (GSTNoImage != null)
                     {

@@ -74,17 +74,9 @@
     <Compile Include="IRepository\ISchemeRepository.cs" />
     <Compile Include="IRepository\IShipmentRepository.cs" />
     <Compile Include="IRepository\IUserMasterRepository.cs" />
-    <Compile Include="Migrations\202003041756350_fsdkfldsyy.cs" />
-    <Compile Include="Migrations\202003041756350_fsdkfldsyy.designer.cs">
-      <DependentUpon>202003041756350_fsdkfldsyy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003041759561_fsdkfldsyyuu.cs" />
-    <Compile Include="Migrations\202003041759561_fsdkfldsyyuu.designer.cs">
-      <DependentUpon>202003041759561_fsdkfldsyyuu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003041903331_fsdkfldsyyt.cs" />
-    <Compile Include="Migrations\202003041903331_fsdkfldsyyt.designer.cs">
-      <DependentUpon>202003041903331_fsdkfldsyyt.cs</DependentUpon>
+    <Compile Include="Migrations\202003061927195_fdsjfnk.cs" />
+    <Compile Include="Migrations\202003061927195_fdsjfnk.designer.cs">
+      <DependentUpon>202003061927195_fdsjfnk.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,14 +110,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003041756350_fsdkfldsyy.resx">
-      <DependentUpon>202003041756350_fsdkfldsyy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003041759561_fsdkfldsyyuu.resx">
-      <DependentUpon>202003041759561_fsdkfldsyyuu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003041903331_fsdkfldsyyt.resx">
-      <DependentUpon>202003041903331_fsdkfldsyyt.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003061927195_fdsjfnk.resx">
+      <DependentUpon>202003061927195_fdsjfnk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

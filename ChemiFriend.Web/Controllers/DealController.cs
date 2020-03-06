@@ -1,5 +1,6 @@
 ﻿using ChemiFriend.Data.IRepository;
 using ChemiFriend.Data.Repository;
+using ChemiFriend.Entity.JsonModel;
 using ChemiFriend.Models;
 using ChemiFriend.Utility;
 using ChemiFriend.Web.Filters;
@@ -182,6 +183,60 @@ namespace ChemiFriend.Web.Controllers
         }
 
         /// <summary>
+        /// Get Deal List
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GetDealList(int Id)
+        {
+            List<GetDealModel> models = new List<GetDealModel>();
+            string ListStatus = string.Empty;
+            if (Id == (int)Status.Active)
+            {
+                ListStatus = "APPROVED";
+                models = _dealRepository.GetDealList().Where(x => x.Status == (int)Status.Active && x.IsDeleted == false).ToList();
+            }
+            else if (Id == (int)Status.Deactive)
+            {
+                ListStatus = "DEACTIVE";
+                models = _dealRepository.GetDealList().Where(x => x.Status == (int)Status.Deactive && x.IsDeleted == false).ToList();
+            }
+            else
+            {
+                ListStatus = "UN-APPROVED";
+                models = _dealRepository.GetDealList().Where(x => x.Status == (int)Status.Created && x.IsDeleted == false).ToList();
+            }
+            ViewBag.ListStatus = ListStatus;
+            return View(models);
+        }
+
+        /// <summary>
+        /// Get Scheme List
+        /// </summary>
+        /// <param name="DealId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GetSchemeList(int DealId)
+        {
+            var lstScheme = _dealRepository.GetSchemeList().Where(x => x.DealId == DealId && x.Status == (int)Status.Active && x.IsDeleted == false).ToList();
+            return View(lstScheme);
+        }
+
+        /// <summary>
+        /// My Deals
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult MyDeals()
+        {
+            List<GetDealModel> models = new List<GetDealModel>();
+            models = _dealRepository.GetDealList().Where(x => x.CreatedBy == UserAuthenticate.UserId && x.Status == (int)Status.Active && x.IsDeleted == false).ToList();
+
+            return View(models);
+        }
+
+
+        /// <summary>
         /// Get Deal Detail
         /// </summary>
         /// <returns></returns>
@@ -194,6 +249,61 @@ namespace ChemiFriend.Web.Controllers
             return View(deails);
         }
 
+        /// <summary>
+        /// Approve Deal
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ApproveDeal(Int64 Id)
+        {
+            ResponseModel _response = new ResponseModel();
+            var details = _dealRepository.FindBy(x => x.DealId == Id).FirstOrDefault();
+            details.Status = (int)Status.Active;
+            details.ModifiedDate = DateTime.Now;
+            details.ModifiedBy = UserAuthenticate.UserId;
+            bool IsTrue = _dealRepository.Update(details);
+            _dealRepository.SaveChanges();
+            if (IsTrue)
+            {
+                _response.Type = "success";
+                _response.Message = "Deal approved successfully";
+            }
+            else
+            {
+                _response.Type = "error";
+                _response.Message = "Somehing went wrong";
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Deacivate Deal
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult DeacivateDeal(Int64 Id)
+        {
+            ResponseModel _response = new ResponseModel();
+            var details = _dealRepository.FindBy(x => x.DealId == Id).FirstOrDefault();
+            details.Status = (int)Status.Deactive;
+            details.ModifiedDate = DateTime.Now;
+            details.ModifiedBy = UserAuthenticate.UserId;
+            bool IsTrue = _dealRepository.Update(details);
+            _dealRepository.SaveChanges();
+            if (IsTrue)
+            {
+                _response.Type = "success";
+                _response.Message = "Deal deactivated successfully";
+            }
+            else
+            {
+                _response.Type = "error";
+                _response.Message = "Somehing went wrong";
+            }
+            return Json(_response, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 

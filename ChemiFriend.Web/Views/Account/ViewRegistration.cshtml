@@ -5,6 +5,8 @@
     ViewBag.Title = "ViewRegistration";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+    var lstLicenceImages = ViewBag.ImagesList as List<ChemiFriend.Entity.LicenceImages>;
+    int count = 0;
 }
 
 @using (Html.BeginForm("ViewRegistration", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
@@ -42,15 +44,18 @@
                                 <div class="control-group">
                                     <label class="control-label">Download Licence Image</label>
                                     <div class="controls">
-                                        @*@Html.TextBoxFor(x => x.LicenceImage, new { @type = "file", @class = "span11" })*@
-                                        @if (string.IsNullOrEmpty(Model.LicenceImage))
+                                        @if (lstLicenceImages.Count > 0)
                                         {
-                                            <text><span style="color:red">No Image Available</span></text>
+                                            foreach (var _images in lstLicenceImages)
+                                            {
+                                                count += 1;
+                                                string _licenceImage = BaseUrl + "Images/UploadImg/" + _images.ImagePath;
+                                                <tex>@count</tex> <a href="@_licenceImage" target="_blank">Download</a><br />
+                                            }
                                         }
                                         else
                                         {
-                                            string _licenceImage = BaseUrl + "Images/UploadImg/" + Model.LicenceImage;
-                                            <a href="@_licenceImage" target="_blank">Download</a>
+                                            <text><span style="color:red">No Image Available</span></text>
                                         }
                                     </div>
                                 </div>
