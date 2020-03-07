@@ -5,6 +5,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+    var lstCart = (List<ChemiFriend.Entity.JsonModel.AddToCartModel>)Session["cart"];
 }
 
 <link href="~/Content/w3layouts/css/IndexCss.css" rel="stylesheet" />
@@ -38,7 +39,6 @@
 
     $(function () {
         Search();
-        AddToCart("load");
     });
 
     function IsActive(elm) {
@@ -72,11 +72,7 @@
 </script>
 <script type="text/javascript">
     function AddToCart(elm) {
-        if (elm == "load") {
-            var _count = @Convert.ToInt32(Session["count"]);
-            $("#CartCount").html(_count);
-            return false;
-        }
+
         var _userId = $(elm).parent().find('.UserId').val();
         if (parseInt(_userId) <= 0) {
             alert('You will have to do login firstly.');

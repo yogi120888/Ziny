@@ -58,24 +58,18 @@
                         <td class="invert">@item.Scheme</td>
                         <td class="invert">@item.DealPrice</td>
                         <td class="invert">
-                            <div class="rem">
-                                <div class="close1"> </div>
-                            </div>
-                            <script>
-                                $(document).ready(function (c) {
-                                    $('.close1').on('click', function (c) {
-                                        $('.rem1').fadeOut('slow', function (c) {
-                                            $('.rem1').remove();
-                                        });
-                                    });
-                                });
-                            </script>
+                            <a href="@Url.Action("RemoveItem", "Account", new { DealId = item.DealId })">
+                                <div class="rem">
+                                    <div class="close1">
+                                    </div>
+                                </div>
+                            </a>
                         </td>
                     </tr>
                 }
 
                 <!--quantity-->
-                <script>
+                <script type="text/javascript">
                     $('.value-plus').on('click', function () {
                         var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
                         divUpd.text(newVal);

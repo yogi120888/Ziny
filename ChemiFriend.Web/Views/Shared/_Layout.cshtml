@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    int cartItemCount = 0;
+    cartItemCount = Convert.ToInt32(Session["count"]);
+}
+<!DOCTYPE html>
 <html>
 <head>
     <title>ZIN OF PROFIT</title>
@@ -75,7 +79,7 @@
                     <input type="hidden" name="cmd" value="_cart">
                     <input type="hidden" name="display" value="1">
                     @*<button class="w3view-cart" type="button" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true">&nbsp;[<span id="CartCount">0</span>]</i></button>*@
-                    <a href="@Url.Action("MyOrder", "Account")" class="w3view-cart"><i class="fa fa-cart-arrow-down" aria-hidden="true">&nbsp;[<span id="CartCount">0</span>]</i></a>
+                    <a href="@Url.Action("MyOrder", "Account")" class="w3view-cart"><i class="fa fa-cart-arrow-down" aria-hidden="true">&nbsp;[<span id="CartCount">@cartItemCount</span>]</i></a>
                 </form>
             </div>
             <div class="clearfix"> </div>

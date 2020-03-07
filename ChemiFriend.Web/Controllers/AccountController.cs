@@ -182,7 +182,10 @@ namespace ChemiFriend.Web.Controllers
             }
         }
 
-        [AllowAnonymous]
+        /// <summary>
+        /// My order list
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult MyOrder()
         {
@@ -204,6 +207,22 @@ namespace ChemiFriend.Web.Controllers
             }
             return View(objModel);
         }
+
+        /// <summary>
+        /// Remove Item from cart list
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult RemoveItem(Int64 DealId)
+        {
+            List<AddToCartModel> li = (List<AddToCartModel>)Session["cart"];
+            li.RemoveAll(x => x.DealId == DealId);
+            Session["cart"] = li;
+            Session["count"] = Convert.ToInt32(Session["count"]) - 1;
+            return RedirectToAction("MyOrder", "Account");
+        }
+
 
         /// <summary>
         /// LIST OF COMPANIES
