@@ -7,13 +7,13 @@ namespace ChemiFriend.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class fdsjfnk : IMigrationMetadata
+    public sealed partial class fbhsjfsiyy : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fdsjfnk));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fbhsjfsiyy));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003061927195_fdsjfnk"; }
+            get { return "202003150748352_fbhsjfsiyy"; }
         }
         
         string IMigrationMetadata.Source

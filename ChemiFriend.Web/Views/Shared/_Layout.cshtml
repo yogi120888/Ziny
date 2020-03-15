@@ -95,7 +95,7 @@
                 </ul>
             </div>
             <div class="w3ls_logo_products_left">
-                <h1><a href="#">ChemiFriend</a></h1>
+                <h1><a href="#">ZINY</a></h1>
             </div>
             <div class="w3l_search" style="display:block;">
                 @*To Do*@
@@ -118,7 +118,7 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header nav_2">
                     <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -130,20 +130,39 @@
                         @if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Admin || ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Distributor)
                         {
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Deal<b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">MANAGE DEAL<b class="caret"></b></a>
                                 <ul class="dropdown-menu multi-column columns-3">
                                     <div class="row">
                                         <div class="multi-gd-img">
                                             <ul class="multi-column-dropdown">
                                                 <h6></h6>
                                                 <li><a href="@Url.Action("CreateDeal", "Deal")">Create Deal</a></li>
-                                                <li><a href="@Url.Action("MyDeals", "Deal")">My Deals</a></li>
+                                                <li><a href="@Url.Action("MyDeals", "Deal")">My Deals List</a></li>
+                                                <li><a href="@Url.Action("OrderItemsList", "Order")">Sell Products</a></li>
+                                                <li><a href="@Url.Action("OrderItemsList", "Order", new { AsCustomer="yes"})">Purchase as Customer</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </ul>
                             </li>
                         }
+                        @if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Admin || ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Retrailer)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">MY ORDERS<b class="caret"></b></a>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="row">
+                                        <div class="multi-gd-img">
+                                            <ul class="multi-column-dropdown">
+                                                <h6></h6>
+                                                <li><a href="@Url.Action("OrderItemsList", "Order")">My Orders</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </li>
+                        }
+
                         <li><a href="@Url.Action("About", "Home")">About</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Category<b class="caret"></b></a>

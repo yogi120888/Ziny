@@ -1,21 +1,13 @@
-﻿using ChemiFriend.ENTITY;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace ChemiFriend.Entity
+namespace ChemiFriend.Web.Models.InputModel
 {
-    public class OrderItem : BaseEntity
+    public class OrderItemModel
     {
-        [Key]
         public Int64 OrderItemId { get; set; }
-        public Int64 OrderId { get; set; }
-        //[ForeignKey("OrderId")]
-        //public OrderItem Orders { get; set; }
         public Int64 UserId { get; set; } // Customer Id
         public Int64 DealId { get; set; }
         public Int64 ProductId { get; set; }
@@ -23,5 +15,11 @@ namespace ChemiFriend.Entity
         public int OrderItemQuantity { get; set; }
         public decimal OrderItemUnitPrice { get; set; }
         public string OrderItemSchemes { get; set; }
+        public byte Status { get; set; } = 0;
+        public bool IsDeleted { get; set; }
+        public Int64 CreatedBy { get; set; } = 0;
+        public DateTime CreatedDate { get; set; }
+        public Int64? ModifiedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

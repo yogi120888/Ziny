@@ -12,10 +12,10 @@ namespace ChemiFriend.Entity
     {
         [Key]
         public Int64 OrderId { get; set; }
-        public Int64 UserId { get; set; }
-        [ForeignKey("UserId")]
-        public Usermaster Usermasters { get; set; }
-        public DateTime DateOrderPlaced { get; set; }
-        public string OrderDetails { get; set; }
+        public Int64 UserId { get; set; } // Customer Id
+        public decimal GrandTotal { get; set; }
+        public byte PaymentStatus { get; set; }
+        [ForeignKey("OrderId")]
+        public List<OrderItem> orderItems { get; set; }
     }
 }

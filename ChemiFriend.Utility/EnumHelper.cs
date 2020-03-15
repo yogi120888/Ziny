@@ -11,6 +11,7 @@ namespace ChemiFriend.Utility
         Distributor = 2,
         Retrailer = 3
     }
+
     public enum CommonBinding
     {
         State = 1,
@@ -25,9 +26,25 @@ namespace ChemiFriend.Utility
         InActive = 3 //ReadyToActive
     }
 
+    public enum PaymentStatus
+    {
+        Failed = 0,
+        Successed = 1,
+        COD = 2 // Cash on Delivery
+    }
+
+    public enum OrderStatus
+    {
+        InActive = 0,
+        Placed = 1,
+        Shipped = 2, // Ready to delivery
+        Delivered = 3, // Completed
+        Cancel = 4
+    }
+
     public enum ApplicableTaxType
     {
-        DPCO = 1,  
+        DPCO = 1,
         NONDPCO = 2
     }
 
@@ -46,5 +63,4 @@ namespace ChemiFriend.Utility
         Nov = 11,
         Dec = 12,
     }
-
 }

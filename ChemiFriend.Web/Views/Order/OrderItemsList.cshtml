@@ -1,0 +1,169 @@
+﻿@model List<ChemiFriend.Entity.JsonModel.GetOrderItemModel>
+@using System.Configuration;
+@using ChemiFriend.Utility;
+
+@{
+    ViewBag.Title = "OrderItemList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string BaseUrl = ConfigurationManager.AppSettings["APIBaseUrl"].ToString();
+    string Role = ((ChemiFriend.Utility.Roles)ChemiFriend.Models.UserAuthenticate.Role).ToString();
+    int SrNo = 0;
+}
+
+<div id="content">
+    <div id="content-header">
+        <div style="float:right;margin-right:100px;margin-top: 5px;"><a href="#" class="btn btn-info" style="text-align:right;"></a></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                @if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Admin)
+                {
+                    <h5>CUSTOMER ORDER ITEM LIST</h5>
+                }
+                else
+                {
+                    <h5>@ChemiFriend.Models.UserAuthenticate.Name.ToUpper() ORDER ITEM LIST</h5>
+                }
+                <div>
+                    <table id="myGrid" class="table">
+                        <thead>
+                            <tr>
+                                <th class="dt-center">SNo.</th>
+                                <th class="dt-center">Customer</th>
+                                <th class="dt-center">Company</th>
+                                <th class="dt-center">Brand</th>
+                                <th class="dt-center">Product</th>
+                                <th class="dt-center">Scheme</th>
+                                <th class="dt-center">Quantity</th>
+                                <th class="dt-center">Unit Price</th>
+                                <th class="dt-center">Status</th>
+                                <th class="dt-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                SrNo += 1;
+                                <tr>
+                                    <td class="dt-center">@SrNo</td>
+                                    <td class="dt-center">@item.Retailer</td>
+                                    <td class="dt-center">@item.Company</td>
+                                    <td class="dt-center">@item.Brand</td>
+                                    <td class="dt-center">@item.Product</td>
+                                    <td class="dt-center">@item.Scheme</td>
+                                    <td class="dt-center">@item.OrderItemQuantity</td>
+                                    <td class="dt-center">@item.OrderItemUnitPrice</td>
+                                    @if (item.Status == (int)OrderStatus.Placed)
+                                    {
+                                        <td class="dt-center" style="color:orange;"><b>@((ChemiFriend.Utility.OrderStatus)item.Status)</b></td>
+                                    }
+                                    else if (item.Status == (int)OrderStatus.Shipped)
+                                    {
+                                        <td class="dt-center" style="color:darkgreen;"><b>@((ChemiFriend.Utility.OrderStatus)item.Status)</b></td>
+                                    }
+                                    else if (item.Status == (int)OrderStatus.Delivered)
+                                    {
+                                        <td class="dt-center" style="color:darkblue;"><b>@((ChemiFriend.Utility.OrderStatus)item.Status)</b></td>
+                                    }
+                                    else if (item.Status == (int)OrderStatus.Cancel)
+                                    {
+                                        <td class="dt-center" style="color:red;"><b>@((ChemiFriend.Utility.OrderStatus)item.Status)</b></td>
+                                    }
+                                    <td class="dt-center">
+                                        <div class="btn-group">
+                                            <button data-toggle="dropdown" class="btn btn-info dropdown-toggle">Action <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                @if (Role == "Admin")
+                                                {
+                                                    if (item.Status == (int)OrderStatus.Placed)
+                                                    {
+                                                        <li><a onclick="IsDelete(this);" id="@item.OrderItemId" status="@((int)ChemiFriend.Utility.OrderStatus.Shipped)" style="color:darkgreen;">Shipped</a></li>
+                                                        <li><a onclick="IsDelete(this);" id="@item.OrderItemId" status="@((int)ChemiFriend.Utility.OrderStatus.Cancel)" style="color:red;">Cancel</a></li>
+                                                    }
+                                                    else if (item.Status == (int)OrderStatus.Shipped)
+                                                    {
+                                                        <li><a onclick="IsDelete(this);" id="@item.OrderItemId" status="@((int)ChemiFriend.Utility.OrderStatus.Delivered)" style="color:darkblue;">Deliverd</a></li>
+                                                        <li><a onclick="IsDelete(this);" id="@item.OrderItemId" status="@((int)ChemiFriend.Utility.OrderStatus.Cancel)" style="color:red;">Cancel</a></li>
+                                                    }
+                                                    else if (item.Status == (int)OrderStatus.Delivered)
+                                                    {
+                                                        <li><text style="color:darkblue;">Order Deliverd</text></li>
+                                                    }
+                                                }
+                                                else if (Role == "Distributor")
+                                                {
+                                                    if (item.Status == (int)OrderStatus.Placed)
+                                                    {
+                                                        <li><a onclick="IsDelete(this);" id="@item.OrderItemId" status="@((int)ChemiFriend.Utility.OrderStatus.Shipped)" style="color:darkgreen;">Shipped</a></li>
+                                                    }
+                                                    else if (item.Status == (int)OrderStatus.Shipped)
+                                                    {
+                                                        <li><a onclick="IsDelete(this);" id="@item.OrderItemId" status="@((int)ChemiFriend.Utility.OrderStatus.Delivered)" style="color:darkblue;">Deliverd</a></li>
+                                                    }
+                                                    else if (item.Status == (int)OrderStatus.Delivered)
+                                                    {
+                                                        <li><text style="color:darkblue;">Order Deliverd</text></li>
+                                                    }
+                                                }
+                                                else if (Role == "Retrailer")
+                                                {
+                                                    if (item.Status == (int)OrderStatus.Placed || item.Status == (int)OrderStatus.Shipped)
+                                                    {
+                                                        <li><a onclick="IsDelete(this);" id="@item.OrderItemId" status="@((int)ChemiFriend.Utility.OrderStatus.Cancel)" style="color:red;">Cancel</a></li>
+                                                    }
+                                                    else if (item.Status == (int)OrderStatus.Delivered)
+                                                    {
+                                                        <li><text style="color:darkblue;">Order Deliverd</text></li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myGrid').DataTable({});
+        });
+
+        //  Delete confirmation PopUp
+        function IsDelete(elm)
+        {
+            var orderItemId = parseInt($(elm).attr("id"));
+            var status = parseInt($(elm).attr("status"));
+            var con = confirm("Are you sure you want to update status ?");
+            if (con) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UpdateOrderItemStatus", "Order")",
+                    data: '{OrderItemId: "' + orderItemId + '", Status: "' + status + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resp) {
+                        if (resp.Type == 'success')
+                        {
+                            var msg = resp.Message;
+                            GritterNoteSuccess(msg)
+                            //window.location.href = window.location.href;
+                        }
+                    },
+                    error: function (resp) {
+                        alert(resp.RespMessage);
+                    }
+                });
+            }
+        }
+    </script>
+}

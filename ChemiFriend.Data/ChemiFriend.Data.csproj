@@ -74,9 +74,9 @@
     <Compile Include="IRepository\ISchemeRepository.cs" />
     <Compile Include="IRepository\IShipmentRepository.cs" />
     <Compile Include="IRepository\IUserMasterRepository.cs" />
-    <Compile Include="Migrations\202003061927195_fdsjfnk.cs" />
-    <Compile Include="Migrations\202003061927195_fdsjfnk.designer.cs">
-      <DependentUpon>202003061927195_fdsjfnk.cs</DependentUpon>
+    <Compile Include="Migrations\202003150748352_fbhsjfsiyy.cs" />
+    <Compile Include="Migrations\202003150748352_fbhsjfsiyy.designer.cs">
+      <DependentUpon>202003150748352_fbhsjfsiyy.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,8 +110,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003061927195_fdsjfnk.resx">
-      <DependentUpon>202003061927195_fdsjfnk.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003150748352_fbhsjfsiyy.resx">
+      <DependentUpon>202003150748352_fbhsjfsiyy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

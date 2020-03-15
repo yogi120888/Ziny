@@ -41,6 +41,8 @@ namespace ChemiFriend.Web.Controllers
         IProductSubCategoryRepository _productSubCategoryRepository;
         IProductRepository _productRepository;
         ILicenceImagesReposiory _licenceImagesReposiory;
+        IOrderRepository _orderRepository;
+        IOrderItemRepository _orderItemRepository;
 
         public AccountController()
         {
@@ -53,6 +55,8 @@ namespace ChemiFriend.Web.Controllers
             _productSubCategoryRepository = new ProductSubCategoryRepository();
             _productRepository = new ProductRepository();
             _licenceImagesReposiory = new LicenceImagesReposiory();
+            _orderRepository = new OrderRepository();
+            _orderItemRepository = new OrderItemRepository();
         }
 
         #region[Public Method]
@@ -151,6 +155,11 @@ namespace ChemiFriend.Web.Controllers
             return PartialView(model);
         }
 
+        /// <summary>
+        /// Add To Cart
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public ActionResult AddToCart(AddToCartModel model)
@@ -201,11 +210,41 @@ namespace ChemiFriend.Web.Controllers
                     {
                         _orderDetail.UserId = item.UserId;
                         _orderDetail.Quantity = item.Quantity;
+                        _orderDetail.TotalPrice = _orderDetail.DealPrice * item.Quantity;
                     }
                     objModel.Add(_orderDetail);
                 }
             }
             return View(objModel);
+        }
+
+        /// <summary>
+        /// Update Order Quantity
+        /// </summary>
+        /// <param name="DealId"></param>
+        /// <param name="quantity"></param>
+        /// <param name="add_sub"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult UpdateOrderQuantity(Int64 DealId, int quantity, string add_sub)
+        {
+            List<AddToCartModel> li = (List<AddToCartModel>)Session["cart"];
+            foreach (var item in li)
+            {
+                if (item.DealId == DealId)
+                {
+                    if (add_sub == "add")
+                    {
+                        item.Quantity = quantity + 1;
+                    }
+                    if (add_sub == "sub" && quantity > 1)
+                    {
+                        item.Quantity = item.Quantity - 1;
+                    }
+                }
+            }
+            Session["cart"] = li;
+            return RedirectToAction("MyOrder", "Account");
         }
 
         /// <summary>
@@ -223,6 +262,56 @@ namespace ChemiFriend.Web.Controllers
             return RedirectToAction("MyOrder", "Account");
         }
 
+        /// <summary>
+        /// Order Place
+        /// </summary>
+        /// <param name="orderModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult OrderPlace(OrderModel orderModel)
+        {
+            if (string.IsNullOrEmpty(orderModel.PaymentMode))
+            {
+                TempData["PaymentMode"] = "Please select payment mode.";
+                return RedirectToAction("MyOrder", "Account");
+            }
+
+            Order _order = Mapper.Map<OrderModel, Order>(orderModel);
+            _order.UserId = UserAuthenticate.UserId;
+            if (orderModel.PaymentMode == "COD")
+            {
+                _order.PaymentStatus = (int)PaymentStatus.COD;
+            }
+            else if (orderModel.PaymentMode == "PaymentNow")
+            {
+                _order.PaymentStatus = (int)PaymentStatus.Successed;
+            }
+            _order.Status = (int)OrderStatus.Placed;
+            _order.CreatedDate = DateTime.Now;
+            _order.CreatedBy = UserAuthenticate.UserId;
+            _order.IsDeleted = false;
+
+            foreach (var item in _order.orderItems)
+            {
+                item.CreatedDate = DateTime.Now;
+                item.CreatedBy = UserAuthenticate.UserId;
+                item.Status = (int)OrderStatus.Placed;
+                item.IsDeleted = false;
+            }
+            // Place order by cash on delivery
+            var result = _orderRepository.SaveReturnModel(_order);
+            if (result != null)
+            {
+                TempData["message"] = "Placed order successfully";
+                Session["cart"] = null;
+                Session["count"] = 0;
+            }
+            else
+            {
+                TempData["message"] = "Something went wrong";
+            }
+            return RedirectToAction("Index", "Account");
+        }
 
         /// <summary>
         /// LIST OF COMPANIES

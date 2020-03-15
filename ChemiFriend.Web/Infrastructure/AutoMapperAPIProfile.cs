@@ -14,7 +14,8 @@ namespace ChemiFriend.Web.Infrastructure
     {
         public AutoMapperAPIProfile()
         {
-            //CreateMap<UsermasterModel, Usermaster>();
+            CreateMap<UsermasterModel, Usermaster>();
+            CreateMap<Usermaster, UsermasterModel>();
             CreateMap<RegistrationModel, Registration>();
             CreateMap<Registration, RegistrationModel>();
             CreateMap<ProductCategoryModel, ProductCategory>();
@@ -31,11 +32,15 @@ namespace ChemiFriend.Web.Infrastructure
             CreateMap<Scheme, SchemeModel>();
             CreateMap<ProductCodeModel, ProductCode>();
             CreateMap<ProductCode, ProductCodeModel>();
+            CreateMap<DealModel, Deal>();
+            CreateMap<SchemeModel, Scheme>();
+            CreateMap<Deal, DealModel>();
+            CreateMap<Scheme, SchemeModel>();
+            CreateMap<OrderModel, Order>();
+            CreateMap<OrderItemModel, OrderItem>();
+            CreateMap<Order, OrderModel>();
+            CreateMap<OrderItem, OrderItemModel>();
 
-            //CreateMap<OrderModel, Order>();
-            //CreateMap<OrderItemModel, OrderItem>();
-            //CreateMap<DealModel, Deal>();
-            //CreateMap<SchemeModel, Scheme>();
         }
 
         public static void Run()

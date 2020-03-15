@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DealController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Filters\CustomAuthorize.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,8 @@
     <Compile Include="Models\ImageUploadModel\DocumentModel.cs" />
     <Compile Include="Models\ImageUploadModel\UploadDocumentModel.cs" />
     <Compile Include="Models\InputModel\DealModel.cs" />
+    <Compile Include="Models\InputModel\OrderItemModel.cs" />
+    <Compile Include="Models\InputModel\OrderModel.cs" />
     <Compile Include="Models\InputModel\ProductCategoryModel.cs" />
     <Compile Include="Models\InputModel\ProductCodeModel.cs" />
     <Compile Include="Models\InputModel\ProductModel.cs" />
@@ -736,6 +739,8 @@
     <Content Include="Views\Account\MyOrder.cshtml" />
     <Content Include="Views\Deal\GetSchemeList.cshtml" />
     <Content Include="Views\Deal\MyDeals.cshtml" />
+    <Content Include="Views\Order\CustomerOrderList.cshtml" />
+    <Content Include="Views\Order\OrderItemsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

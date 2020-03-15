@@ -1,4 +1,5 @@
 ﻿using ChemiFriend.Entity;
+using ChemiFriend.Entity.JsonModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace ChemiFriend.Data.IRepository
 {
     public interface IOrderItemRepository : IGenericRepository<OrderItem>
     {
-
+        IQueryable<GetOrderItemModel> GetOrderItemList();
     }
 }

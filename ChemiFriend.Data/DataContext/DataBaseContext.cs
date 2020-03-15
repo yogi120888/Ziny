@@ -41,7 +41,5 @@ namespace ChemiFriend.Data.DataContext
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<DealApplicableFor> DealApplicableFors { get; set; }
         public DbSet<ProductCode> productCodes { get; set; }
-
-
     }
 }

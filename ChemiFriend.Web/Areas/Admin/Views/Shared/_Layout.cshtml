@@ -71,13 +71,18 @@
     <div id="sidebar">
         <a href="#" class="visible-phone"><i class="icon icon-home"></i>Admin Dashboard</a>
         <ul>
-            @if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Admin || ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Distributor)
+            @if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Distributor)
             {
-                <li class="active"><a href="#"><i class="icon icon-home"></i> <span>DASHBOARD</span></a> </li>
+                <li class="active"><a href="~/Account/Index"><i class="icon icon-home"></i> <span>HOME</span></a> </li>
             }
-            @if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Admin)
+            else if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Retrailer)
+            {
+                <li class="active"><a href="~/Account/Index"><i class="icon icon-home"></i> <span>HOME</span></a> </li>
+            }
+            else if (ChemiFriend.Models.UserAuthenticate.Role == (int)ChemiFriend.Utility.Roles.Admin)
             {
                 // Admin Part
+                <li class="active"><a href="#"><i class="icon icon-home"></i> <span>DASHBOARD</span></a> </li>
                 <li class="submenu">
                     <a href="JavaScrip:Void(0)"><i class="icon icon-th-list"></i> <span>MASTERS</span></a>
                     <ul>
@@ -103,7 +108,12 @@
                         <li><a href="~/Deal/GetDealList/2">Deactive Deal</a></li>
                     </ul>
                 </li>
-
+                <li class="submenu">
+                    <a href="JavaScrip:Void(0)"><i class="icon icon-th-list"></i> <span>ORDER</span></a>
+                    <ul>
+                        <li><a href="~/Order/CustomerOrderList">Customer Order List</a></li>
+                    </ul>
+                </li>
             }
         </ul>
     </div>

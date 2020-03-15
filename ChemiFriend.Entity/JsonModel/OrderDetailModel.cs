@@ -17,5 +17,6 @@ namespace ChemiFriend.Entity.JsonModel
         public Int64 SchemeId { get; set; }
         public string Scheme { get; set; }
         public decimal DealPrice { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }
